@@ -9,7 +9,7 @@ class Author(models.Model):
     review_count = models.IntegerField("Number of Reviews", default=0)
     bio = models.TextField("About me", max_length=500, default=str(first_name+last_name))
     #previousworks =
-
+    genre = models.CharField(max_length=20, default="FA")
 
     GENRES = (
         ('FA', 'Fantasy'),
