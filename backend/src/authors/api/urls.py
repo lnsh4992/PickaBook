@@ -2,10 +2,10 @@ from django.urls import path
 
 from .views import (
     AuthorDetailView,
-    AuthorListView
+    #AuthorListView
 )
 
 urlpatterns = [
-    path('', AuthorListView.as_view()),
-    path('author<str:author>', AuthorDetailView.as_view())
+    #path('', AuthorListView.as_view()),
+    path(r'^view/(?P<name>[\w\s]+)$', AuthorDetailView.as_view())
 ]

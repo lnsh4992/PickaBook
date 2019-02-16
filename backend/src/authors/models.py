@@ -4,12 +4,13 @@ from django.db import models
 
 class Author(models.Model):
 
-    first_name = models.CharField(max_length=20, default="FirstName")
-    last_name = models.CharField(max_length=20, default="LastName")
+    name = models.CharField(max_length=50, default="Name")
+    #last_name = models.CharField(max_length=20, default="LastName")
     review_count = models.IntegerField("Number of Reviews", default=0)
     bio = models.TextField("About me", max_length=500, default=str(first_name + "  "+ last_name))
     previousworks = (('BOOK NAME', 'Description'))
     genre = models.CharField(max_length=20, default="FA")
+    review = models.DecimalField(min_value=0.0, max_value=5.0)
 
     GENRES = (
         ('FA', 'Fantasy'),
