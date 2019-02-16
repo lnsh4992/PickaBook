@@ -7,8 +7,8 @@ class Author(models.Model):
     first_name = models.CharField(max_length=20, default="FirstName")
     last_name = models.CharField(max_length=20, default="LastName")
     review_count = models.IntegerField("Number of Reviews", default=0)
-    bio = models.TextField("About me", max_length=500, default=str(first_name+last_name))
-    #previousworks =
+    bio = models.TextField("About me", max_length=500, default=str(first_name + "  "+ last_name))
+    previousworks = (('BOOK NAME', 'Description'))
     genre = models.CharField(max_length=20, default="FA")
 
     GENRES = (
