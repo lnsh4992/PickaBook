@@ -23,9 +23,11 @@ class ProfilePage extends React.Component {
             MY: "Mystery",
             BI: "Biography",
             FI: "Fiction",
-            SF: "Science Fiction"
+            SF: "Science Fiction",
+            image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
+            avatar: this.state.image_url
         };
-    }  
+    }
 
 
     componentDidMount() {
@@ -37,7 +39,7 @@ class ProfilePage extends React.Component {
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png"
+                avatar: res.data.avatar
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -53,7 +55,7 @@ class ProfilePage extends React.Component {
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.image_url} style={{    
+                                <img src={this.state.avatar} style={{    
                                 }}
                                 width="100%" height="100%" >
                                 </img>

@@ -21,20 +21,30 @@ class ProfileUpdateForm extends React.Component {
             MY: "Mystery",
             BI: "Biography",
             FI: "Fiction",
-            SF: "Science Fiction"
-
+            SF: "Science Fiction",
+            selectedFile: null
         };
       }
+
+    handleFileSelect = event => {
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
 
     handleFormSubmit = (event, userID) => {
         event.preventDefault();
         console.log(this.state)
 
+        const img_data = new FormData()
+        img_data.append('file', this.state.selectedFile, this.state.selectedFile.name)
+
         return axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             bio: this.state.bio,
-            genre: this.state.genre
+            genre: this.state.genre,
+            avatar: this.state.img_data
         })
         .then(res => {
             this.props.history.push('/profile');
@@ -58,6 +68,7 @@ class ProfileUpdateForm extends React.Component {
                 last_name: res.data.last_name,
                 bio: res.data.bio,
                 genre: res.data.genre,
+                avatar: res.data.avatar
             })
 
         })
@@ -97,6 +108,14 @@ class ProfileUpdateForm extends React.Component {
                             <Option value="NF">Non Fiction</Option>
                             <Option value="SF">Science Fiction</Option>
                         </Select>    
+                    </FormItem>
+
+                    <FormItem label = "Avatar">
+                        <input 
+                         type="file" 
+                         name="" 
+                         id="" 
+                         onChange={this.handleFileSelect} />
                     </FormItem>
 
                     <FormItem>

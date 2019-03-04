@@ -12,7 +12,7 @@ class QAnswer extends React.Component {
             dislikes: 0,
             action: null
         };
-    }  
+    }
 
 
     componentDidMount = () => {
@@ -32,7 +32,7 @@ class QAnswer extends React.Component {
           action: 'liked',
         });
       }
-    
+
       dislike = () => {
         this.setState({
           likes: 0,
@@ -46,13 +46,13 @@ class QAnswer extends React.Component {
         const { likes, dislikes, action } = this.state;
         const actions = [
             <span>
-              <Tooltip title="Like">
+              //<Tooltip title="Like">
                 <Icon
                   type="like"
                   theme={action === 'liked' ? 'filled' : 'outlined'}
                   onClick={this.like}
                 />
-              </Tooltip>
+              //</Tooltip>
               <span style={{ paddingLeft: 8, cursor: 'auto' }}>
                 {likes}
               </span>
@@ -88,7 +88,7 @@ class QAnswer extends React.Component {
                         >
                             {
                                 item.answers.length > 0 ?
-                                
+
                                 <List
                                 className="comment-list"
                                 itemLayout="horizontal"
@@ -106,7 +106,7 @@ class QAnswer extends React.Component {
                                 <b syle={{marginLeft: 200}}>No replies</b>
                             }
                             </Comment>
-                        
+
                     )}
                 />
             </div>

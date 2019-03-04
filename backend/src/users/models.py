@@ -25,7 +25,6 @@ class Profile(models.Model):
     )
 
     genre = models.CharField(max_length=2, choices = GENRES, default='FA')
-
     avatar = models.ImageField(upload_to='user_avatar', blank=True)
 
 @receiver(post_save, sender=User)
