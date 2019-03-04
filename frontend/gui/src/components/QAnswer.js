@@ -46,13 +46,13 @@ class QAnswer extends React.Component {
         const { likes, dislikes, action } = this.state;
         const actions = [
             <span>
-              //<Tooltip title="Like">
+              <Tooltip title="Like">
                 <Icon
                   type="like"
                   theme={action === 'liked' ? 'filled' : 'outlined'}
                   onClick={this.like}
                 />
-              //</Tooltip>
+              </Tooltip>
               <span style={{ paddingLeft: 8, cursor: 'auto' }}>
                 {likes}
               </span>

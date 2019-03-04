@@ -15,7 +15,7 @@ class ProfileRegistrationForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             value: 3.0,
         };
     }
@@ -57,7 +57,7 @@ class ProfileRegistrationForm extends React.Component {
               sm: { span: 16 },
             },
         };
-
+/*
         const tailFormItemLayout = {
             wrapperCol: {
               xs: {
@@ -70,7 +70,7 @@ class ProfileRegistrationForm extends React.Component {
               },
             },
         };
-
+*/
         return (
             <div>
                 <Form layout="horizontal" onSubmit={(event) => this.handleFormSubmit(
@@ -83,7 +83,7 @@ class ProfileRegistrationForm extends React.Component {
                         </FormItem>
                     </Col>
 
-                    
+
                     <Col span={6}>
                     <FormItem >
                     <span>
@@ -93,8 +93,8 @@ class ProfileRegistrationForm extends React.Component {
                     </FormItem>
                     </Col>
                     </Row>
-                    
-                    
+
+
                     <Row gutter={20} >
                     <Col span={18} >
                     <FormItem label="Review" >
@@ -102,7 +102,7 @@ class ProfileRegistrationForm extends React.Component {
                     </FormItem>
                     </Col>
                     </Row>
-                    
+
 
                     <FormItem>
                         <Button type="primary" htmlType="submit">
