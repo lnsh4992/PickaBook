@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List, message, Avatar, Spin } from "antd";
+import { Card, Row, Col, List, Icon, Avatar, Spin } from "antd";
 
 const gridStyle = {
     textAlign: 'center',
@@ -19,8 +19,12 @@ class AuthorDetail extends React.Component {
             BI: "Biography",
             FI: "Fiction",
             SF: "Science Fiction",
-            books: []
+            books: [],
+            following: false,
+            iconType: "user-add"
         };
+
+        this.style={marginLeft: 10, color: '#daa520'}
     }  
 
     componentDidMount = () => {
@@ -54,6 +58,29 @@ class AuthorDetail extends React.Component {
         console.log("Unmounting");
     }
 
+    handleFollow = () => {
+        const profID = localStorage.getItem("profID");
+        const authID = this.props.match.params.authID;
+        axios.put(`http://127.0.0.1:8000/profile/addfollow/${profID}`, {
+            following: [authID]
+        })
+        .then(res => {
+            this.style = {
+                marginLeft: 10,
+                color: !this.state.following ? "#b22222": '#daa520'
+            }
+            this.setState({
+                iconType: !this.state.following ? "user-delete" : "user-add" ,
+                following: !this.state.following
+            });
+            
+
+        })
+        .catch(error => console.log(error));
+
+
+    }
+
     render() {
         return (
                 <div>
@@ -70,7 +97,15 @@ class AuthorDetail extends React.Component {
                         </Col>
                         
                         <Col span={16}>
-                            <Card title={this.state.title} headStyle={{
+                            <Card title={
+                                    <div>
+                                        {this.state.title} 
+                                        <Icon style={this.style} type={this.state.iconType}
+                                            onClick={this.handleFollow} />
+                                    </div>
+                                }
+                                
+                                headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia'

@@ -38,7 +38,8 @@ class ProfilePage extends React.Component {
                 bio: res.data.bio,
                 genre: res.data.genre,
                 image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
-                books: res.data.favorites
+                books: res.data.favorites,
+                authors: res.data.following
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -99,34 +100,62 @@ class ProfilePage extends React.Component {
                     </Row>
 
                     <Row gutter={20} type="flex" justify="center">
-                    <Col span={11}>
-                    <Card title="Favorites">
-                    <List
-                        pagination={{
-                            onChange: (page) => {
-                                console.log(page);
-                            },
-                            pageSize: 2,
-                        }}
-                        grid={{ gutter: 0, column: 2 }}
-                        dataSource={this.state.books}
-                        renderItem={item => (
-                            <List.Item>
-                                <Card
-                                    hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt={item.title} src={item.image_url} />}
-                                >
-                                    <Card.Meta
-                                    title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
-                                    
-                                    />
-                                </Card>
-                            </List.Item>
-                        )}
-                    />
-                    </Card>
-                    </Col>
+                        <Col span={11}>
+                        <Card title="Favorites">
+                        <List
+                            pagination={{
+                                onChange: (page) => {
+                                    console.log(page);
+                                },
+                                pageSize: 2,
+                            }}
+                            grid={{ gutter: 0, column: 2 }}
+                            dataSource={this.state.books}
+                            renderItem={item => (
+                                <List.Item>
+                                    <Card
+                                        hoverable
+                                        style={{ width: 180 }}
+                                        cover={<img alt={item.title} src={item.image_url} />}
+                                    >
+                                        <Card.Meta
+                                        title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                                        
+                                        />
+                                    </Card>
+                                </List.Item>
+                            )}
+                        />
+                        </Card>
+                        </Col>
+
+                        <Col span={11}>
+                        <Card title="Favorites">
+                        <List
+                            pagination={{
+                                onChange: (page) => {
+                                    console.log(page);
+                                },
+                                pageSize: 2,
+                            }}
+                            grid={{ gutter: 0, column: 2 }}
+                            dataSource={this.state.authors}
+                            renderItem={item => (
+                                <List.Item>
+                                    <Card
+                                        hoverable
+                                        style={{ width: 180 }}
+                                        cover={<img alt={item.name} src={item.image_url} />}
+                                    >
+                                        <Card.Meta
+                                        title={<a href={'/authors/'+item.pk}><b>{item.name}</b></a>}
+                                        />
+                                    </Card>
+                                </List.Item>
+                            )}
+                        />
+                        </Card>
+                        </Col>
                     </Row>
                 </div>
         )

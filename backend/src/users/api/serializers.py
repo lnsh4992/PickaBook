@@ -1,12 +1,15 @@
 from rest_framework import serializers
 from users.models import Profile
 from books.api.serializers import BookSerializer
+from authors.api.serializers import AuthorCardSerializer
 
 class ProfileSerializer(serializers.ModelSerializer):
     favorites = BookSerializer(read_only=True, many=True)
+    following = AuthorCardSerializer(read_only=True, many=True)
+
     class Meta:
         model = Profile 
-        fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites')
+        fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following')
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
