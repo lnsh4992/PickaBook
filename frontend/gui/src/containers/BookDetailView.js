@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List, message, Avatar, Spin } from "antd";
+import { Card, Row, Col, List, message, Avatar, Icon } from "antd";
 import reqwest from 'reqwest';
 import InfiniteScroll from 'react-infinite-scroller';
 import QAnswer from '../components/QAnswer';
@@ -25,7 +25,9 @@ class BookDetail extends React.Component {
             SF: "Science Fiction",
             reviews: [],
             loading: false,
-            hasMore: true
+            hasMore: true,
+            following: false,
+            iconTheme: "outlined"
         };
     }  
 
@@ -87,6 +89,24 @@ class BookDetail extends React.Component {
         }
     }
     
+    handleFollow = () => {
+        const profID = localStorage.getItem("profID");
+        const bookID = this.props.match.params.bookID;
+        axios.put(`http://127.0.0.1:8000/profile/addfavorite/${profID}`, {
+            favorites: [bookID]
+        })
+        .then(res => {
+            this.setState({
+                iconTheme: !this.state.following ? "filled" : "outlined" ,
+                following: !this.state.following
+    
+            })
+            console.log(this.state)
+        })
+        .catch(error => console.log(error));
+
+
+    }
 
     componentWillUnmount(){
         this._isMounted = false;
@@ -109,7 +129,13 @@ class BookDetail extends React.Component {
                         </Col>
                         
                         <Col span={16}>
-                            <Card title={this.state.title} headStyle={{
+                            <Card title={
+                                    <div>
+                                        {this.state.title} 
+                                        <Icon style={{marginLeft: 10, color:'#fb928e'}} type="heart" theme={this.state.iconTheme} 
+                                            twoToneColor="#eb2f96" onClick={this.handleFollow} />
+                                    </div>
+                                } headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia'

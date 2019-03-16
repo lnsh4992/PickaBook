@@ -41,7 +41,6 @@ class CustomHeader extends React.Component {
         if ( this.state.filter === "book" ){
             axios.get(`http://127.0.0.1:8000/library/view/${event.target.elements.tgtname.value}`)
             .then(res => {
-                console.log(res);
                 this.props.history.push(`/booklist/${res.data.pk}/`);
             })
             .catch(err => {

@@ -9,7 +9,9 @@ from rest_framework.generics import (
 from users.models import Profile
 from .serializers import (
     ProfileSerializer,
-    ProfileUpdateSerializer
+    ProfileUpdateSerializer,
+    ProfileAddFavSerializer,
+    ProfileAddFollowSerializer
 )
 
 # Use to retrieve based on multiple filters
@@ -38,3 +40,11 @@ class ProfileUpdateView(UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileUpdateSerializer
     lookup_field = 'user__pk'
+
+class ProfileAddFavView(UpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileAddFavSerializer
+
+class ProfileAddFollowView(UpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileAddFollowSerializer

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, List } from "antd";
 import { connect } from "react-redux";
 
 const gridStyle = {
@@ -37,7 +37,8 @@ class ProfilePage extends React.Component {
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png"
+                image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
+                books: res.data.favorites
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -95,6 +96,37 @@ class ProfilePage extends React.Component {
                                 </p>
                             </Card>
                         </Col>
+                    </Row>
+
+                    <Row gutter={20} type="flex" justify="center">
+                    <Col span={11}>
+                    <Card title="Favorites">
+                    <List
+                        pagination={{
+                            onChange: (page) => {
+                                console.log(page);
+                            },
+                            pageSize: 2,
+                        }}
+                        grid={{ gutter: 0, column: 2 }}
+                        dataSource={this.state.books}
+                        renderItem={item => (
+                            <List.Item>
+                                <Card
+                                    hoverable
+                                    style={{ width: 180 }}
+                                    cover={<img alt={item.title} src={item.image_url} />}
+                                >
+                                    <Card.Meta
+                                    title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                                    
+                                    />
+                                </Card>
+                            </List.Item>
+                        )}
+                    />
+                    </Card>
+                    </Col>
                     </Row>
                 </div>
         )

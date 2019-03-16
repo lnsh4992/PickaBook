@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import datetime
 
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -12,6 +13,9 @@ class Profile(models.Model):
     review_count = models.IntegerField("Number of Reviews", default=0)
     creation_date= models.DateField(default=datetime.date.today)
     bio = models.TextField("About me", max_length=500, default="Hey, Welcome to my Profile!")
+    
+    favorites = models.ManyToManyField('books.Book', related_name="favorites")
+    following = models.ManyToManyField('authors.Author', related_name="following")
 
     GENRES = (
         ('FA', 'Fantasy'),
