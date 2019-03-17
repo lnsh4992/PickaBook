@@ -1,8 +1,11 @@
 import React from 'react';
 import Books from '../components/Book';
 import axios from 'axios';
-import {List, Card, Row, Rate} from 'antd';
+import {List, Card, Row, Rate, Layout, Menu} from 'antd';
 import ReactCardFlip from 'react-card-flip';
+
+const { SubMenu } = Menu;
+const { Header, Content, Footer, Sider } = Layout;
 
 class Explore extends React.Component {
     
@@ -41,10 +44,35 @@ class Explore extends React.Component {
     
     render() {
         return (
+            <Layout style={{ padding: '0 0', background: '#fff'}}>
+                <Sider width={200} >
+                    <Menu
+                        mode="inline"
+                        theme="dark"
+                        defaultSelectedKeys={[3]}
+                        style={{ height: '100%' }}
+                    >
+                        <Menu.Item key="1">Newest Collection</Menu.Item>
+                        <Menu.Item key="2">Top Rated</Menu.Item>
+                        <Menu.Item key="3">Title</Menu.Item>
+                        <SubMenu key="genre" title='Genre'>
+                        <Menu.Item key="FA">Fantasy</Menu.Item>
+                        <Menu.Item key="NF">Non Fiction</Menu.Item>
+                        <Menu.Item key="RO">Romance</Menu.Item>
+                        <Menu.Item key="TH">Thriller</Menu.Item>
+                        <Menu.Item key="MY">Mystery</Menu.Item>
+                        <Menu.Item key="BI">Biography</Menu.Item>
+                        <Menu.Item key="FI">Fiction</Menu.Item>
+                        <Menu.Item key="SF">Science Fiction</Menu.Item>
+                        </SubMenu>
+                    </Menu>
+                </Sider>
 
+                <Content>
+                    
                 <List
                 grid={{
-                    gutter: 16, column: 4
+                    gutter: 16, column: 3
                 }}
                 pagination={{
                 onChange: (page) => {
@@ -84,6 +112,10 @@ class Explore extends React.Component {
                     </List.Item>
                 )}
             />
+
+                </Content>
+            </Layout>
+
 
         )
     }

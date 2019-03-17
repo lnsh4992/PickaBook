@@ -13,7 +13,7 @@ class BookListView(ListAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
-        return Book.objects.all()
+        return Book.objects.order_by('title')
 
 class BookDetailView(RetrieveAPIView):
     queryset = Book.objects.all()
