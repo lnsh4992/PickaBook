@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Avatar, Icon } from 'antd';
+import { List, Avatar, Icon, Card } from 'antd';
 
 const IconText = ({ type, text }) => (
 <span>
@@ -9,31 +9,32 @@ const IconText = ({ type, text }) => (
 );
 
 const Books = (props) => {
+    console.log(props.data);
     return (
         <List
-            itemLayout="vertical"
-            size="large"
+            grid={{
+                gutter: 16, column: 4
+            }}
             pagination={{
             onChange: (page) => {
                 console.log(page);
             },
-            pageSize: 3,
+            pageSize: 12,
             }}
             dataSource={props.data}
-            footer={<div><b>ant design</b> footer part</div>}
+            
             renderItem={item => (
-            <List.Item
-                key={item.title}
-                actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-                extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
-            >
-                <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
-                />
-                {item.content}
-            </List.Item>
+                <List.Item>
+                    <Card
+                        hoverable
+                        style={{ width: 180 }}
+                        cover={<img alt={item.title} src={item.image_url} />}
+                    >
+                        <Card.Meta
+                        title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                        />
+                    </Card>
+                </List.Item>
             )}
         />
     )

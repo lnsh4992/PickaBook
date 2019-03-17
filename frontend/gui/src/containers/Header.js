@@ -75,7 +75,7 @@ class CustomHeader extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-            <Nav.Link href="#home">Explore</Nav.Link>
+            <Nav.Link href="/explore">Explore</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/updateprof">Update Profile</NavDropdown.Item>

@@ -12,6 +12,7 @@ import ProfileRegister from './containers/ProfileRegister';
 import ProfileUpdate from './containers/ProfileUpdate';
 import QAnswer from './components/QAnswer';
 import PwResetNewPw from './components/PwResetNewPw';
+import Explore from './containers/Explore';
 import ForgotPW from './components/ForgotPW';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
@@ -52,6 +53,7 @@ const BaseRouter = (props) => {
         <AppRoute exact path='/updateprof/' layout={(props) => <CustomLayout {...props} />} component={ProfileUpdate} props={props}/>
         <AppRoute exact path='/profile/' layout={(props) => <CustomLayout {...props} />} component={ProfilePage} props={props}/>
 
+        <AppRoute exact path='/explore/' layout={(props) => <CustomLayout {...props} />} component={Explore} props={props} />
       </Switch>
     </BrowserRouter>
     </div>
