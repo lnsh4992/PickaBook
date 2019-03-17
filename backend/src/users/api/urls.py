@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 
 from .views import (
+    UserProfileDetailView,
     ProfileDetailView,
     ProfileUpdateView,
     ProfileAddFavView,
@@ -15,8 +16,9 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
-    path('<user__pk>', ProfileDetailView.as_view(), name='profiledetail'),
+    path('<user__pk>', UserProfileDetailView.as_view(), name='userprofiledetail'),
     path('update/<user__pk>', ProfileUpdateView.as_view()),
+    path('user/<pk>', ProfileDetailView.as_view(), name='Profile'),
     path('addfavorite/<pk>', ProfileAddFavView.as_view()),
     path('addfollow/<pk>', ProfileAddFollowView.as_view()),
     path('resetpw/', PasswordResetView.as_view(), name='reset_password'),

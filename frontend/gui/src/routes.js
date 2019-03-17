@@ -8,6 +8,7 @@ import BookList from './containers/BookList';
 import BookDetail from './containers/BookDetailView';
 import AuthorDetail from './containers/AuthorDetailView';
 import ProfilePage from './components/ProfilePage';
+import ProfileLookup from './components/ProfileLookup';
 import ProfileRegister from './containers/ProfileRegister';
 import ProfileUpdate from './containers/ProfileUpdate';
 import QAnswer from './components/QAnswer';
@@ -52,6 +53,7 @@ const BaseRouter = (props) => {
         <AppRoute exact path='/newprof/' layout={(props) => <CustomLayout {...props} />} component={ProfileRegister} props={props}/>
         <AppRoute exact path='/updateprof/' layout={(props) => <CustomLayout {...props} />} component={ProfileUpdate} props={props}/>
         <AppRoute exact path='/profile/' layout={(props) => <CustomLayout {...props} />} component={ProfilePage} props={props}/>
+        <AppRoute exact path='/profile/:profileID' layout={(props) => <CustomLayout {...props} />} component={ProfileLookup} props={props}/>
 
         <AppRoute exact path='/explore/' layout={(props) => <CustomLayout {...props} />} component={Explore} props={props} />
       </Switch>

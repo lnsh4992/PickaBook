@@ -1,18 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, List } from "antd";
-import { connect } from "react-redux";
+
 
 const gridStyle = {
     textAlign: 'center',
   };
 
-class ProfilePage extends React.Component {
+class ProfileLookup extends React.Component {
     
-    state = {
-        profile: {}
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +25,8 @@ class ProfilePage extends React.Component {
 
 
     componentDidMount() {
-        axios.get(`http://127.0.0.1:8000/profile/${this.props.userid}`).then(res => {
+        const profileID = this.props.match.params.profileID;
+        axios.get(`http://127.0.0.1:8000/profile/user/${profileID}`).then(res => {
             this.setState({
                 first_name: res.data.first_name,
                 last_name: res.data.last_name,
@@ -41,10 +38,9 @@ class ProfilePage extends React.Component {
                 books: res.data.favorites,
                 authors: res.data.following
             });
-            localStorage.setItem("profID", res.data.pk);
-            console.log(localStorage.getItem("profID"));
 
         })
+        .catch(error => console.log(error));
     }
 
     render() {
@@ -162,10 +158,5 @@ class ProfilePage extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        userid: state.userId
-    };
-};
 
-export default connect(mapStateToProps)(ProfilePage);
+export default ProfileLookup;

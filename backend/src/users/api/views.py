@@ -31,10 +31,14 @@ from .serializers import (
 #         self.check_object_permissions(self.request, obj)
 #         return obj
 
-class ProfileDetailView(RetrieveAPIView):
+class UserProfileDetailView(RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     lookup_field = 'user__pk'
+
+class ProfileDetailView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 class ProfileUpdateView(UpdateAPIView):
     queryset = Profile.objects.all()
