@@ -21,6 +21,7 @@ class Explore extends React.Component {
             FI: "Fiction",
             SF: "Science Fiction",
             books: [],
+            booksFiltered: [],
             isFlipped: false
         };
     }
@@ -30,7 +31,7 @@ class Explore extends React.Component {
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped}));
     }
 
-    handleChange = (event) => {
+    handleSortChange = (event) => {
         var obj = [...this.state.books];
 
         switch(event){
@@ -45,7 +46,11 @@ class Explore extends React.Component {
                 break;
         }
 
-        this.setState({books: obj});
+        this.setState({booksFiltered: obj});
+    }
+
+    handleGenreChange = (event) => {
+        this.setState({booksFiltered: this.state.books.filter(obj => obj.genre == event)});
     }
 
     componentDidMount = () => {
@@ -56,6 +61,9 @@ class Explore extends React.Component {
             for(var i=0; i<this.state.books.length; ++i){
                 this.state.books[i].isFlipped = false
             }
+            this.setState({
+                booksFiltered: this.state.books
+            })
         })
         .catch(error => console.log(error));
     }
@@ -70,18 +78,18 @@ class Explore extends React.Component {
                         defaultSelectedKeys={[3]}
                         style={{ height: '100%' }}
                     >
-                        <Menu.Item key="1" onClick={()=> this.handleChange('publication_date')}>Newest Collection</Menu.Item>
-                        <Menu.Item key="2" onClick={() => this.handleChange('rating')}>Top Rated</Menu.Item>
-                        <Menu.Item key="3" onClick={() => this.handleChange('title')}>Title</Menu.Item>
+                        <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>Newest Collection</Menu.Item>
+                        <Menu.Item key="2" onClick={() => this.handleSortChange('rating')}>Top Rated</Menu.Item>
+                        <Menu.Item key="3" onClick={() => this.handleSortChange('title')}>Title</Menu.Item>
                         <SubMenu key="genre" title='Genre'>
-                        <Menu.Item key="FA">Fantasy</Menu.Item>
-                        <Menu.Item key="NF">Non Fiction</Menu.Item>
-                        <Menu.Item key="RO">Romance</Menu.Item>
-                        <Menu.Item key="TH">Thriller</Menu.Item>
-                        <Menu.Item key="MY">Mystery</Menu.Item>
-                        <Menu.Item key="BI">Biography</Menu.Item>
-                        <Menu.Item key="FI">Fiction</Menu.Item>
-                        <Menu.Item key="SF">Science Fiction</Menu.Item>
+                        <Menu.Item key="FA" onClick={() => this.handleGenreChange('FA')}>Fantasy</Menu.Item>
+                        <Menu.Item key="NF" onClick={() => this.handleGenreChange('NF')}>Non Fiction</Menu.Item>
+                        <Menu.Item key="RO" onClick={() => this.handleGenreChange('RO')}>Romance</Menu.Item>
+                        <Menu.Item key="TH" onClick={() => this.handleGenreChange('TH')}>Thriller</Menu.Item>
+                        <Menu.Item key="MY" onClick={() => this.handleGenreChange('MY')}>Mystery</Menu.Item>
+                        <Menu.Item key="BI" onClick={() => this.handleGenreChange('BI')}>Biography</Menu.Item>
+                        <Menu.Item key="FI" onClick={() => this.handleGenreChange('FI')}>Fiction</Menu.Item>
+                        <Menu.Item key="SF" onClick={() => this.handleGenreChange('SF')}>Science Fiction</Menu.Item>
                         </SubMenu>
                     </Menu>
                 </Sider>
@@ -98,7 +106,7 @@ class Explore extends React.Component {
                 },
                 pageSize: 12,
                 }}
-                dataSource={this.state.books}
+                dataSource={this.state.booksFiltered}
                 
                 renderItem={item => (
                     <List.Item style={{height: 450}}>
