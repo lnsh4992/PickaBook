@@ -30,6 +30,24 @@ class Explore extends React.Component {
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped}));
     }
 
+    handleChange = (event) => {
+        var obj = [...this.state.books];
+
+        switch(event){
+            case 'title': 
+                obj.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            case 'rating':
+                obj.sort((a, b) => b.rating - a.rating);
+                break;
+            case 'publication_date':
+                obj.sort((a, b) => b.publication_date.localeCompare(a.publication_date));
+                break;
+        }
+
+        this.setState({books: obj});
+    }
+
     componentDidMount = () => {
         axios.get("http://127.0.0.1:8000/library/booklist/").then(res => {
             this.setState({
@@ -52,9 +70,9 @@ class Explore extends React.Component {
                         defaultSelectedKeys={[3]}
                         style={{ height: '100%' }}
                     >
-                        <Menu.Item key="1">Newest Collection</Menu.Item>
-                        <Menu.Item key="2">Top Rated</Menu.Item>
-                        <Menu.Item key="3">Title</Menu.Item>
+                        <Menu.Item key="1" onClick={()=> this.handleChange('publication_date')}>Newest Collection</Menu.Item>
+                        <Menu.Item key="2" onClick={() => this.handleChange('rating')}>Top Rated</Menu.Item>
+                        <Menu.Item key="3" onClick={() => this.handleChange('title')}>Title</Menu.Item>
                         <SubMenu key="genre" title='Genre'>
                         <Menu.Item key="FA">Fantasy</Menu.Item>
                         <Menu.Item key="NF">Non Fiction</Menu.Item>
@@ -105,7 +123,7 @@ class Explore extends React.Component {
                         >
                             <p>Date: {item.publication_date}</p>
                             <p>Genre: {this.state[item.genre]}</p>
-                            <p>Rating: <Rate disabled allowHalf defaultValue={item.rating} /></p>
+                            <p>Rating: <Rate disabled allowHalf value={item.rating} /></p>
                             <p>Reviews: {item.number_of_reviews}</p>
                         </Card>
                         </ReactCardFlip>
