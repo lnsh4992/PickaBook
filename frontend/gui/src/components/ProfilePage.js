@@ -25,7 +25,7 @@ class ProfilePage extends React.Component {
             FI: "Fiction",
             SF: "Science Fiction",
             image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
-            avatar: this.state.image_url
+            avatar: this.state.image_url    // <---- for user story #6
         };
     }
 
@@ -39,7 +39,7 @@ class ProfilePage extends React.Component {
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                avatar: res.data.avatar
+                avatar: res.data.avatar     // <---- for user story #6
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -55,7 +55,7 @@ class ProfilePage extends React.Component {
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.avatar} style={{    
+                                <img src={this.state.avatar} style={{    // <---- for user story #6
                                 }}
                                 width="100%" height="100%" >
                                 </img>

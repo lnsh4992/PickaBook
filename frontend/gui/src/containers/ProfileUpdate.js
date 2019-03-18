@@ -44,7 +44,7 @@ class ProfileUpdateForm extends React.Component {
             last_name: this.state.last_name,
             bio: this.state.bio,
             genre: this.state.genre,
-            avatar: this.state.img_data
+            avatar: this.state.img_data     // <---- for user story #6
         })
         .then(res => {
             this.props.history.push('/profile');
@@ -68,7 +68,7 @@ class ProfileUpdateForm extends React.Component {
                 last_name: res.data.last_name,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                avatar: res.data.avatar
+                avatar: res.data.avatar     // <---- for user story #6
             })
 
         })
@@ -110,7 +110,7 @@ class ProfileUpdateForm extends React.Component {
                         </Select>    
                     </FormItem>
 
-                    <FormItem label = "Avatar">
+                    <FormItem label = "Avatar">     
                         <input 
                          type="file" 
                          name="" 
