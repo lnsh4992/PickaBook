@@ -10,6 +10,13 @@ const gridStyle = {
     textAlign: 'center',
   };
 
+const IconText = ({ type, text }) => (
+<span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {text}
+</span>
+);
+
 class BookDetail extends React.Component {
 
     constructor(props) {
@@ -181,32 +188,29 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Reviews">
-                                
-                                <InfiniteScroll
-                                    initialLoad={false}
-                                    pageStart={0}
-                                    loadMore={this.handleInfiniteOnLoad}
-                                    hasMore={!this.state.loading && this.state.hasMore}
-                                    useWindow={false}
-                                >
+                            <Card title={<div style={gridStyle}>Reviews</div>}>
 
                                 <List
-                                    dataSource={this.state.reviews.slice(0, this.state.current_length)}
+                                    itemLayout="vertical"
+                                    size="large"
+                                    dataSource={this.state.reviews}
                                     renderItem={item => (
-                                    <List.Item key={item.id}>
+                                    <List.Item key={item.id}
+                                            actions={[<IconText type="like-o" text={item.likes} />, <IconText type="dislike-o" text={item.dislikes} />]}
+                                            extra={item.creation_date}
+                                    >
                                         <List.Item.Meta
                                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                            title={<a href="https://ant.design">{item.title}</a>}
-                                            description={item.content}
+                                            title={item.title}
+                                            description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
+                                            
                                         />
-                                        <div>{item.creation_date}</div>
-                                        </List.Item>
+                                        <div>{item.content}</div>
+                                    </List.Item>
                                     )}
                                 >
 
                                 </List>
-                                </InfiniteScroll>
 
                             </Card>
                         </Col>

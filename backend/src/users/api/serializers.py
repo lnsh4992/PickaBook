@@ -11,6 +11,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile 
         fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following')
 
+class ProfileShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('pk', 'first_name', 'last_name')
+
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
