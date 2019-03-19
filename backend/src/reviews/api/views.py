@@ -4,12 +4,14 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.generics import (
     ListAPIView,
-    CreateAPIView
+    CreateAPIView,
+    UpdateAPIView
 )
 
 from reviews.models import BookReview
 from .serializers import (
-    BookReviewSerializer
+    BookReviewSerializer,
+    BookReviewLikeSerializer
 )
 
 class BookReviewCreateView(CreateAPIView):
@@ -21,4 +23,9 @@ class BookReviewListView(ListAPIView):
     serializer_class = BookReviewSerializer
 
     def get_queryset(self):
-        return BookReview.objects.filter(book=self.kwargs['fk'])
+        return BookReview.objects.filter(book=self.kwargs['fk']).order_by('-likes')
+
+
+class BookReviewLikeView(UpdateAPIView):
+    queryset = BookReview.objects.all()
+    serializer_class = BookReviewLikeSerializer
