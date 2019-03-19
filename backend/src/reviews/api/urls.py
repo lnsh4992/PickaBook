@@ -9,6 +9,6 @@ from .views import (
 urlpatterns = [
     path('<fk>', BookReviewListView.as_view(), name="reviewlist"),
     path('create/', BookReviewCreateView.as_view()),
-    path('like/<pk>', BookReviewLikeView.as_view())
+    path('like/<pk>', BookReviewLikeView.as_view(), name='likereview')
     
 ]
