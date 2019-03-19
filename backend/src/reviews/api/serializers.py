@@ -18,8 +18,8 @@ class BookReviewLikeSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         review = instance
         input = validated_data.pop('likes')
-        
-        
+
+
         if input == 1:
             review.likes += 1
         else:
