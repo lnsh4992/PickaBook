@@ -202,3 +202,19 @@ class ProfileTest(TestCase):
         for i in range(5):
             self.assertTrue(books[i] in prof.favorites.all())
         self.assertTrue(books[5] not in prof.favorites.all())
+
+    def test_other_profile(self):
+        prof = self.create_profile()
+        auth = self.create_author()
+        book = self.create_book()
+
+        prof.following.add(auth)
+        prof.favorites.add(book)
+        prof.save()
+
+        url = reverse('Profile', kwargs={'pk': prof.pk })
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(prof.first_name, str(resp.content))
+        self.assertIn(book.title, str(resp.content))
+        self.assertIn(auth.name, str(resp.content))
