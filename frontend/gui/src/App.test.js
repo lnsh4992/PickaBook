@@ -69,7 +69,24 @@ test('Questions of Book', () => {
   });
 });
 
+test('All Following Authors', () => {
+  expect.assertions(3);
+  return axios.get(`http://127.0.0.1:8000/profile/13`).then(res => {
+          expect(res.data.length).toBeGreaterThan(1);
+          expect(res.data[0].name).toBe("Jordan");
+          expect(res.data[1].name).toBe("Sandra Brown");
+  });
+});
 
+test('All Favorite Books', () => {
+  expect.assertions(4);
+  return axios.get(`http://127.0.0.1:8000/profile/13`).then(res => {
+          expect(res.data.length).toBeGreaterThan(3);
+          expect(res.data[0].title).toBe("Test Book 1");
+          expect(res.data[1].title).toBe("Test Book 2");
+          expect(res.data[2].title).toBe("The Chef");
+  });
+});
 
 /*
 describe('Indicator', () => {

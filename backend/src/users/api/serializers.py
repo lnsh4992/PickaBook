@@ -26,7 +26,10 @@ class ProfileAddFavSerializer(serializers.ModelSerializer):
         prof = instance
         favBooks = validated_data.pop('favorites')
         for book in favBooks:
-            prof.favorites.add(book)
+            if book in prof.favorites.all():
+                prof.favorites.remove(book)
+            else:
+                prof.favorites.add(book)
         prof.save()
         return prof
 
@@ -37,9 +40,12 @@ class ProfileAddFollowSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         prof = instance
-        print(validated_data)
+
         following = validated_data.pop('following')
         for author in following:
-            prof.following.add(author)
+            if author in prof.following.all():
+                prof.following.remove(author)
+            else:
+                prof.following.add(author)
         prof.save()
         return prof
