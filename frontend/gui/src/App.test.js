@@ -97,6 +97,59 @@ test('All Favorite Books', () => {
   });
 });
 
+test('Book List', () => {
+  expect.assertions(2);
+
+  return axios.get(`http://127.0.0.1:8000/library/booklist/`).then(res =>{
+        expect(res.data.length).toBeGreaterThan(1);
+        //console.log(res.data.map(a => a.title));
+        expect(res.data.map(a => a.title)).toEqual(res.data.map(a => a.title).sort());
+        /*
+        for(let i=0; i < res.data.length-1; ++i){
+           expect(res.data[i].title.localeCompare(res.data[i+1].title)).toBeLessThan(1);
+        }
+        */
+  });
+});
+
+test('Book List Filter Date', () => {
+  expect.assertions(2);
+
+  return axios.get(`http://127.0.0.1:8000/library/booklist/`).then(res =>{
+        expect(res.data.length).toBeGreaterThan(1);
+        var obj = [...res.data];
+        obj.sort((a, b) => b.publication_date.localeCompare(a.publication_date));
+
+        expect(res.data.map(a => a.publication_date).sort().reverse()).toEqual(obj.map(a => a.publication_date));
+  });
+});
+
+test('Book List Filter Rating', () => {
+  expect.assertions(2);
+
+  return axios.get(`http://127.0.0.1:8000/library/booklist/`).then(res =>{
+        expect(res.data.length).toBeGreaterThan(1);
+        var obj = [...res.data];
+        obj.sort((a, b) => b.rating - a.rating);
+
+        expect(res.data.map(a => a.rating).sort().reverse()).toEqual(obj.map(a => a.rating));
+  });
+});
+
+test('Book List Filter Genre', () => {
+  expect.assertions(3);
+
+  return axios.get(`http://127.0.0.1:8000/library/booklist/`).then(res =>{
+        expect(res.data.length).toBeGreaterThan(1);
+        var obj = [...res.data];
+        obj = obj.filter(a => a.genre == 'FA')
+
+        expect(res.data.filter(a => a.genre == 'FA').map(a => a.genre)).toEqual(obj.map(a => a.genre));
+        expect(obj.map(a=>a.genre)).toEqual(expect.not.arrayContaining(['SF']));
+  });
+});
+
+
 /*
 describe('Indicator', () => {
   describe('when loading is false', () => {
