@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List, message, Avatar, Icon } from "antd";
+import { Card, Row, Col, List, message, Avatar, Icon, Rate } from "antd";
 import reqwest from 'reqwest';
 import InfiniteScroll from 'react-infinite-scroller';
 import QAnswer from '../components/QAnswer';
@@ -10,9 +10,19 @@ const gridStyle = {
     textAlign: 'center',
   };
 
-const IconText = ({ type, text }) => (
+const LikeStyle = {
+    marginRight : 8,
+    color: '#378695'
+};
+
+const DislikeStyle = {
+    marginRight : 8,
+    color: '#900e01'
+};
+
+const IconText = ({ type, text, onClick, theme, style }) => (
 <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    <Icon type={type} style={style} onClick={onClick} theme={theme}/>
     {text}
 </span>
 );
@@ -73,7 +83,11 @@ class BookDetail extends React.Component {
                 max_length: res.data.length,
                 current_length: Math.min(3, res.data.length)
             })
-            console.log(this.state)
+            for(var i=0; i<this.state.reviews.length; ++i){
+                this.state.reviews[i].isLiked = false
+                this.state.reviews[i].isDisliked = false
+            }
+
         })
         .catch(error => console.log(error));
     }
@@ -113,6 +127,28 @@ class BookDetail extends React.Component {
         .catch(error => console.log(error));
 
 
+    }
+
+    handleLike = (revID, inp) => {
+        var review = this.state.reviews.filter(review => review.pk === revID)[0];
+        if (review.isDisliked || review.isLiked)
+            return;
+
+        axios.put(`http://127.0.0.1:8000/bookreview/like/${revID}`, {
+            likes: inp === 'like' ? 1 : 0
+        }).then(res => {
+                
+                if (inp === 'like') {
+                    review.isLiked = true;
+                    review.likes += 1;
+                }
+                else {
+                    review.isDisliked = true;
+                    review.dislikes += 1;
+                }
+                this.setState(this.state);
+            })
+            .catch(error => console.log(error));
     }
 
     componentWillUnmount(){
@@ -196,8 +232,17 @@ class BookDetail extends React.Component {
                                     dataSource={this.state.reviews}
                                     renderItem={item => (
                                     <List.Item key={item.id}
-                                            actions={[<IconText type="like-o" text={item.likes} />, <IconText type="dislike-o" text={item.dislikes} />]}
-                                            extra={item.creation_date}
+                                            actions={[<IconText type="like-o" 
+                                                                text={item.likes} 
+                                                                onClick={() => this.handleLike(item.pk, "like")} 
+                                                                theme = {item.isLiked ? 'filled' : 'outlined'}
+                                                                style = {LikeStyle}/>, 
+                                                      <IconText type="dislike-o" 
+                                                                text={item.dislikes} 
+                                                                onClick={() => this.handleLike(item.pk, "dislike")}
+                                                                theme = {item.isDisliked ? 'filled' : 'outlined'}
+                                                                style = {DislikeStyle} />]}
+                                            extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
                                     >
                                         <List.Item.Meta
                                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
