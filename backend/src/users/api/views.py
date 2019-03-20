@@ -63,8 +63,6 @@ class ProfileAddFollowView(UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileAddFollowSerializer
 
-
-
 class ProfilePictureView(CreateAPIView):
     queryset = ProfilePicture.objects.all()
     serializer_class = AvatarSerializer
