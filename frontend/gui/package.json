@@ -2,14 +2,10 @@
   "name": "gui",
   "version": "0.1.0",
   "private": true,
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "antd": "^3.13.2",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
-    "jest": "^24.1.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
     "react-blocks": "^1.1.4",
@@ -27,7 +23,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
