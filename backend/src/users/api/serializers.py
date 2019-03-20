@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from users.models import Profile
+from users.models import Profile, ProfilePicture
 from books.api.serializers import BookSerializer
 from authors.api.serializers import AuthorCardSerializer
 
@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile 
-        fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following')
+        fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following', 'avatar')
 
 class ProfileShortSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,7 +19,7 @@ class ProfileShortSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'bio', 'genre')
+        fields = ('first_name', 'last_name', 'bio', 'genre', 'avatar')
         read_only_fields = ['user', 'review_count', 'creation_date']
 
 class ProfileAddFavSerializer(serializers.ModelSerializer):
@@ -54,3 +54,14 @@ class ProfileAddFollowSerializer(serializers.ModelSerializer):
                 prof.following.add(author)
         prof.save()
         return prof
+
+class ProfilePictureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('avatar', )
+
+
+class AvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfilePicture
+        fields = ['avatar', ]

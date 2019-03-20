@@ -29,6 +29,7 @@ class Profile(models.Model):
     )
 
     genre = models.CharField(max_length=2, choices = GENRES, default='FA')
+    avatar = models.ImageField(upload_to='user_avatar', blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -38,3 +39,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class ProfilePicture(models.Model):
+    avatar = models.ImageField(upload_to='user_avatar', blank=True)

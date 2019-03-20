@@ -23,7 +23,9 @@ class ProfilePage extends React.Component {
             MY: "Mystery",
             BI: "Biography",
             FI: "Fiction",
-            SF: "Science Fiction"
+            SF: "Science Fiction",
+            image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
+            avatar: this.state.image_url
         };
     }  
 
@@ -37,9 +39,9 @@ class ProfilePage extends React.Component {
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
                 books: res.data.favorites,
-                authors: res.data.following
+                authors: res.data.following,
+                avatar: res.data.avatar
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -50,19 +52,20 @@ class ProfilePage extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} type="flex" justify="center">
-                        <Col span={6}>
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.image_url} style={{    
+                                <img src={this.state.avatar} style={{
+                                    width: 211, height: 221
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                             <Card title={this.state.first_name + this.state.last_name} headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
@@ -89,7 +92,7 @@ class ProfilePage extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card style={gridStyle} title="About Me">
                                 <p>
@@ -99,7 +102,7 @@ class ProfilePage extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={11}>
                         <Card title="Favorites">
                         <List
@@ -120,7 +123,6 @@ class ProfilePage extends React.Component {
                                     >
                                         <Card.Meta
                                         title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
-                                        
                                         />
                                     </Card>
                                 </List.Item>

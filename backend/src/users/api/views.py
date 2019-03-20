@@ -4,14 +4,23 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.generics import (
     RetrieveAPIView,
-    UpdateAPIView
+    UpdateAPIView,
+    CreateAPIView
 )
-from users.models import Profile
+from users.models import Profile, ProfilePicture
 from .serializers import (
     ProfileSerializer,
     ProfileUpdateSerializer,
     ProfileAddFavSerializer,
-    ProfileAddFollowSerializer
+    ProfileAddFollowSerializer,
+    ProfilePictureSerializer,
+    AvatarSerializer
+)
+
+from rest_framework.parsers import (
+    FileUploadParser,
+    FormParser,
+    MultiPartParser
 )
 
 # Use to retrieve based on multiple filters
@@ -31,10 +40,20 @@ from .serializers import (
 #         self.check_object_permissions(self.request, obj)
 #         return obj
 
+
 class UserProfileDetailView(RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     lookup_field = 'user__pk'
+
+class LookupProfileView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        fname = self.kwargs.get('fname')
+        lname = self.kwargs.get('lname')
+        return Profile.objects.filter(first_name=fname, last_name=lname)[0]
 
 class ProfileDetailView(RetrieveAPIView):
     queryset = Profile.objects.all()
@@ -52,3 +71,21 @@ class ProfileAddFavView(UpdateAPIView):
 class ProfileAddFollowView(UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileAddFollowSerializer
+
+class ProfilePictureView(CreateAPIView):
+    queryset = ProfilePicture.objects.all()
+    serializer_class = AvatarSerializer
+    # lookup_field = 'user__pk'
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
+
+    def perform_create(self, serializer):
+        print(self.request.FILES['avatar'])
+        serializer.save()
+
+class ProfPicV(UpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfilePictureSerializer
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
+

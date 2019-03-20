@@ -16,8 +16,29 @@ class ProfileRegistrationForm extends React.Component {
         this.state = { genre: "FA" };
       }
 
+    handleFileSelect = event => {
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
+
     handleFormSubmit = (event, userID) => {
         event.preventDefault();
+        console.log(this.state)
+
+        let img_data = new FormData()
+        img_data.append('avatar', this.state.selectedFile)
+        fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json, text/plain, */*',
+            },
+            body: img_data
+        }).then(res => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
 
         axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
             first_name: event.target.elements.firstname.value,
@@ -65,6 +86,14 @@ class ProfileRegistrationForm extends React.Component {
                             <Option value="NF">Non Fiction</Option>
                             <Option value="SF">Science Fiction</Option>
                         </Select>    
+                    </FormItem>
+
+                    <FormItem label = "Avatar">
+                        <input 
+                         type="file" 
+                         name="" 
+                         id=""
+                         onChange={this.handleFileSelect} />
                     </FormItem>
 
                     <FormItem>

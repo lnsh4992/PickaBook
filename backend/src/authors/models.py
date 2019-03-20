@@ -11,11 +11,11 @@ class Author(models.Model):
     review_count = models.IntegerField("Number of Reviews", default=0)
     bio = models.TextField("About me", max_length=500, default=name)
     previousworks = (('BOOK NAME', 'Description'))
-    #previousworks = models.ListCharField(
-#        title = models.CharField(max_length=50, default="Book Name"),
-#        desc = models.TextField("Book Description", max_length=100, default="About Book")
-        #size = 100,
-#    )
+    # previousworks = models.ListCharField(
+    # title = models.CharField(max_length=50, default="Book Name"),
+    # desc = models.TextField("Book Description", max_length=100, default="About Book")
+    # size = 100,
+    # )
     numFollowers = models.IntegerField(default=0)
 
     #genre = models.CharField(max_length=20, default="FA")
@@ -36,4 +36,4 @@ class Author(models.Model):
     genre = models.CharField(max_length=2, choices = GENRES, default='FA')
 
     def __str__(self):
-        return self.name+" "+str(self.likes)
+        return self.name

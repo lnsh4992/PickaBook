@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Avg
 import datetime
+from users.models import Profile
 # Create your models here.
  
 class BookReview(models.Model):
@@ -22,8 +23,9 @@ class BookReview(models.Model):
         return self.title    
 
     def save(self, *args, **kwargs):
-        self.prof.review_count = self.prof.review_count + 1
-        self.prof.save()
+        profx = self.prof
+#        self.prof.review_count = self.prof.review_count + 1
+#        self.prof.save()
         super().save(*args, **kwargs)
         revs = BookReview.objects.filter(book=self.book)
         avg = revs.aggregate(Avg('rating'))['rating__avg']

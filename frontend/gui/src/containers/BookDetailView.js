@@ -159,19 +159,20 @@ class BookDetail extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} type="flex" justify="center">
-                        <Col span={6}>
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.image_url} style={{    
+                                <img src={this.state.image_url} style={{
+                                    width: 210, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                             <Card title={
                                     <div>
                                         {this.state.title} 
@@ -212,7 +213,7 @@ class BookDetail extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card style={gridStyle} title="Synopsis/blurb">
                                 <p>
@@ -222,7 +223,7 @@ class BookDetail extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card title={<div style={gridStyle}>Reviews</div>}>
 
@@ -261,7 +262,7 @@ class BookDetail extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card title="Add A Review">
                                 <ReviewForm bookID={this.props.match.params.bookID} />
@@ -269,7 +270,7 @@ class BookDetail extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex">
+                    <Row gutter={20} type="flex" justify="center">
                         <Col span={22}>
                             <Card title="Questions">
 

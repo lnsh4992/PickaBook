@@ -21,14 +21,35 @@ class ProfileUpdateForm extends React.Component {
             MY: "Mystery",
             BI: "Biography",
             FI: "Fiction",
-            SF: "Science Fiction"
+            SF: "Science Fiction",
+            selectedFile: null
 
         };
       }
 
+    handleFileSelect = event => {
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
+
     handleFormSubmit = (event, userID) => {
         event.preventDefault();
         console.log(this.state)
+
+        let img_data = new FormData()
+        img_data.append('avatar', this.state.selectedFile)
+        fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json, text/plain, */*',
+            },
+            body: img_data
+        }).then(res => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
 
         return axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
             first_name: this.state.first_name,
@@ -58,6 +79,8 @@ class ProfileUpdateForm extends React.Component {
                 last_name: res.data.last_name,
                 bio: res.data.bio,
                 genre: res.data.genre,
+                avatar: res.data.avatar,
+                profID: res.data.pk
             })
 
         })
@@ -97,6 +120,14 @@ class ProfileUpdateForm extends React.Component {
                             <Option value="NF">Non Fiction</Option>
                             <Option value="SF">Science Fiction</Option>
                         </Select>    
+                    </FormItem>
+
+                    <FormItem label = "Avatar">
+                        <input 
+                         type="file" 
+                         name="" 
+                         id=""
+                         onChange={this.handleFileSelect} />
                     </FormItem>
 
                     <FormItem>
