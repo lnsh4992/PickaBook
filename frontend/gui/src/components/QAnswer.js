@@ -11,6 +11,7 @@ class QAnswer extends React.Component {
             likes: 0,
             dislikes: 0,
             action: null,
+            img: null
         };
     }  
 
@@ -82,7 +83,7 @@ class QAnswer extends React.Component {
                         <Comment
                             actions={actions}
                             author={item.profile}
-                            avatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            avatar={<Avatar src={item.profile.avatar}/>}
                             content={item.question}
                             datetime={item.creation_date}
                         >
@@ -96,7 +97,7 @@ class QAnswer extends React.Component {
                                 renderItem={answer => (
                                     <Comment
                                         author={answer.profile}
-                                        avatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                        avatar={<Avatar src={answer.profile.avatar}/>}
                                         content={answer.answer}
                                         datetime={answer.creation_date}
                                     />

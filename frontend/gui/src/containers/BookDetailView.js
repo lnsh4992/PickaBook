@@ -246,7 +246,7 @@ class BookDetail extends React.Component {
                                             extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
                                     >
                                         <List.Item.Meta
-                                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                            avatar={<Avatar src={item.prof.avatar} />}
                                             title={item.title}
                                             description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
                                             

@@ -22,14 +22,16 @@ class ProfileUpdateForm extends React.Component {
             BI: "Biography",
             FI: "Fiction",
             SF: "Science Fiction",
-            selectedFile: null
+            selectedFile: null,
+            isSelected: false
 
         };
       }
 
     handleFileSelect = event => {
         this.setState({
-            selectedFile: event.target.files[0]
+            selectedFile: event.target.files[0],
+            isSelected: true
         })
     }
 
@@ -37,8 +39,9 @@ class ProfileUpdateForm extends React.Component {
         event.preventDefault();
         console.log(this.state)
 
-        let img_data = new FormData()
-        img_data.append('avatar', this.state.selectedFile)
+        if( this.state.isSelected ){
+            let img_data = new FormData()
+            img_data.append('avatar', this.state.selectedFile)
         fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
             method: 'PUT',
             headers: {
@@ -48,19 +51,35 @@ class ProfileUpdateForm extends React.Component {
         }).then(res => res.json())
         .then((data) => {
             console.log(data);
+            axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                bio: this.state.bio,
+                genre: this.state.genre
+            })
+            .then(res => {
+                this.props.history.push('/profile');
+            })
+            .catch(error => console.log(error));
         })
         .catch(err => console.log(err))
+        }
 
-        return axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            bio: this.state.bio,
-            genre: this.state.genre
-        })
-        .then(res => {
-            this.props.history.push('/profile');
-        })
-        .catch(error => console.log(error));
+        else {
+            axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                bio: this.state.bio,
+                genre: this.state.genre
+            })
+            .then(res => {
+                this.props.history.push('/profile');
+            })
+            .catch(error => console.log(error));
+        }
+
+        
+        
     }
 
     handleGenreChange = (value) => {
