@@ -7,7 +7,8 @@ from .views import (
     ProfileAddFavView,
     ProfileAddFollowView,
     ProfilePictureView,
-    ProfPicV
+    ProfPicV,
+    LookupProfileView
 )
 
 from django.contrib.auth.views import (
@@ -21,6 +22,7 @@ urlpatterns = [
     path('<user__pk>', UserProfileDetailView.as_view(), name='userprofiledetail'),
     path('update/<user__pk>', ProfileUpdateView.as_view()),
     path('user/<pk>', ProfileDetailView.as_view(), name='Profile'),
+    re_path(r'^search/(?P<fname>[0-9A-Za-z]+)/(?P<lname>[0-9A-Za-z]+)/$', LookupProfileView.as_view()),
     path('addfavorite/<pk>', ProfileAddFavView.as_view(), name='favoritebook'),
     path('addfollow/<pk>', ProfileAddFollowView.as_view(), name='followauthor'),
     path('resetpw/', PasswordResetView.as_view(), name='reset_password'),

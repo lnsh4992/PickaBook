@@ -63,6 +63,19 @@ class CustomHeader extends React.Component {
             })
         }
 
+        if ( this.state.filter === "profile"){
+            var name = event.target.elements.tgtname.value.split(" ")
+            axios.get(`http://127.0.0.1:8000/profile/search/${name[0]}/${name[1]}/`)
+            .then(res => {
+                this.props.history.push(`/profile/${res.data.pk}/`);
+            })
+            .catch(err => {
+                this.setState({
+                    show: true
+                });
+            })
+        }
+
     }
 
     render() {
@@ -97,7 +110,8 @@ class CustomHeader extends React.Component {
             <NavDropdown title="Filter" id="basic-nav-dropdown" 
             onSelect={(value => this.handleFilter(value))}>
               <NavDropdown.Item eventKey="book">Book</NavDropdown.Item>
-                <NavDropdown.Item eventKey="author">Author</NavDropdown.Item>    
+              <NavDropdown.Item eventKey="author">Author</NavDropdown.Item> 
+              <NavDropdown.Item eventKey="profile">Profile</NavDropdown.Item>       
             </NavDropdown>
             
 
@@ -108,7 +122,7 @@ class CustomHeader extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>Error Not Found!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Unfortunately, we can't find {this.state.target}</Modal.Body>
+          <Modal.Body>Unfortunately, we can't find <b>{this.state.filter}</b> {this.state.target}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
