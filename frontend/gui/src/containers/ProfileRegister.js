@@ -55,6 +55,15 @@ class ProfileRegistrationForm extends React.Component {
         this.setState({genre: value});
     }
 
+    componentDidMount() {
+        axios.get(`http://127.0.0.1:8000/profile/${this.props.userid}`).then(res => {
+            this.setState({
+                profID: res.data.pk
+            })
+
+        })
+    }
+
     render() {
         return (
             <div>
