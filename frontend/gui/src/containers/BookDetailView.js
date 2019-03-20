@@ -160,19 +160,19 @@ class BookDetail extends React.Component {
         return (
                 <div>
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
-                        <Col span={6}>
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
                                 <img src={this.state.image_url} style={{
-                                    width: 318, height: 295
+                                    width: 210, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                             <Card title={
                                     <div>
                                         {this.state.title} 
