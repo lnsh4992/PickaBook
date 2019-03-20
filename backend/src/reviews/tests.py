@@ -45,6 +45,60 @@ class BookReviewModelTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn(review_entry.content, str(resp.content))
 
+    def test_review_driver_create(self):
+        newProf = self.create_prof()
+        book = self.create_book()
+        
+        url = reverse('createreview')
+        resp = self.client.post(url, {
+                        'title': 'revTitle',
+                        'content': 'revCont',
+                        'rating': '3.5',
+                        'prof': newProf.pk,
+                        'book': book.pk
+                })
+
+        self.assertEqual(resp.status_code, 201)
+
+        review = BookReview.objects.get(pk=1)
+        self.assertEqual(review.title, 'revTitle')
+
+    def test_review_book_rating_driver(self):
+        newProf = self.create_prof()
+        book = self.create_book()
+        
+        url = reverse('createreview')
+        resp = self.client.post(url, {
+                        'title': 'revTitle',
+                        'content': 'revCont',
+                        'rating': '5.0',
+                        'prof': newProf.pk,
+                        'book': book.pk
+                })
+
+        self.assertEqual(resp.status_code, 201)
+
+        review = BookReview.objects.get(pk=1)
+        self.assertEqual(review.title, 'revTitle')
+        book = Book.objects.get(pk=book.pk)
+        self.assertEqual(book.rating, 5.0)
+
+        resp = self.client.post(url, {
+                        'title': 'revTitle2',
+                        'content': 'revCont2',
+                        'rating': '3.0',
+                        'prof': newProf.pk,
+                        'book': book.pk
+                })
+
+        self.assertEqual(resp.status_code, 201)
+        review = BookReview.objects.get(pk=2)
+        self.assertEqual(review.title, 'revTitle2')
+        book = Book.objects.get(pk=book.pk)
+        self.assertEqual(book.rating, 4.0)
+
+    
+
     def test_review_like(self):
 
         review = self.create_review()
