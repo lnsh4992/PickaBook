@@ -6,13 +6,15 @@ from .views import (
     ProfileUpdateView,
     ProfileAddFavView,
     ProfileAddFollowView,
+    ProfilePictureView,
+    ProfPicV
 )
 
 from django.contrib.auth.views import (
     PasswordResetView, 
     PasswordResetDoneView,
     PasswordResetConfirmView,
-    PasswordResetCompleteView
+    PasswordResetCompleteView,
 )
 
 urlpatterns = [
@@ -24,5 +26,7 @@ urlpatterns = [
     path('resetpw/', PasswordResetView.as_view(), name='reset_password'),
     path('resetpw/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     re_path(r'^resetpw/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('resetpw/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete')
+    path('resetpw/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('updatepic/', ProfilePictureView.as_view()),
+    path('updatepicprof/<pk>', ProfPicV.as_view())
 ]

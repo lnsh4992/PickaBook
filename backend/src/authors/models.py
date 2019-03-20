@@ -36,4 +36,4 @@ class Author(models.Model):
     genre = models.CharField(max_length=2, choices = GENRES, default='FA')
 
     def __str__(self):
-        return self.name+" "+str(self.likes)
+        return self.name

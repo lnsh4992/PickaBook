@@ -4,14 +4,23 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.generics import (
     RetrieveAPIView,
-    UpdateAPIView
+    UpdateAPIView,
+    CreateAPIView
 )
-from users.models import Profile
+from users.models import Profile, ProfilePicture
 from .serializers import (
     ProfileSerializer,
     ProfileUpdateSerializer,
     ProfileAddFavSerializer,
-    ProfileAddFollowSerializer
+    ProfileAddFollowSerializer,
+    ProfilePictureSerializer,
+    AvatarSerializer
+)
+
+from rest_framework.parsers import (
+    FileUploadParser,
+    FormParser,
+    MultiPartParser
 )
 
 # Use to retrieve based on multiple filters
@@ -30,6 +39,7 @@ from .serializers import (
 #         obj = get_object_or_404(queryset, **filter)  # Lookup the object
 #         self.check_object_permissions(self.request, obj)
 #         return obj
+
 
 class UserProfileDetailView(RetrieveAPIView):
     queryset = Profile.objects.all()
@@ -52,3 +62,23 @@ class ProfileAddFavView(UpdateAPIView):
 class ProfileAddFollowView(UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileAddFollowSerializer
+
+
+
+class ProfilePictureView(CreateAPIView):
+    queryset = ProfilePicture.objects.all()
+    serializer_class = AvatarSerializer
+    # lookup_field = 'user__pk'
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
+
+    def perform_create(self, serializer):
+        print(self.request.FILES['avatar'])
+        serializer.save()
+
+class ProfPicV(UpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfilePictureSerializer
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (FormParser, MultiPartParser, FileUploadParser)
+
