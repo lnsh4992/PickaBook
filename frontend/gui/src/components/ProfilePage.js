@@ -52,7 +52,7 @@ class ProfilePage extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={6}>
                             <Card bodyStyle={{
                                 padding: 0
@@ -92,7 +92,7 @@ class ProfilePage extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card style={gridStyle} title="About Me">
                                 <p>
@@ -102,7 +102,7 @@ class ProfilePage extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={11}>
                         <Card title="Favorites">
                         <List
