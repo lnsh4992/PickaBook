@@ -126,7 +126,7 @@ class ProfileUpdateForm extends React.Component {
                         <input 
                          type="file" 
                          name="" 
-                         id="" 
+                         id=""
                          onChange={this.handleFileSelect} />
                     </FormItem>
 

@@ -57,7 +57,8 @@ class ProfilePage extends React.Component {
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.avatar} style={{    
+                                <img src={this.state.avatar} style={{
+                                    width: 320, height: 218
                                 }}
                                 width="100%" height="100%" >
                                 </img>

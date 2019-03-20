@@ -10,7 +10,7 @@ class QAnswer extends React.Component {
             questions: [],
             likes: 0,
             dislikes: 0,
-            action: null
+            action: null,
         };
     }  
 
