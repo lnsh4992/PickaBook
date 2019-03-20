@@ -11,12 +11,13 @@ from rest_framework.generics import (
 from reviews.models import BookReview
 from .serializers import (
     BookReviewSerializer,
-    BookReviewLikeSerializer
+    BookReviewLikeSerializer,
+    BookReviewCreateSerializer
 )
 
 class BookReviewCreateView(CreateAPIView):
     queryset = BookReview.objects.all()
-    serializer_class = BookReviewSerializer
+    serializer_class = BookReviewCreateSerializer
 
 class BookReviewListView(ListAPIView):
     queryset = BookReview.objects.all()

@@ -36,6 +36,15 @@ class UserProfileDetailView(RetrieveAPIView):
     serializer_class = ProfileSerializer
     lookup_field = 'user__pk'
 
+class LookupProfileView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        fname = self.kwargs.get('fname')
+        lname = self.kwargs.get('lname')
+        return Profile.objects.filter(first_name=fname, last_name=lname)[0]
+
 class ProfileDetailView(RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
