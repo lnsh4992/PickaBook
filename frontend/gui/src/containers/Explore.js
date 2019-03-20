@@ -1,7 +1,10 @@
 import React from 'react';
 import Books from '../components/Book';
 import axios from 'axios';
-import {List, Card, Row, Rate, Layout, Menu} from 'antd';
+import {List, Card, Rate, Layout, Menu, Input, Row} from 'antd';
+import {Form, FormControl, Button } from 'react-bootstrap';
+
+
 import ReactCardFlip from 'react-card-flip';
 
 const { SubMenu } = Menu;
@@ -53,6 +56,24 @@ class Explore extends React.Component {
         this.setState({booksFiltered: this.state.books.filter(obj => obj.genre == event)});
     }
 
+    handleSearch = (event) => {
+        event.preventDefault();
+        console.log(event.target.elements.tgtname.value);
+        const title = event.target.elements.tgtname.value
+        axios.get(`http://127.0.0.1:8000/library/search/${title}`).then(res => {
+            this.setState({
+                books: res.data
+            });
+            for(var i=0; i<this.state.books.length; ++i){
+                this.state.books[i].isFlipped = false
+            }
+            this.setState({
+                booksFiltered: this.state.books
+            })
+        })
+        .catch(error => console.log(error));
+    }
+
     componentDidMount = () => {
         axios.get("http://127.0.0.1:8000/library/booklist/").then(res => {
             this.setState({
@@ -91,7 +112,11 @@ class Explore extends React.Component {
                         <Menu.Item key="FI" onClick={() => this.handleGenreChange('FI')}>Fiction</Menu.Item>
                         <Menu.Item key="SF" onClick={() => this.handleGenreChange('SF')}>Science Fiction</Menu.Item>
                         </SubMenu>
-                    </Menu>
+                        <Form inline onSubmit={(event) => this.handleSearch(event)}>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" name="tgtname" />
+                            <Button variant="outline-success" type="primary">Search</Button>
+                        </Form>
+                </Menu>
                 </Sider>
 
                 <Content>
