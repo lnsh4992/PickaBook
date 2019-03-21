@@ -11,7 +11,7 @@ from .views import (
 
 urlpatterns = [
     path('booklist/', BookListView.as_view(), name='booklist'),
-    re_path(r'^search/(?P<title>[\w\s]+)$', BookSearchResultView.as_view()),
+    re_path(r'^search/(?P<title>[\w\s]+)$', BookSearchResultView.as_view(), name='search'),
     path('booklist/<pk>/', BookDetailView.as_view()),
     path('createbook/', BookCreateView.as_view()),
     re_path(r'^view/(?P<title>[\w\s]+)$', BookSearchView.as_view()),
