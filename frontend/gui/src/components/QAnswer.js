@@ -254,7 +254,7 @@ class QAnswer extends React.Component {
                 </Drawer>
 
 
-                <Card title={<div>"Questions"
+                <Card title={<div>Questions
                     <Button type="primary" onClick={this.showQuestionDrawer} style={buttonStyle}>New Question</Button>
                 </div>}>
                 <List

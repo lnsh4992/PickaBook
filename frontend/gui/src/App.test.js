@@ -67,7 +67,7 @@ test('Reviews of book', () => {
   expect.assertions(2);
   return axios.get(`http://127.0.0.1:8000/bookreview/1`).then(res => {
           expect(res.data.length).toBeGreaterThan(0);
-          expect(res.data[0].title).toBe("Good stuff");
+          expect(res.data[0].title).toBe("Alright");
   })
 })
 
@@ -90,10 +90,10 @@ test('All Following Authors', () => {
 test('All Favorite Books', () => {
   expect.assertions(4);
   return axios.get(`http://127.0.0.1:8000/profile/13`).then(res => {
-          expect(res.data.favorites.length).toBeGreaterThan(3);
-          expect(res.data.favorites[0].title).toBe("Test book 1");
-          expect(res.data.favorites[1].title).toBe("Test book 2");
-          expect(res.data.favorites[2].title).toBe("The Chef");
+          expect(res.data.favorites.length).toEqual(3);
+          expect(res.data.favorites[0].title).toBe("Test book 2");
+          expect(res.data.favorites[1].title).toBe("The Chef");
+          expect(res.data.favorites[2].title).toBe("Tailspin");
   });
 });
 
@@ -149,6 +149,15 @@ test('Book List Filter Genre', () => {
   });
 });
 
+test('Book Substring', () => {
+  expect.assertions(2);
+
+  return axios.get(`http://127.0.0.1:8000/library/search/alita`).then(res =>{
+        expect(res.data.length).toBeGreaterThan(0);
+        
+        expect(res.data[0].title).toBe("Alita");
+  });
+});
 
 /*
 describe('Indicator', () => {
