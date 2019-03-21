@@ -33,7 +33,7 @@ const BaseRouter = (props) => {
 
     return (
     <div>
-    <BrowserRouter forceRefresh={true}>
+    <BrowserRouter>
       <Switch>
         <AppRoute exact path='/' layout={(props) => <CustomLayout {...props} />} component={Login} props={props}/>
         <AppRoute exact path='/login/' layout={(props) => <CenteredLayout {...props} />} component={Login} props={props}/>
