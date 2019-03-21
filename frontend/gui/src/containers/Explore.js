@@ -1,7 +1,7 @@
 import React from 'react';
 import Books from '../components/Book';
 import axios from 'axios';
-import {List, Card, Rate, Layout, Menu, Input, Row} from 'antd';
+import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
 
 
@@ -25,7 +25,8 @@ class Explore extends React.Component {
             SF: "Science Fiction",
             books: [],
             booksFiltered: [],
-            isFlipped: false
+            isFlipped: false,
+            error: false
         };
     }
 
@@ -56,10 +57,23 @@ class Explore extends React.Component {
         this.setState({booksFiltered: this.state.books.filter(obj => obj.genre == event)});
     }
 
+    errorMessage = () => {
+        message.error('Please do not use special characters Before Submitting!');
+        this.setState({error: false});
+    }
+
     handleSearch = (event) => {
         event.preventDefault();
         console.log(event.target.elements.tgtname.value);
-        const title = event.target.elements.tgtname.value
+        const title = event.target.elements.tgtname.value;
+        
+        if( !title.match("^[0-9A-Za-z\s]+$") )
+        {
+            this.setState({error: true});
+            return;
+        }
+
+
         axios.get(`http://127.0.0.1:8000/library/search/${title}`).then(res => {
             this.setState({
                 books: res.data
@@ -92,6 +106,11 @@ class Explore extends React.Component {
     render() {
         return (
             <Layout style={{ padding: '0 0', background: '#fff'}}>
+                {this.state.error ?
+                    this.errorMessage()
+                    :
+                    <b></b>
+                }
                 <Sider width={200} >
                     <Menu
                         mode="inline"

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Select, Rate, Col, Row } from 'antd';
-import { connect } from "react-redux";
+import { Form, Input, Button, Select, Rate, Col, Row, message } from 'antd';
 
 import axios from 'axios';
 
@@ -17,12 +16,19 @@ class ProfileRegistrationForm extends React.Component {
         super(props);
         this.state = { 
             value: 3.0,
+            error: false
         };
     }
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        if( event.target.elements.title.value === "" || event.target.elements.review.value === ""){
+            this.setState({
+                error: true
+            });
+            return;
+        }
+
         const profID = localStorage.getItem("profID");
         const data = {
             title: event.target.elements.title.value,
@@ -43,6 +49,13 @@ class ProfileRegistrationForm extends React.Component {
 
     handleChange = (value) => {
         this.setState({ value });
+    }
+
+    ErrorMessage = () =>  {
+        message.error('Please Fill The Form Before Submitting!');
+        this.setState({
+            error: false
+        })
     }
 
 
@@ -75,6 +88,11 @@ class ProfileRegistrationForm extends React.Component {
 
         return (
             <div>
+                {this.state.error ?
+                    this.ErrorMessage()
+                    :
+                    <b></b>
+                }
                 <Form layout="horizontal" onSubmit={(event) => this.handleFormSubmit(
                     event,
                 )}>
