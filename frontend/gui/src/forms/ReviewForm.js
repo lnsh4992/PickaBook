@@ -33,14 +33,16 @@ class ProfileRegistrationForm extends React.Component {
         };
         console.log(data)
         axios.post(`http://127.0.0.1:8000/bookreview/create/`, data)
-        .then(res => console.log(res))
+        .then(res => {
+            this.props.fetchReviews();
+
+        })
         .catch(error => console.log(error));
 //        this.props.history.push('/profile');
     }
 
     handleChange = (value) => {
         this.setState({ value });
-        console.log(this.state);
     }
 
 

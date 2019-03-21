@@ -77,6 +77,11 @@ class BookDetail extends React.Component {
         })
         .catch(error => console.log(error));
 
+        this.fetchReviews();
+    }
+
+    fetchReviews = () => {
+        const bookID = this.props.match.params.bookID;
         axios.get(`http://127.0.0.1:8000/bookreview/${bookID}`).then(res => {
             this.setState({
                 reviews: res.data,
@@ -265,18 +270,15 @@ class BookDetail extends React.Component {
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card title="Add A Review">
-                                <ReviewForm bookID={this.props.match.params.bookID} />
+                                <ReviewForm bookID={this.props.match.params.bookID} fetchReviews={this.fetchReviews} />
                             </Card>
                         </Col>
                     </Row>
 
                     <Row gutter={20} type="flex" justify="center">
                         <Col span={22}>
-                            <Card title="Questions">
+                            <QAnswer bookID={this.props.match.params.bookID} />
 
-                                <QAnswer bookID={this.props.match.params.bookID} />
-
-                            </Card>
                         </Col>
                     </Row>
 

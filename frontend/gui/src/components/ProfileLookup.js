@@ -34,7 +34,7 @@ class ProfileLookup extends React.Component {
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
                 genre: res.data.genre,
-                image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
+                avatar: res.data.avatar,
                 books: res.data.favorites,
                 authors: res.data.following
             });
@@ -46,12 +46,13 @@ class ProfileLookup extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={6}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.image_url} style={{    
+                                <img src={this.state.avatar} style={{
+                                    width: 211, height: 221
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -85,7 +86,7 @@ class ProfileLookup extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card style={gridStyle} title="About Me">
                                 <p>
@@ -95,7 +96,7 @@ class ProfileLookup extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={11}>
                         <Card title="Favorites">
                         <List

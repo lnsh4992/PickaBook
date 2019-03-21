@@ -1,2 +1,4 @@
 backend/env/
 .vscode/
+backend/src/db.sqlite3
+backend/src/media/
