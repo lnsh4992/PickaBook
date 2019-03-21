@@ -88,6 +88,7 @@ def search(keyWords):
     for t in rmvTitle:
         bookInfo = bookInfo.exclude(title=t)
 
+    bookInfo = bookInfo.exclude(title="Test book 1")
 #    bookInfo = bookInfo.exclude(title="Test book 1")
 
 # Sorting to whoe high match rate result show first

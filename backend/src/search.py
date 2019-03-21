@@ -73,7 +73,7 @@ def search(keyWords):
         matchCnt = 0
         for j in range(0, len(trimedKeys)):
             if(author_name[i].lower().find(trimedKeys[j]) != -1):
-                print("!!!!!!  ",author_name[i])
+#                print("!!!!!!  ",author_name[i])
                 matchCnt += 1
     
         if(matchCnt > 0):
@@ -113,6 +113,6 @@ def search(keyWords):
 
 if __name__ == "__main__":
     
-    keyWords = "ALita"
+    keyWords = "enof"
     search(keyWords)
 
