@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pickabook.settings")
@@ -32,6 +31,7 @@ def test(csvPath):
             image_urlL.append(bookInfo[key][4])
             publication_dateL.append(bookInfo[key][5])
             synopsisL.append(bookInfo[key][6])
+            print(bookInfo[key][6])
             ratingL.append(bookInfo[key][7])
         cnt += 1
     
@@ -39,8 +39,13 @@ def test(csvPath):
 
 
     for i in range(0, len(titleL)):
-            Book(title = titleL[i], author_name = author_nameL[i], publication_date = publication_dateL[i].split(' ')[i], genre = genreL[i], rating = ratingL[i], image_url = image_urlL[i], synopsis = synopsisL[i]).save()
-
+#        print(publication_dateL[i])
+        print(publication_dateL[i].split(' ')[0])
+        print()
+#        try:
+#            Book(title = titleL[i], author_name = author_nameL[i], publication_date = publication_dateL[i].split(' ')[i], genre = genreL[i], rating = ratingL[i], image_url = image_urlL[i], synopsis = synopsisL[i]).save()
+#        except:
+#            continue
 
 
 if __name__ == "__main__":
