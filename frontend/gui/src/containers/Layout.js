@@ -44,14 +44,14 @@ class CustomLayout extends React.Component {
         </Header>
 */}
         
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '0 50px', background: '#0f6171'}}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
           
-          <div style={{ background: 'rgba(241, 101, 86, 0.35)' , padding: 24, minHeight: 280 }}>
+          <div style={{ background: '#DDA72F' , padding: 24, minHeight: 280 }}>
             {this.props.children}
           </div>
 

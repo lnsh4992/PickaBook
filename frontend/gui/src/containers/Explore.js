@@ -3,6 +3,7 @@ import Books from '../components/Book';
 import axios from 'axios';
 import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
+import { SketchPicker } from 'react-color';
 
 
 import ReactCardFlip from 'react-card-flip';
@@ -26,7 +27,7 @@ class Explore extends React.Component {
             books: [],
             booksFiltered: [],
             isFlipped: false,
-            error: false
+            error: false,
         };
     }
 
@@ -105,13 +106,13 @@ class Explore extends React.Component {
     
     render() {
         return (
-            <Layout style={{ padding: '0 0', background: '#fff'}}>
+            <Layout style={{ padding: '0 0', background: '#0f6171'}}>
                 {this.state.error ?
                     this.errorMessage()
                     :
                     <b></b>
                 }
-                <Sider width={200} >
+                <Sider width={220} >
                     <Menu
                         mode="inline"
                         theme="dark"
@@ -132,7 +133,9 @@ class Explore extends React.Component {
                         <Menu.Item key="SF" onClick={() => this.handleGenreChange('SF')}>Science Fiction</Menu.Item>
                         </SubMenu>
                         <Form inline onSubmit={(event) => this.handleSearch(event)}>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" name="tgtname" />
+                            <FormControl 
+                            type="text" placeholder="Search" className="mr-sm-2" name="tgtname" 
+                            />
                             <Button variant="outline-success" type="primary">Search</Button>
                         </Form>
                 </Menu>
@@ -143,6 +146,9 @@ class Explore extends React.Component {
                 <List
                 grid={{
                     gutter: 16, column: 3
+                }}
+                style={{
+                  paddingTop: 20, paddingLeft: 80  
                 }}
                 pagination={{
                 onChange: (page) => {
@@ -157,7 +163,7 @@ class Explore extends React.Component {
                         <ReactCardFlip isFlipped={item.isFlipped} flipDirection="horizontal">
                         <Card
                             hoverable
-                            style={{ width: 240 }}
+                            style={{ width: 240, background: '#DDA72F'}}
                             cover={<img alt={item.title} src={item.image_url} />}
                             onClick={() => this.handleClick(item)}
                             key="front"
@@ -169,7 +175,7 @@ class Explore extends React.Component {
 
                         <Card
                             title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
-                            style={{width: 240}}
+                            style={{width: 240, background: '#DDA72F'}}
                             key="back"
                             onClick={() => this.handleClick(item)}
                         >
