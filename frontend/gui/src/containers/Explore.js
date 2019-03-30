@@ -117,7 +117,7 @@ class Explore extends React.Component {
                         mode="inline"
                         theme="dark"
                         defaultSelectedKeys={[3]}
-                        style={{ height: '100%' }}
+                        style={{ height: '100%', paddingLeft: 10, paddingTop: 10 }}
                     >
                         <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>Newest Collection</Menu.Item>
                         <Menu.Item key="2" onClick={() => this.handleSortChange('rating')}>Top Rated</Menu.Item>
@@ -134,9 +134,13 @@ class Explore extends React.Component {
                         </SubMenu>
                         <Form inline onSubmit={(event) => this.handleSearch(event)}>
                             <FormControl 
-                            type="text" placeholder="Search" className="mr-sm-2" name="tgtname" 
+                            type="text" placeholder="Search" className="mr-sm-2" name="tgtname"
                             />
-                            <Button variant="outline-success" type="primary">Search</Button>
+                            <Button style={{marginTop: 10}}
+                                    variant="outline-success" 
+                                    type="primary">
+                                    Search
+                            </Button>
                         </Form>
                 </Menu>
                 </Sider>
@@ -148,7 +152,7 @@ class Explore extends React.Component {
                     gutter: 16, column: 3
                 }}
                 style={{
-                  paddingTop: 20, paddingLeft: 80  
+                  paddingTop: 20, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
                 }}
                 pagination={{
                 onChange: (page) => {
@@ -175,7 +179,7 @@ class Explore extends React.Component {
 
                         <Card
                             title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
-                            style={{width: 240, background: '#DDA72F'}}
+                            style={{width: 240, height: 350, background: '#DDA72F'}}
                             key="back"
                             onClick={() => this.handleClick(item)}
                         >
