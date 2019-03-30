@@ -170,7 +170,7 @@ class BookDetail extends React.Component {
                                 padding: 0
                             }}>
                                 <img src={this.state.image_url} style={{
-                                    width: 210, height: 295
+                                    width: 194, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -178,17 +178,21 @@ class BookDetail extends React.Component {
                         </Col>
                         
                         <Col span={18}>
-                            <Card title={
-                                    <div>
-                                        {this.state.title} 
-                                        <Icon style={{marginLeft: 10, color:'#fb928e'}} type="heart" theme={this.state.iconTheme} 
-                                            twoToneColor="#eb2f96" onClick={this.handleFollow} />
-                                    </div>
-                                } headStyle={{
+                            <Card 
+                            title={
+                                <div>
+                                    {this.state.title} 
+                                    <Icon style={{marginLeft: 10, color:'#fb928e'}} type="heart" theme={this.state.iconTheme} 
+                                        twoToneColor="#eb2f96" onClick={this.handleFollow} />
+                                </div>
+                            } 
+                            headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
-                                fontFamily: 'Georgia'
-                            }}>
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                            >
                                 <p>
                                     <b><i>Author: </i></b> 
                                     <a href={'/authors/'+this.state.authID} > {this.state.author_name} </a>
@@ -220,7 +224,14 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb">
+                            <Card style={gridStyle} title="Synopsis/blurb"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                            >
                                 <p>
                                     {this.state.synopsis}
                                 </p>
@@ -230,7 +241,14 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card title={<div style={gridStyle}>Reviews</div>}>
+                            <Card title={<div style={gridStyle}>Reviews</div>}
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                            >
 
                                 <List
                                     itemLayout="vertical"
@@ -269,7 +287,14 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card title="Add A Review">
+                            <Card title="Add A Review"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                            >
                                 <ReviewForm bookID={this.props.match.params.bookID} fetchReviews={this.fetchReviews} />
                             </Card>
                         </Col>
@@ -278,7 +303,6 @@ class BookDetail extends React.Component {
                     <Row gutter={20} type="flex" justify="center">
                         <Col span={22}>
                             <QAnswer bookID={this.props.match.params.bookID} />
-
                         </Col>
                     </Row>
 

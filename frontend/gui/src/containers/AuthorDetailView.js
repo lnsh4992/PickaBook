@@ -84,12 +84,14 @@ class AuthorDetail extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={6}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.image_url} style={{    
+                                <img src={this.state.image_url} 
+                                style={{
+                                    width: 302, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -106,10 +108,12 @@ class AuthorDetail extends React.Component {
                                 }
                                 
                                 headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia'
-                            }}>
+                                    fontSize: 20,
+                                    fontStyle: 'italic',
+                                    fontFamily: 'Georgia', 
+                                    background: '#378695'
+                                }}
+                            >
                                 <p>
                                     <b><i>Birthdate: </i></b> 
                                     {this.state.birthdate}
@@ -139,9 +143,16 @@ class AuthorDetail extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb">
+                            <Card style={gridStyle} title="Synopsis/blurb"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                            >
                                 <p>
                                     {this.state.synopsis}
                                 </p>
@@ -151,6 +162,9 @@ class AuthorDetail extends React.Component {
 
                     <List
                         grid={{ gutter: 16, column: 4 }}
+                        style={{
+                            paddingTop: 20, paddingLeft: 55  
+                        }}
                         dataSource={this.state.books}
                         renderItem={item => (
                         <List.Item>
@@ -159,7 +173,13 @@ class AuthorDetail extends React.Component {
                             <Card
                                 hoverable
                                 style={{ width: 240 }}
-                                cover={<img alt={item.title} src={item.image_url} />}
+                                cover={<img alt={item.title} 
+                                            src={item.image_url} 
+                                            style={{
+                                                width: 238, height: 295
+                                            }}
+                                            width="100%" height="100%"
+                                />}
                             >
                                 <Card.Meta
                                 title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}

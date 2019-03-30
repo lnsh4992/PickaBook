@@ -106,7 +106,7 @@ class Explore extends React.Component {
     
     render() {
         return (
-            <Layout style={{ padding: '0 0', background: '#0f6171'}}>
+            <Layout style={{ padding: '0 0', background: '#378695'}}>
                 {this.state.error ?
                     this.errorMessage()
                     :
