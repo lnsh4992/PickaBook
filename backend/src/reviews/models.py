@@ -23,9 +23,9 @@ class BookReview(models.Model):
         return self.title    
 
     def save(self, *args, **kwargs):
-        profx = self.prof
-#        self.prof.review_count = self.prof.review_count + 1
-#        self.prof.save()
+#        profx = self.prof
+        self.prof.review_count = self.prof.review_count + 1
+        self.prof.save()
         super().save(*args, **kwargs)
         revs = BookReview.objects.filter(book=self.book)
         avg = revs.aggregate(Avg('rating'))['rating__avg']

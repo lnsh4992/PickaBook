@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from users.models import Profile, ProfilePicture
+from authors.models import Author
 from books.api.serializers import BookSerializer
 from authors.api.serializers import AuthorCardSerializer
 
@@ -50,8 +51,11 @@ class ProfileAddFollowSerializer(serializers.ModelSerializer):
         for author in following:
             if author in prof.following.all():
                 prof.following.remove(author)
+                author.numFollowers -= 1
             else:
                 prof.following.add(author)
+                author.numFollowers += 1
+            author.save()
         prof.save()
         return prof
 

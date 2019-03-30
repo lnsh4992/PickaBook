@@ -69,7 +69,7 @@ class Explore extends React.Component {
         
         if( !title.match("^[0-9A-Za-z\s]+$") )
         {
-            this.setState({error: true});
+            this.setState({error: false});
             return;
         }
 
