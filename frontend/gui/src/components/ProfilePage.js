@@ -9,7 +9,7 @@ const gridStyle = {
   };
 
 class ProfilePage extends React.Component {
-    
+
     state = {
         profile: {}
     }
@@ -28,7 +28,7 @@ class ProfilePage extends React.Component {
             image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
             avatar: this.state.image_url
         };
-    }  
+    }
 
 
     componentDidMount() {
@@ -42,7 +42,8 @@ class ProfilePage extends React.Component {
                 genre: res.data.genre,
                 books: res.data.favorites,
                 authors: res.data.following,
-                avatar: res.data.avatar
+                avatar: res.data.avatar,
+                privacy: res.data.privacy
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
@@ -52,148 +53,147 @@ class ProfilePage extends React.Component {
 
     render() {
         return (
-                <div>
-                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={4}>
-                            <Card bodyStyle={{
-                                padding: 0
-                            }}>
-                                <img src={this.state.avatar} 
-                                style={{
-                                    width: 211, height: 221
-                                }}
-                                width="100%" height="100%" >
-                                </img>
-                            </Card>
-                        </Col>
-                        
-                        <Col span={18}>
-                            <Card title={
-                                <div>
-                                    <NotificationMenu />
-                                    {this.state.first_name + " " + this.state.last_name}
-                                </div>} headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia', 
-                                background: '#378695'
-                            }}>
-                                <p>
-                                    <b><i>User Since: </i></b> 
-                                    {this.state.creation_date}
-                                </p>
-                                
-                                <p>
-                                    <b><i>Review Count: </i></b> 
-                                    {this.state.review_count}
-                                </p>
-                                
-                                <p>
-                                    <b><i>Favorite Genre: </i></b>
-                                    {this.state[this.state.genre]}
-                                </p>
+                  <div>
+                      <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                          <Col span={4}>
+                              <Card bodyStyle={{
+                                  padding: 0
+                              }}>
+                                  <img src={this.state.avatar}
+                                  style={{
+                                      width: 211, height: 221
+                                  }}
+                                  width="100%" height="100%" >
+                                  </img>
+                              </Card>
+                          </Col>
+
+                          <Col span={18}>
+                              <Card title={
+                                  <div>
+                                      <NotificationMenu />
+                                      {this.state.first_name + " " + this.state.last_name}
+                                  </div>} headStyle={{
+                                  fontSize: 20,
+                                  fontStyle: 'italic',
+                                  fontFamily: 'Georgia',
+                                  background: '#378695'
+                              }}>
+                                  <p>
+                                      <b><i>User Since: </i></b>
+                                      {this.state.creation_date}
+                                  </p>
+
+                                  <p>
+                                      <b><i>Review Count: </i></b>
+                                      {this.state.review_count}
+                                  </p>
+
+                                  <p>
+                                      <b><i>Favorite Genre: </i></b>
+                                      {this.state[this.state.genre]}
+                                  </p>
 
 
-                            </Card>
-                        </Col>
+                              </Card>
+                          </Col>
 
-                    </Row>
+                      </Row>
 
-                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={22}>
-                            <Card 
-                                style={gridStyle} 
-                                title="About Me" 
-                                headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia', 
-                                background: '#378695'
-                                }}
-                            >
-                                <p>
-                                    {this.state.bio}
-                                </p>
-                            </Card>
-                        </Col>
-                    </Row>
+                      <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                          <Col span={22}>
+                              <Card
+                                  style={gridStyle}
+                                  title="About Me"
+                                  headStyle={{
+                                  fontSize: 20,
+                                  fontStyle: 'italic',
+                                  fontFamily: 'Georgia',
+                                  background: '#378695'
+                                  }}
+                              >
+                                  <p>
+                                      {this.state.bio}
+                                  </p>
+                              </Card>
+                          </Col>
+                      </Row>
 
-                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={11}>
-                        <Card 
-                            title="Favorites"
-                            headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia', 
-                                background: '#378695'
-                            }}
-                        >
-                        <List
-                            pagination={{
-                                onChange: (page) => {
-                                    console.log(page);
-                                },
-                                pageSize: 2,
-                            }}
-                            grid={{ gutter: 0, column: 2 }}
-                            dataSource={this.state.books}
-                            renderItem={item => (
-                                <List.Item>
-                                    <Card
-                                        hoverable
-                                        style={{ width: 180, background: '#DDA72F'}}
-                                        cover={<img alt={item.title} src={item.image_url} />}
-                                    >
-                                        <Card.Meta
-                                        title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
-                                        />
-                                    </Card>
-                                </List.Item>
-                            )}
-                        />
-                        </Card>
-                        </Col>
+                      <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                          <Col span={11}>
+                          <Card
+                              title="Favorites"
+                              headStyle={{
+                                  fontSize: 20,
+                                  fontStyle: 'italic',
+                                  fontFamily: 'Georgia',
+                                  background: '#378695'
+                              }}
+                          >
+                          <List
+                              pagination={{
+                                  onChange: (page) => {
+                                      console.log(page);
+                                  },
+                                  pageSize: 2,
+                              }}
+                              grid={{ gutter: 0, column: 2 }}
+                              dataSource={this.state.books}
+                              renderItem={item => (
+                                  <List.Item>
+                                      <Card
+                                          hoverable
+                                          style={{ width: 180, background: '#DDA72F'}}
+                                          cover={<img alt={item.title} src={item.image_url} />}
+                                      >
+                                          <Card.Meta
+                                          title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                                          />
+                                      </Card>
+                                  </List.Item>
+                              )}
+                          />
+                          </Card>
+                          </Col>
 
-                        <Col span={11}>
-                        <Card 
-                            title="Following"
-                            headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia', 
-                                background: '#378695'
-                            }}
-                        >
-                        <List
-                            pagination={{
-                                onChange: (page) => {
-                                    console.log(page);
-                                },
-                                pageSize: 2,
-                            }}
-                            grid={{ gutter: 0, column: 2 }}
-                            dataSource={this.state.authors}
-                            renderItem={item => (
-                                <List.Item>
-                                    <Card
-                                        hoverable
-                                        style={{ width: 180, background: '#DDA72F'}}
-                                        cover={<img alt={item.name} src={item.image_url} />}
-                                    >
-                                        <Card.Meta
-                                        title={<a href={'/authors/'+item.pk}><b>{item.name}</b></a>}
-                                        />
-                                    </Card>
-                                </List.Item>
-                            )}
-                        />
-                        </Card>
-                        </Col>
-                    </Row>
-                </div>
-        )
-    }
+                          <Col span={11}>
+                          <Card
+                              title="Following"
+                              headStyle={{
+                                  fontSize: 20,
+                                  fontStyle: 'italic',
+                                  fontFamily: 'Georgia',
+                                  background: '#378695'
+                              }}
+                          >
+                          <List
+                              pagination={{
+                                  onChange: (page) => {
+                                      console.log(page);
+                                  },
+                                  pageSize: 2,
+                              }}
+                              grid={{ gutter: 0, column: 2 }}
+                              dataSource={this.state.authors}
+                              renderItem={item => (
+                                  <List.Item>
+                                      <Card
+                                          hoverable
+                                          style={{ width: 180, background: '#DDA72F'}}
+                                          cover={<img alt={item.name} src={item.image_url} />}
+                                      >
+                                          <Card.Meta
+                                          title={<a href={'/authors/'+item.pk}><b>{item.name}</b></a>}
+                                          />
+                                      </Card>
+                                  </List.Item>
+                              )}
+                          />
+                          </Card>
+                          </Col>
+                      </Row>
+                  </div>
+              )
 }
 
 const mapStateToProps = state => {

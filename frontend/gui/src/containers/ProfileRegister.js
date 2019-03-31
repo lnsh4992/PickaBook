@@ -55,6 +55,10 @@ class ProfileRegistrationForm extends React.Component {
         this.setState({genre: value});
     }
 
+    handlePrivacyChange = (value) => {
+      this.setState({privacy: value});
+    }
+
     componentDidMount() {
         axios.get(`http://127.0.0.1:8000/profile/${this.props.userid}`).then(res => {
             this.setState({
@@ -71,6 +75,12 @@ class ProfileRegistrationForm extends React.Component {
                     event,
                     this.props.userid
                 )}>
+                    <FormItem label="Privacy">
+                      <Select name="privacy" defaultValue="False"
+                      onChange={(value) => this.handlePrivacyChange(value)}>
+                        <Option value="True">True</Option>
+                        <Option value="False">False</Option>
+                    </FormItem>
                     <FormItem label="First Name" >
                         <Input name="firstname" placeholder="First name" />
                     </FormItem>
@@ -78,13 +88,13 @@ class ProfileRegistrationForm extends React.Component {
                     <FormItem label="Last Name" >
                         <Input name="lastname" placeholder="Last name" />
                     </FormItem>
-                    
+
                     <FormItem label = "Bio" >
                         <TextArea name="bio" placeholder="About Me!" autosize={{minRows: 2}} />
                     </FormItem>
 
                     <FormItem label = "Genre" >
-                        <Select name="genre" defaultValue="FA" 
+                        <Select name="genre" defaultValue="FA"
                         onChange={(value) => this.handleGenreChange(value)}>
                             <Option value="FA">Fantasy</Option>
                             <Option value="RO">Romance</Option>
@@ -94,13 +104,13 @@ class ProfileRegistrationForm extends React.Component {
                             <Option value="FI">Fiction</Option>
                             <Option value="NF">Non Fiction</Option>
                             <Option value="SF">Science Fiction</Option>
-                        </Select>    
+                        </Select>
                     </FormItem>
 
                     <FormItem label = "Avatar">
-                        <input 
-                         type="file" 
-                         name="" 
+                        <input
+                         type="file"
+                         name=""
                          id=""
                          onChange={this.handleFileSelect} />
                     </FormItem>
