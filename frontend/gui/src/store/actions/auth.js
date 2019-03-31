@@ -86,6 +86,8 @@ export const authSignup = (
             localStorage.setItem("user", JSON.stringify(user));
             dispatch(authSuccess(user));
             dispatch(checkAuthTimeout(3600));
+
+//            axios.get('')
         })
         .catch( err => {
             dispatch(authFail(err));

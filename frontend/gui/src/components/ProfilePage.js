@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, List } from "antd";
 import { connect } from "react-redux";
+import NotificationMenu from '../containers/NotificationMenu';
 
 const gridStyle = {
     textAlign: 'center',
@@ -67,7 +68,11 @@ class ProfilePage extends React.Component {
                         </Col>
                         
                         <Col span={18}>
-                            <Card title={this.state.first_name + this.state.last_name} headStyle={{
+                            <Card title={
+                                <div>
+                                    <NotificationMenu />
+                                    {this.state.first_name + " " + this.state.last_name}
+                                </div>} headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
