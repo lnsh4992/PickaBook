@@ -57,7 +57,8 @@ class ProfilePage extends React.Component {
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
-                                <img src={this.state.avatar} style={{
+                                <img src={this.state.avatar} 
+                                style={{
                                     width: 211, height: 221
                                 }}
                                 width="100%" height="100%" >
@@ -69,7 +70,8 @@ class ProfilePage extends React.Component {
                             <Card title={this.state.first_name + this.state.last_name} headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
-                                fontFamily: 'Georgia'
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
                             }}>
                                 <p>
                                     <b><i>User Since: </i></b> 
@@ -94,7 +96,16 @@ class ProfilePage extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="About Me">
+                            <Card 
+                                style={gridStyle} 
+                                title="About Me" 
+                                headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                                }}
+                            >
                                 <p>
                                     {this.state.bio}
                                 </p>
@@ -104,7 +115,15 @@ class ProfilePage extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={11}>
-                        <Card title="Favorites">
+                        <Card 
+                            title="Favorites"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                        >
                         <List
                             pagination={{
                                 onChange: (page) => {
@@ -118,7 +137,7 @@ class ProfilePage extends React.Component {
                                 <List.Item>
                                     <Card
                                         hoverable
-                                        style={{ width: 180 }}
+                                        style={{ width: 180, background: '#DDA72F'}}
                                         cover={<img alt={item.title} src={item.image_url} />}
                                     >
                                         <Card.Meta
@@ -132,7 +151,15 @@ class ProfilePage extends React.Component {
                         </Col>
 
                         <Col span={11}>
-                        <Card title="Following">
+                        <Card 
+                            title="Following"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#378695'
+                            }}
+                        >
                         <List
                             pagination={{
                                 onChange: (page) => {
@@ -146,7 +173,7 @@ class ProfilePage extends React.Component {
                                 <List.Item>
                                     <Card
                                         hoverable
-                                        style={{ width: 180 }}
+                                        style={{ width: 180, background: '#DDA72F'}}
                                         cover={<img alt={item.name} src={item.image_url} />}
                                     >
                                         <Card.Meta

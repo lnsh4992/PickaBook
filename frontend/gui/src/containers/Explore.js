@@ -3,6 +3,7 @@ import Books from '../components/Book';
 import axios from 'axios';
 import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
+import { SketchPicker } from 'react-color';
 
 
 import ReactCardFlip from 'react-card-flip';
@@ -26,7 +27,7 @@ class Explore extends React.Component {
             books: [],
             booksFiltered: [],
             isFlipped: false,
-            error: false
+            error: false,
         };
     }
 
@@ -105,18 +106,18 @@ class Explore extends React.Component {
     
     render() {
         return (
-            <Layout style={{ padding: '0 0', background: '#fff'}}>
+            <Layout style={{ padding: '0 0', background: '#378695'}}>
                 {this.state.error ?
                     this.errorMessage()
                     :
                     <b></b>
                 }
-                <Sider width={200} >
+                <Sider width={220} >
                     <Menu
                         mode="inline"
                         theme="dark"
                         defaultSelectedKeys={[3]}
-                        style={{ height: '100%' }}
+                        style={{ height: '100%', paddingLeft: 10, paddingTop: 10 }}
                     >
                         <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>Newest Collection</Menu.Item>
                         <Menu.Item key="2" onClick={() => this.handleSortChange('rating')}>Top Rated</Menu.Item>
@@ -132,8 +133,14 @@ class Explore extends React.Component {
                         <Menu.Item key="SF" onClick={() => this.handleGenreChange('SF')}>Science Fiction</Menu.Item>
                         </SubMenu>
                         <Form inline onSubmit={(event) => this.handleSearch(event)}>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" name="tgtname" />
-                            <Button variant="outline-success" type="primary">Search</Button>
+                            <FormControl 
+                            type="text" placeholder="Search" className="mr-sm-2" name="tgtname"
+                            />
+                            <Button style={{marginTop: 10}}
+                                    variant="outline-success" 
+                                    type="primary">
+                                    Search
+                            </Button>
                         </Form>
                 </Menu>
                 </Sider>
@@ -143,6 +150,9 @@ class Explore extends React.Component {
                 <List
                 grid={{
                     gutter: 16, column: 3
+                }}
+                style={{
+                  paddingTop: 20, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
                 }}
                 pagination={{
                 onChange: (page) => {
@@ -157,7 +167,7 @@ class Explore extends React.Component {
                         <ReactCardFlip isFlipped={item.isFlipped} flipDirection="horizontal">
                         <Card
                             hoverable
-                            style={{ width: 240 }}
+                            style={{ width: 240, background: '#DDA72F'}}
                             cover={<img alt={item.title} src={item.image_url} />}
                             onClick={() => this.handleClick(item)}
                             key="front"
@@ -169,7 +179,7 @@ class Explore extends React.Component {
 
                         <Card
                             title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
-                            style={{width: 240}}
+                            style={{width: 240, height: 350, background: '#DDA72F'}}
                             key="back"
                             onClick={() => this.handleClick(item)}
                         >

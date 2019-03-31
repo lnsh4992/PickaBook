@@ -27,5 +27,6 @@ urlpatterns = [
     path('library/', include('books.api.urls')),
     path('profile/', include('users.api.urls')),
     path('bookreview/', include('reviews.api.urls')),
-    path('qanswer/', include('qanswers.api.urls'))
+    path('qanswer/', include('qanswers.api.urls')),
+    path('notification/', include('notifications.api.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

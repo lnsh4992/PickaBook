@@ -125,7 +125,7 @@ class ProfileRegistrationForm extends React.Component {
                     
 
                     <FormItem>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" style={{background: '#DDA72F'}}>
                             Submit!
                         </Button>
                     </FormItem>

@@ -89,6 +89,7 @@ def search(keyWords):
         bookInfo = bookInfo.exclude(title=t)
 
     bookInfo = bookInfo.exclude(title="Test book 1")
+#    bookInfo = bookInfo.exclude(title="Test book 1")
 
 # Sorting to whoe high match rate result show first
     resultTitle.sort(key=lambda x: x[1], reverse=True)

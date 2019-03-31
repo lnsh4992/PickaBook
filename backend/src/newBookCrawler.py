@@ -4,6 +4,10 @@ import pandas as pd
 import random
 from datetime import datetime as dt
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pickabook.settings")
+import django
+django.setup()
+from books.models import Book
 # import re
 
 
@@ -58,36 +62,36 @@ def getDetail(link):
     
     datePublished = str(datePublished).split(' ')
 
-#    if "Jan" in datePublished[0]:
-#        datePublished[0] = "01"
-#    if "Fe" in datePublished[0] :
-#        datePublished[0] = "02"
-##    else if "Mar" in datePublished[0] :
-##        datePublished[0] = "03"
-##    else if "Ap" in datePublished[0] :
-##        datePublished[0] = "04"
-##    else if "May" in datePublished[0] :
-##        datePublished[0] = "05"
-##    else if "Jun" in datePublished[0] :
-##        datePublished[0] = "06"
-##    else if "July" in datePublished[0] :
-##        datePublished[0] = "07"
-##    else if "Aug" in datePublished[0] :
-##        datePublished[0] = "08"
-##    else if "Sep" in datePublished[0] :
-##        datePublished[0] = "09"
-##    else if "Oct" in datePublished[0] :
-##        datePublished[0] = "10"
-##    else if "Nov" in datePublished[0] :
-##        datePublished[0] = "11"
-##    else:
-##        datePublished[0] = "12"
+    if "Jan" in datePublished[0]:
+        datePublished[0] = "01"
+    elif "Fe" in datePublished[0] :
+        datePublished[0] = "02"
+    elif "Mar" in datePublished[0] :
+        datePublished[0] = "03"
+    elif "Ap" in datePublished[0] :
+        datePublished[0] = "04"
+    elif "May" in datePublished[0] :
+        datePublished[0] = "05"
+    elif "Jun" in datePublished[0] :
+        datePublished[0] = "06"
+    elif "July" in datePublished[0] :
+        datePublished[0] = "07"
+    elif "Aug" in datePublished[0] :
+        datePublished[0] = "08"
+    elif "Sep" in datePublished[0] :
+        datePublished[0] = "09"
+    elif "Oct" in datePublished[0] :
+        datePublished[0] = "10"
+    elif "Nov" in datePublished[0] :
+        datePublished[0] = "11"
+    else:
+        datePublished[0] = "12"
 
 #    print(datePublished)
 
-#    datePublished = dt(int(datePublished[1]), int(datePublished[0]), 1, 0)
+    datePublished = dt(int(datePublished[1]), int(datePublished[0]), 1, 0)
 
-    return (title, author, genre, overview, datePublished)
+    return (title, author, genre, overview, str(datePublished).split(' ')[0])
 
 def run():
     
@@ -110,31 +114,35 @@ def run():
 
         cnt += 1
         print(cnt)
-        print("Title: ", detail[0])
-        print("Author: ", detail[1])
-        print("Genre: ", detail[2])
-        print("Link: ", link)
-        print("Image: ", img)
-        print("Date Published: ", detail[4])
-        print("Overview: ",detail[3])
+#        print("Title: ", detail[0])
+#        print("Author: ", detail[1])
+#        print("Genre: ", detail[2])
+#        print("Link: ", link)
+#        print("Image: ", img)
+#        print("Date Published: ", detail[4])
+#        print("Overview: ",detail[3])
+
         
-        
-        Books["Title"].append(detail[0])
-        Books["Author"].append(detail[1])
-        Books["Genre"].append(detail[2])
-        Books["Link"].append(link)
-        Books["Image"].append(img)
-        Books["PbDate"].append(detail[4])
-        Books["Overview"].append(detail[3])
-        Books["Rating"].append(0.0)
-        
+        try:
+            Book(title = detail[0], author_name = detail[1], publication_date = detail[4].split(' ')[0], genre = detail[2], rating = 0.0, image_url = img, synopsis = detail[3]).save()
+        except:
+            print("Exception Occured!")
+            continue
+
+#        Books["Title"].append(detail[0])
+#        Books["Author"].append(detail[1])
+#        Books["Genre"].append(detail[2])
+#        Books["Link"].append(link)
+#        Books["Image"].append(img)
+#        Books["PbDate"].append(detail[4])
+#        Books["Overview"].append(detail[3])
+#        Books["Rating"].append(0.0)
+
         print("------------------------------------------------------")
 
-    
-#    BlogData(title = Books["Title"], author_name = Books["Author"], publication_date = Books["PbDate"], genre = Books["Genre"], rating = Books["Rating"], image_url = Books["Image"], synopsis = Books["Overview"]).save()
 
-    df = pd.DataFrame.from_dict(Books, orient="index")
-    df.to_csv("Books.csv")
+#    df = pd.DataFrame.from_dict(Books, orient="index")
+#    df.to_csv("Books.csv")
 
 if __name__ == '__main__':
     print("started!")

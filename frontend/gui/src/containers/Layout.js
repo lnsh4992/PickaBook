@@ -44,20 +44,20 @@ class CustomLayout extends React.Component {
         </Header>
 */}
         
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '0 50px', background: '#378695'}}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
           
-          <div style={{ background: 'rgba(241, 101, 86, 0.35)' , padding: 24, minHeight: 280 }}>
+          <div style={{ background: '#DDA72F' , padding: 24, minHeight: 280 }}>
             {this.props.children}
           </div>
 
         </Content>
         
-        <Footer style={{ textAlign: 'center' }}>
+        <Footer style={{ textAlign: 'center', background: '#414141', color: 'white'}}>
           PickaBook: a CS 307 Project | Created by Myeongsu Kim, Logesh Roshan, Piyush Juneja, Shobhit Makhija
         </Footer>
       

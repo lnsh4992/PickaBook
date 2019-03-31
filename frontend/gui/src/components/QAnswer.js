@@ -5,7 +5,8 @@ import axios from 'axios';
 const { TextArea } = Input;
 const buttonStyle = {
     position: 'absolute',
-    right: 0,
+    right: 20,
+    background: '#DDA72F'
 }
 
 class QAnswer extends React.Component {
@@ -256,7 +257,14 @@ class QAnswer extends React.Component {
 
                 <Card title={<div>Questions
                     <Button type="primary" onClick={this.showQuestionDrawer} style={buttonStyle}>New Question</Button>
-                </div>}>
+                </div>}
+                headStyle={{
+                    fontSize: 20,
+                    fontStyle: 'italic',
+                    fontFamily: 'Georgia', 
+                    background: '#378695'
+                }}
+                >
                 <List
                     className="comment-list"
                     itemLayout="horizontal"

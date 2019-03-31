@@ -13,7 +13,7 @@ class ProfileRegistrationForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { genre: "FA", isSelected: false };
+        this.state = { genre: "FA" };
       }
 
     handleFileSelect = event => {
@@ -25,16 +25,9 @@ class ProfileRegistrationForm extends React.Component {
     handleFormSubmit = (event, userID) => {
         event.preventDefault();
         console.log(this.state)
-        const data = {
-                first_name: event.target.elements.firstname.value,
-                last_name: event.target.elements.lastname.value,
-                bio: event.target.elements.bio.value,
-                genre: this.state.genre
-        };
 
-        if( this.state.isSelected ){
-            let img_data = new FormData()
-            img_data.append('avatar', this.state.selectedFile)
+        let img_data = new FormData()
+        img_data.append('avatar', this.state.selectedFile)
         fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
             method: 'PUT',
             headers: {
@@ -44,37 +37,18 @@ class ProfileRegistrationForm extends React.Component {
         }).then(res => res.json())
         .then((data) => {
             console.log(data);
-            axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, data)
-            .then(res => {
-                this.props.history.push('/profile');
-            })
-            .catch(error => console.log(error));
         })
         .catch(err => console.log(err))
-        }
 
-        else {
-            let img_data = new FormData()
-            img_data.append('avatar', this.state.selectedFile)
-
-            fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json, text/plain, */*',
-                },
-                body: img_data
-            }).then(res => res.json())
-            .then((data) => {
-                console.log(data);
-            })
-            .catch(err => console.log(err))
-    
-            axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, data)
-            .then(res => {this.props.history.push('/profile');})
-            .catch(error => console.log(error));
-
-        }
-
+        axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
+            first_name: event.target.elements.firstname.value,
+            last_name: event.target.elements.lastname.value,
+            bio: event.target.elements.bio.value,
+            genre: this.state.genre
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
+        this.props.history.push('/profile');
     }
 
     handleGenreChange = (value) => {
