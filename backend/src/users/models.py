@@ -12,8 +12,9 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=20, default="LastName")
     review_count = models.IntegerField("Number of Reviews", default=0)
     creation_date= models.DateField(default=datetime.date.today)
+    privacy= models.BooleanField(initial=False)
     bio = models.TextField("About me", max_length=500, default="Hey, Welcome to my Profile!")
-    
+
     favorites = models.ManyToManyField('books.Book', related_name="favorites")
     following = models.ManyToManyField('authors.Author', related_name="following")
 
