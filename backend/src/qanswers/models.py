@@ -1,4 +1,5 @@
 from django.db import models
+from notifications.models import Notification
 import datetime
 
 # Create your models here.
@@ -30,4 +31,9 @@ class Answer(models.Model):
     creation_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return self.answer    
+        return self.answer 
+
+    def save(self, *args, **kwargs):
+        nottext = self.profile.first_name + " " + self.profile.last_name + " Has answered your quesion on " + self.book.title
+        notif = Notification.objects.create(text=nottext, book=self.book, question=self.question, isBook=0, prof=self.question.profile)
+        super(Answer, self).save(*args, **kwargs)    
