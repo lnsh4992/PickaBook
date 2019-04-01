@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from notifications.models import Notification
+from authors.models import Author
 
 # Create your models here.
 
@@ -47,3 +49,19 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super(Book, self).save(*args, **kwargs)
+        auth = None
+        try:
+            auth = Author.objects.get(name=self.author_name)
+        except Author.DoesNotExist:
+            auth = None
+        
+        if auth is not None:
+            profs = auth.following.all()
+            notif = self.author_name + " has released a new Book! Check out " + self.title
+            for prof in profs:
+                Notification.objects.create(text=notif, book=self, isBook=1, prof=prof)
+
+        
