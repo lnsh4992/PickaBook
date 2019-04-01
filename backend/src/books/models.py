@@ -7,6 +7,9 @@ class Book(models.Model):
 
     # title of the book
     title = models.CharField(max_length=200, unique=True)
+
+    # ISBN Code
+    isbn = models.CharField(max_length=10, default = 'XXXXXXXXXX')
     
     # author of the book
     author_name = models.CharField(max_length=100, default = '')

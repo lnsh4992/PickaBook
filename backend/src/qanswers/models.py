@@ -34,6 +34,6 @@ class Answer(models.Model):
         return self.answer 
 
     def save(self, *args, **kwargs):
-        nottext = self.profile.first_name + " " + self.profile.last_name + " Has answered your quesion on " + self.book.title
+        nottext = self.profile.first_name + " " + self.profile.last_name + " Has Answered your question on " + self.book.title
         notif = Notification.objects.create(text=nottext, book=self.book, question=self.question, isBook=0, prof=self.question.profile)
         super(Answer, self).save(*args, **kwargs)    
