@@ -69,15 +69,18 @@ class ProfilePage extends React.Component {
                         
                         <Col span={18}>
                             <Card title={
-                                <div>
-                                    <NotificationMenu />
-                                    {this.state.first_name + " " + this.state.last_name}
-                                </div>} headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia', 
-                                background: '#378695'
-                            }}>
+                                <div style={{display:'flex', alignItems: 'stretch'}}>
+                                    <Col span={22}>
+                                        {this.state.first_name + " " + this.state.last_name}
+                                    </Col>
+                                    <NotificationMenu/>
+                                </div>} 
+                                headStyle={{
+                                    fontSize: 20,
+                                    fontStyle: 'italic',
+                                    fontFamily: 'Georgia', 
+                                    background: '#378695'
+                                }}>
                                 <p>
                                     <b><i>User Since: </i></b> 
                                     {this.state.creation_date}
