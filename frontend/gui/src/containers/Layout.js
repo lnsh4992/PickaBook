@@ -4,10 +4,16 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 import CustomHeader from './Header';
+import { Button, Modal } from 'react-bootstrap';
 
 const { Header, Content, Footer } = Layout;
 
 class CustomLayout extends React.Component {
+
+  LoginRoute = () => {
+    this.props.history.push('/login');
+  }
+
   render() {
     console.log(this.props);
       return (
@@ -45,16 +51,37 @@ class CustomLayout extends React.Component {
 */}
         
         <Content style={{ padding: '0 50px', background: '#378695'}}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          
-          <div style={{ background: '#DDA72F' , padding: 24, minHeight: 280 }}>
-            {this.props.children}
-          </div>
 
+          { this.props.isAuthenticated ? 
+    
+            <div>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>List</Breadcrumb.Item>
+              <Breadcrumb.Item>App</Breadcrumb.Item>
+            </Breadcrumb>
+          
+            <div style={{ background: '#DDA72F' , padding: 24, minHeight: 280 }}>
+              {this.props.children}
+            </div>
+            </div>
+
+            :
+
+            <Modal show={true}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Not Logged In!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Please Login, in order to access the contents of our site</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" onClick={this.LoginRoute}>
+                    Login
+                  </Button>
+                </Modal.Footer>
+            </Modal>
+
+          }
+          
         </Content>
         
         <Footer style={{ textAlign: 'center', background: '#414141', color: 'white'}}>

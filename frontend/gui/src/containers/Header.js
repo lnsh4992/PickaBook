@@ -84,55 +84,55 @@ class CustomHeader extends React.Component {
         return (
             <div>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
-        <Navbar bg="dark" expand="lg" variant="dark">
-            <Navbar.Brand href="#home">PickaBook</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-            <Nav.Link href="/explore">Explore</Nav.Link>
-            <NavDropdown title="Profile" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/updateprof">Update Profile</NavDropdown.Item>
-            </NavDropdown>
+                <Navbar bg="dark" expand="lg" variant="dark">
+                    <Navbar.Brand href="#home">PickaBook</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                    <Nav.Link href="/explore">Explore</Nav.Link>
+                    <NavDropdown title="Profile" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                        <NavDropdown.Item href="/updateprof">Update Profile</NavDropdown.Item>
+                    </NavDropdown>
+                    
+                    {
+                        this.props.isAuthenticated ? 
+                        <Nav.Link onClick={this.props.logout} href="/login">Logout</Nav.Link>
+                        :
+                        <Nav.Link href="/login">Login</Nav.Link>
+                    }
+
+                    </Nav>
+                    <Form inline onSubmit={(event) => this.handleFormSubmit(event)}>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" name="tgtname" />
+                    <Button variant="outline-success" type="primary">Search</Button>
+                    </Form>
+                    
+                    <NavDropdown title="Filter" id="basic-nav-dropdown" 
+                    onSelect={(value => this.handleFilter(value))}>
+                    <NavDropdown.Item eventKey="book">Book</NavDropdown.Item>
+                    <NavDropdown.Item eventKey="author">Author</NavDropdown.Item> 
+                    <NavDropdown.Item eventKey="profile">Profile</NavDropdown.Item>       
+                    </NavDropdown>
+                    
+
+                    </Navbar.Collapse>
+                </Navbar>
+
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Error Not Found!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Unfortunately, we can't find <b>{this.state.filter}</b> {this.state.target}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={this.handleClose}>
+                    Close
+                    </Button>
+
+                </Modal.Footer>
+                </Modal>
             
-            {
-                this.props.isAuthenticated ? 
-                <Nav.Link onClick={this.props.logout} href="/login">Logout</Nav.Link>
-                :
-                <Nav.Link href="/login">Login</Nav.Link>
-            }
-
-            </Nav>
-            <Form inline onSubmit={(event) => this.handleFormSubmit(event)}>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" name="tgtname" />
-               <Button variant="outline-success" type="primary">Search</Button>
-            </Form>
-            
-            <NavDropdown title="Filter" id="basic-nav-dropdown" 
-            onSelect={(value => this.handleFilter(value))}>
-              <NavDropdown.Item eventKey="book">Book</NavDropdown.Item>
-              <NavDropdown.Item eventKey="author">Author</NavDropdown.Item> 
-              <NavDropdown.Item eventKey="profile">Profile</NavDropdown.Item>       
-            </NavDropdown>
-            
-
-            </Navbar.Collapse>
-        </Navbar>
-
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Error Not Found!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Unfortunately, we can't find <b>{this.state.filter}</b> {this.state.target}</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-
-          </Modal.Footer>
-        </Modal>
-
-        </div>
+            </div>
         );
     }
 }
