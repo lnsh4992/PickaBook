@@ -80,8 +80,8 @@ class CustomLayout extends React.Component {
           
         </Content>
         
-        <Footer style={{ textAlign: 'center', background: '#414141', color: 'white'}}>
-          PickaBook: a CS 307 Project | Created by Myeongsu Kim, Logesh Roshan, Piyush Juneja, Shobhit Makhija
+        <Footer style={{ textAlign: 'center', background: '#020037', color: 'white'}}>
+          PickaBook: a CS 307 Project | Created by Myeongsu Kim, Logesh Roshan, Piyush Juneja, Shobhit Makhija.
         </Footer>
       
       </Layout>

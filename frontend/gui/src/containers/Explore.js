@@ -168,7 +168,7 @@ class Explore extends React.Component {
                         <Card
                             hoverable
                             style={{ width: 240, background: '#F6C564'}}
-                            cover={<img alt={item.title} src={item.image_url} />}
+                            cover={<img alt={item.title} src={item.image_url} style={{height: 350}} />}
                             onClick={() => this.handleClick(item)}
                             key="front"
                         >

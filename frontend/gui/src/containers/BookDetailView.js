@@ -10,6 +10,10 @@ const gridStyle = {
     textAlign: 'center',
   };
 
+const toLeft = {
+    textAlign: 'left',
+};
+
 const LikeStyle = {
     marginRight : 8,
     color: '#378695'
@@ -225,7 +229,7 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb"
+                            <Card style={toLeft} title="Synopsis/blurb"
                             headStyle={{
                                 fontSize: 20,
                                 color: 'white',

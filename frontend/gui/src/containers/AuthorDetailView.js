@@ -6,6 +6,10 @@ const gridStyle = {
     textAlign: 'center',
   };
 
+const toLeft = {
+    textAlign: 'left',
+};
+
 class AuthorDetail extends React.Component {
 
     constructor(props) {
@@ -146,7 +150,7 @@ class AuthorDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb"
+                            <Card style={toLeft} title={<div style={{display:'flex', alignItems: 'stretch'}}>About the Author</div>}
                             headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
@@ -158,6 +162,21 @@ class AuthorDetail extends React.Component {
                                 <p>
                                     {this.state.synopsis}
                                 </p>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
+                        <Col span={22}>
+                            <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Reviews</div>}
+                            headStyle={{
+                                fontSize: 20,
+                                color: 'white',
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037'
+                            }}
+                            >
                             </Card>
                         </Col>
                     </Row>
