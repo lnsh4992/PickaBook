@@ -7,6 +7,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pickabook.settings")
 import django
 django.setup()
 from books.models import Book
+import re
 
 
 def getBookinfo(fullPath):
