@@ -50,20 +50,16 @@ class CustomLayout extends React.Component {
         </Header>
 */}
         
-        <Content style={{ padding: '0 50px', background: '#378695'}}>
+        <Content style={{ padding: '0 50px', background: '#020037'}}>
 
           { this.props.isAuthenticated ? 
     
             <div>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
-          
-            <div style={{ background: '#DDA72F' , padding: 24, minHeight: 280 }}>
-              {this.props.children}
-            </div>
+              <Breadcrumb style={{ margin: '50px 0' }}>
+              </Breadcrumb>
+              <div style={{ background: '#F6C564' , padding: 24, minHeight: 280 }}>
+                {this.props.children}
+              </div>
             </div>
 
             :

@@ -85,20 +85,20 @@ class AuthorDetail extends React.Component {
         return (
                 <div>
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={6}>
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
                                 <img src={this.state.image_url} 
                                 style={{
-                                    width: 302, height: 295
+                                    width: 194, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                             <Card title={
                                     <div>
                                         {this.state.title} 
@@ -111,7 +111,8 @@ class AuthorDetail extends React.Component {
                                     fontSize: 20,
                                     fontStyle: 'italic',
                                     fontFamily: 'Georgia', 
-                                    background: '#378695'
+                                    background: '#020037',
+                                    color: 'white'
                                 }}
                             >
                                 <p>
@@ -150,7 +151,8 @@ class AuthorDetail extends React.Component {
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037',
+                                color: 'white'
                             }}
                             >
                                 <p>

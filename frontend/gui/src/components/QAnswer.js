@@ -262,7 +262,8 @@ class QAnswer extends React.Component {
                     fontSize: 20,
                     fontStyle: 'italic',
                     fontFamily: 'Georgia', 
-                    background: '#378695'
+                    background: '#020037',
+                    color: 'white'
                 }}
                 >
                 <List
