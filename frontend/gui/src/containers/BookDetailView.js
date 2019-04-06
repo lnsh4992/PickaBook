@@ -10,6 +10,10 @@ const gridStyle = {
     textAlign: 'center',
   };
 
+const toLeft = {
+    textAlign: 'left',
+};
+
 const LikeStyle = {
     marginRight : 8,
     color: '#378695'
@@ -52,7 +56,13 @@ class BookDetail extends React.Component {
         
         const bookID = this.props.match.params.bookID;
         this._isMounted=true;
+        const profID = localStorage.getItem("profID");
         
+        axios.get(`http://127.0.0.1:8000/profile/favorites/${profID}`).then(res => {
+            console.log(res);
+        })
+        .catch(err => { console.log(err) });
+
         axios.get(`http://127.0.0.1:8000/library/booklist/${bookID}`).then(res => {
           this.setState({
             // book: res.data
@@ -188,9 +198,10 @@ class BookDetail extends React.Component {
                             } 
                             headStyle={{
                                 fontSize: 20,
+                                color: 'white',
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037'
                             }}
                             >
                                 <p>
@@ -224,12 +235,14 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb"
+                            <Card style={toLeft} title="Synopsis/blurb"
                             headStyle={{
                                 fontSize: 20,
+                                color: 'white',
+                                textAlign: 'left',
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037'
                             }}
                             >
                                 <p>
@@ -241,12 +254,13 @@ class BookDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card title={<div style={gridStyle}>Reviews</div>}
+                            <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Reviews</div>}
                             headStyle={{
                                 fontSize: 20,
+                                color: 'white',
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037'
                             }}
                             >
 
@@ -290,9 +304,10 @@ class BookDetail extends React.Component {
                             <Card title="Add A Review"
                             headStyle={{
                                 fontSize: 20,
+                                color: 'white',
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037'
                             }}
                             >
                                 <ReviewForm bookID={this.props.match.params.bookID} fetchReviews={this.fetchReviews} />

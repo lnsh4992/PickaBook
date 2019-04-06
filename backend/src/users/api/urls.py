@@ -7,6 +7,7 @@ from .views import (
     ProfileAddFavView,
     ProfileAddFollowView,
     ProfilePictureView,
+    ProfileFavoriteView,
     ProfPicV,
     LookupProfileView
 )
@@ -22,9 +23,12 @@ urlpatterns = [
     path('<user__pk>', UserProfileDetailView.as_view(), name='userprofiledetail'),
     path('update/<user__pk>', ProfileUpdateView.as_view()),
     path('user/<pk>', ProfileDetailView.as_view(), name='Profile'),
+    path('favorites/<pk>', ProfileFavoriteView.as_view()),
     re_path(r'^search/(?P<fname>[0-9A-Za-z]+)/(?P<lname>[0-9A-Za-z]+)/$', LookupProfileView.as_view()),
+    
     path('addfavorite/<pk>', ProfileAddFavView.as_view(), name='favoritebook'),
     path('addfollow/<pk>', ProfileAddFollowView.as_view(), name='followauthor'),
+
     path('resetpw/', PasswordResetView.as_view(), name='reset_password'),
     path('resetpw/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     re_path(r'^resetpw/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
