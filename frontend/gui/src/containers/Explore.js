@@ -152,7 +152,7 @@ class Explore extends React.Component {
                     gutter: 16, column: 3
                 }}
                 style={{
-                  paddingTop: 20, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
+                  paddingTop: 50, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
                 }}
                 pagination={{
                 onChange: (page) => {

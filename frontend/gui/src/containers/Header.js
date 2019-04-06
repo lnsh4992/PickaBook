@@ -86,7 +86,7 @@ class CustomHeader extends React.Component {
             <div>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
                 <Navbar bg="dark" expand="lg" variant="dark">
-                    <Navbar.Brand href="#home"> <img src={Img} style={{width:100, marginTop: 0}} /></Navbar.Brand>
+                    <Navbar.Brand href="#home"> <img src={Img} style={{width:120}} /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
