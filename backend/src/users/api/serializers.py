@@ -1,7 +1,10 @@
 from rest_framework import serializers
 from users.models import Profile, ProfilePicture
 from authors.models import Author
-from books.api.serializers import BookSerializer
+from books.api.serializers import (
+    BookSerializer,
+    BookTitleSerializer
+)
 from authors.api.serializers import AuthorCardSerializer
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -16,6 +19,12 @@ class ProfileShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('pk', 'first_name', 'last_name', 'avatar')
+
+class ProfileFavoriteSerializer(serializers.ModelSerializer):
+    favorites = BookTitleSerializer(read_only=True, many=True)
+    class Meta:
+        model = Profile
+        fields = ('pk', 'favorites')
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
