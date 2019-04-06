@@ -53,7 +53,7 @@ class NotificationMenu extends React.Component {
         <div>
             <Dropdown overlay={
                 <div>
-                    <List 
+                    <List
                         size="small"
                         bordered
                         style={{backgroundColor: '#555'}}
