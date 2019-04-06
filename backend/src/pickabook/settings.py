@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'qanswers',
     'authors',
     'notifications',
-    
+    'authReviews',
+
     'django.contrib.sites',
     'corsheaders',
     'allauth',
