@@ -184,8 +184,14 @@ def crawl(path, api_key):
 
     print("===========================\n\n")
 
-if __name__ == "__main__":
-    
+
+def run():
     path = "https://api.nytimes.com/svc/books/v3/lists/current/"
     key = ".json?api-key=VwopaxgQABehBoAWn5YrwPL8j54rRuQB"
     crawl(path, key)
+
+#if __name__ == "__main__":
+#    
+#    path = "https://api.nytimes.com/svc/books/v3/lists/current/"
+#    key = ".json?api-key=VwopaxgQABehBoAWn5YrwPL8j54rRuQB"
+#    crawl(path, key)
