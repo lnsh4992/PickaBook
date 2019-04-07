@@ -60,7 +60,7 @@ class ProfilePage extends React.Component {
                             }}>
                                 <img src={this.state.avatar} 
                                 style={{
-                                    width: 211, height: 221
+                                    width: 194, height: 224
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -79,7 +79,8 @@ class ProfilePage extends React.Component {
                                     fontSize: 20,
                                     fontStyle: 'italic',
                                     fontFamily: 'Georgia', 
-                                    background: '#378695'
+                                    background: '#020037',
+                                    color: 'white'
                                 }}>
                                 <p>
                                     <b><i>User Since: </i></b> 
@@ -111,7 +112,8 @@ class ProfilePage extends React.Component {
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037',
+                                color: 'white'
                                 }}
                             >
                                 <p>
@@ -129,7 +131,8 @@ class ProfilePage extends React.Component {
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037',
+                                color: 'white'
                             }}
                         >
                         <List
@@ -145,8 +148,8 @@ class ProfilePage extends React.Component {
                                 <List.Item>
                                     <Card
                                         hoverable
-                                        style={{ width: 180, background: '#DDA72F'}}
-                                        cover={<img alt={item.title} src={item.image_url} />}
+                                        style={{ width: 180, background: '#F6C564'}}
+                                        cover={<img alt={item.title} src={item.image_url} style={{width:178, height: 250}} />}
                                     >
                                         <Card.Meta
                                         title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
@@ -165,7 +168,8 @@ class ProfilePage extends React.Component {
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037',
+                                color: 'white'
                             }}
                         >
                         <List
@@ -181,8 +185,8 @@ class ProfilePage extends React.Component {
                                 <List.Item>
                                     <Card
                                         hoverable
-                                        style={{ width: 180, background: '#DDA72F'}}
-                                        cover={<img alt={item.name} src={item.image_url} />}
+                                        style={{ width: 180, background: '#F6C564', color: 'white'}}
+                                        cover={<img alt={item.name} src={item.image_url} style={{width:178, height: 250}} />}
                                     >
                                         <Card.Meta
                                         title={<a href={'/authors/'+item.pk}><b>{item.name}</b></a>}

@@ -5,11 +5,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pickabook.settings")
 import django
 django.setup()
 from books.models import Book
+#from books.authors import Author
 from reviews.models import BookReview
 from bs4 import BeautifulSoup
 import re
-# print("wdcjdcvejcvejvcegv")
-#def test(csvPath):
+from authors.models import Author
 
 def tag_remove(HTML_string):
     
@@ -128,9 +128,9 @@ if __name__ == "__main__":
             print(searchResult)
 
 #            try:
-#                Book(title = detail[0], author_name = detail[1], publication_date = detail[4].split(' ')[0], genre = detail[2], rating = 0.0, image_url = img, synopsis = detail[3]).save()
+            Author(name = str(searchResult["name"]), image_url = str(searchResult["image_url"]), review_count = int(searchResult["review"]), bio = str(searchResult["bio"]), genre = str(searchResult["genre"]), numFollowers = int(searchResult["numFollowers"]), review = 0.0).save()
 #            except:
-#                print("Exception Occured!")
+#                print("Exception Occured! (Author)")
 #                continue
 
 

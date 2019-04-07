@@ -6,6 +6,10 @@ const gridStyle = {
     textAlign: 'center',
   };
 
+const toLeft = {
+    textAlign: 'left',
+};
+
 class AuthorDetail extends React.Component {
 
     constructor(props) {
@@ -85,20 +89,20 @@ class AuthorDetail extends React.Component {
         return (
                 <div>
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={6}>
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
                                 <img src={this.state.image_url} 
                                 style={{
-                                    width: 302, height: 295
+                                    width: 194, height: 295
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                             <Card title={
                                     <div>
                                         {this.state.title} 
@@ -111,7 +115,8 @@ class AuthorDetail extends React.Component {
                                     fontSize: 20,
                                     fontStyle: 'italic',
                                     fontFamily: 'Georgia', 
-                                    background: '#378695'
+                                    background: '#020037',
+                                    color: 'white'
                                 }}
                             >
                                 <p>
@@ -145,17 +150,33 @@ class AuthorDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card style={gridStyle} title="Synopsis/blurb"
+                            <Card style={toLeft} title={<div style={{display:'flex', alignItems: 'stretch'}}>About the Author</div>}
                             headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
-                                background: '#378695'
+                                background: '#020037',
+                                color: 'white'
                             }}
                             >
                                 <p>
                                     {this.state.synopsis}
                                 </p>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
+                        <Col span={22}>
+                            <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Reviews</div>}
+                            headStyle={{
+                                fontSize: 20,
+                                color: 'white',
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037'
+                            }}
+                            >
                             </Card>
                         </Col>
                     </Row>
