@@ -55,7 +55,8 @@ class ProfileUpdateForm extends React.Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 bio: this.state.bio,
-                genre: this.state.genre
+                genre: this.state.genre,
+                privacy: this.state.privacy
             })
             .then(res => {
                 this.props.history.push('/profile');
@@ -70,7 +71,8 @@ class ProfileUpdateForm extends React.Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 bio: this.state.bio,
-                genre: this.state.genre
+                genre: this.state.genre,
+                privacy: this.state.privacy
             })
             .then(res => {
                 this.props.history.push('/profile');
@@ -78,8 +80,8 @@ class ProfileUpdateForm extends React.Component {
             .catch(error => console.log(error));
         }
 
-        
-        
+
+
     }
 
     handleGenreChange = (value) => {
@@ -91,6 +93,10 @@ class ProfileUpdateForm extends React.Component {
 
     }
 
+    handlePrivacyChange = (value) => {
+      this.setState({privacy: value});
+    }
+
     componentDidMount() {
         axios.get(`http://127.0.0.1:8000/profile/${this.props.userid}`).then(res => {
             this.setState({
@@ -99,7 +105,8 @@ class ProfileUpdateForm extends React.Component {
                 bio: res.data.bio,
                 genre: res.data.genre,
                 avatar: res.data.avatar,
-                profID: res.data.pk
+                profID: res.data.pk,
+                privacy: res.data.privacy
             })
 
         })
@@ -113,22 +120,22 @@ class ProfileUpdateForm extends React.Component {
                     this.props.userid
                 )}>
                     <FormItem label="First Name" >
-                        <Input name="firstname" placeholder={this.state.first_name} 
+                        <Input name="firstname" placeholder={this.state.first_name}
                         onChange={(value => this.handleTextChange('first_name', value))} />
                     </FormItem>
 
                     <FormItem label="Last Name" >
-                        <Input name="lastname" placeholder={this.state.last_name} 
+                        <Input name="lastname" placeholder={this.state.last_name}
                         onChange={(value => this.handleTextChange('last_name', value))}/>
                     </FormItem>
-                    
+
                     <FormItem label = "Bio" >
                         <TextArea name="bio" placeholder={this.state.bio} autosize={{minRows: 2}}
                         onChange={(value => this.handleTextChange('bio', value))} />
                     </FormItem>
 
                     <FormItem label = "Genre" >
-                        <Select name="genre" placeholder={this.state[this.state.genre]} defaultValue={this.state.genre} 
+                        <Select name="genre" placeholder={this.state[this.state.genre]} defaultValue={this.state.genre}
                         onChange={(value) => this.handleGenreChange(value)}>
                             <Option value="FA">Fantasy</Option>
                             <Option value="RO">Romance</Option>
@@ -138,13 +145,21 @@ class ProfileUpdateForm extends React.Component {
                             <Option value="FI">Fiction</Option>
                             <Option value="NF">Non Fiction</Option>
                             <Option value="SF">Science Fiction</Option>
-                        </Select>    
+                        </Select>
+                    </FormItem>
+
+                    <FormItem label = "Privacy">
+                      <Select name="privacy" placeholder={this.state[this.state.genre]} defaultvalue={this.state.privacy}>
+                      onChange={(value) => this.handlePrivacyChange(value)}>
+                        <Option value="True">True</Option>
+                        <Option value="False">False</Option>
+                      </Select>
                     </FormItem>
 
                     <FormItem label = "Avatar">
-                        <input 
-                         type="file" 
-                         name="" 
+                        <input
+                         type="file"
+                         name=""
                          id=""
                          onChange={this.handleFileSelect} />
                     </FormItem>

@@ -52,6 +52,42 @@ class ProfilePage extends React.Component {
     }
 
     render() {
+      if(this.state.privacy == "True"){
+        return(
+          <div>
+            <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+              <Col span={4}>
+                  <Card bodyStyle={{
+                      padding: 0
+                  }}>
+                      <img src={this.state.avatar}
+                      style={{
+                          width: 211, height: 221
+                      }}
+                      width="100%" height="100%" >
+                      </img>
+                  </Card>
+              </Col>
+
+              <Col span={18}>
+                  <Card title={
+                      <div>
+                          <NotificationMenu />
+                          {this.state.first_name + " " + this.state.last_name}
+                      </div>} headStyle={{
+                      fontSize: 20,
+                      fontStyle: 'italic',
+                      fontFamily: 'Georgia',
+                      background: '#378695'
+                  }}>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        )
+      }
+
+      else{
         return (
                   <div>
                       <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
@@ -194,9 +230,10 @@ class ProfilePage extends React.Component {
                       </Row>
                   </div>
               )
+            }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         userid: state.userId
     };
