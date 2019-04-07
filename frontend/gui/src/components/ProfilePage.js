@@ -73,7 +73,7 @@ class ProfilePage extends React.Component {
                                     <Col span={22}>
                                         {this.state.first_name + " " + this.state.last_name}
                                     </Col>
-                                    <NotificationMenu/>
+                                    <NotificationMenu history={this.props.history}/>
                                 </div>} 
                                 headStyle={{
                                     fontSize: 20,

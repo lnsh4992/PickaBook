@@ -43,6 +43,11 @@ class NotificationMenu extends React.Component {
         .catch(err => console.log(err));
     }
 
+    handleClick = (bookID, notifID) => {
+        axios.delete(`http://127.0.0.1:8000/notification/destroy/${notifID}`);
+        this.props.history.push('/booklist/'+bookID);
+    }
+
     render() {
         return (
         <div>
@@ -53,7 +58,9 @@ class NotificationMenu extends React.Component {
                         bordered
                         style={{backgroundColor: '#555'}}
                         dataSource = {this.state.notifications}
-                        renderItem = {item => ( <a href={'/booklist/'+item.book} ><List.Item>{item.text}</List.Item></a>)}
+                        renderItem = {item => ( 
+                            <List.Item onClick={()=>this.handleClick(item.book, item.pk)}><a href="#">{item.text}</a></List.Item>
+                            )}
                     />
                 </div>
             } trigger={['click']}>

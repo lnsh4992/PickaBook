@@ -56,7 +56,13 @@ class BookDetail extends React.Component {
         
         const bookID = this.props.match.params.bookID;
         this._isMounted=true;
+        const profID = localStorage.getItem("profID");
         
+        axios.get(`http://127.0.0.1:8000/profile/favorites/${profID}`).then(res => {
+            console.log(res);
+        })
+        .catch(err => { console.log(err) });
+
         axios.get(`http://127.0.0.1:8000/library/booklist/${bookID}`).then(res => {
           this.setState({
             // book: res.data

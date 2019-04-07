@@ -38,6 +38,7 @@ class Explore extends React.Component {
 
     handleSortChange = (event) => {
         var obj = [...this.state.books];
+        console.log(obj);
 
         switch(event){
             case 'title': 
@@ -47,6 +48,7 @@ class Explore extends React.Component {
                 obj.sort((a, b) => b.rating - a.rating);
                 break;
             case 'publication_date':
+                
                 obj.sort((a, b) => b.publication_date.localeCompare(a.publication_date));
                 break;
         }
@@ -106,7 +108,7 @@ class Explore extends React.Component {
     
     render() {
         return (
-            <Layout style={{ padding: '0 0', background: '#020037'}}>
+            <Layout style={{ padding: '0 0', background: '#378695'}}>
                 {this.state.error ?
                     this.errorMessage()
                     :
@@ -152,7 +154,7 @@ class Explore extends React.Component {
                     gutter: 16, column: 3
                 }}
                 style={{
-                  paddingTop: 20, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
+                  paddingTop: 50, paddingLeft: 80, paddingRight: 10, paddingBottom: 10
                 }}
                 pagination={{
                 onChange: (page) => {
@@ -167,8 +169,8 @@ class Explore extends React.Component {
                         <ReactCardFlip isFlipped={item.isFlipped} flipDirection="horizontal">
                         <Card
                             hoverable
-                            style={{ width: 240, background: '#F6C564'}}
-                            cover={<img alt={item.title} src={item.image_url} style={{height: 350}} />}
+                            style={{ width: 240, background: '#DDA72F'}}
+                            cover={<img alt={item.title} src={item.image_url} />}
                             onClick={() => this.handleClick(item)}
                             key="front"
                         >
@@ -179,7 +181,7 @@ class Explore extends React.Component {
 
                         <Card
                             title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
-                            style={{width: 240, height: 350, background: '#F6C564'}}
+                            style={{width: 240, height: 350, background: '#DDA72F'}}
                             key="back"
                             onClick={() => this.handleClick(item)}
                         >

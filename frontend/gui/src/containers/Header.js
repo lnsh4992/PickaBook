@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as actions from '../store/actions/auth';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import Img from '../images/logo.png'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -85,7 +86,7 @@ class CustomHeader extends React.Component {
             <div>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
                 <Navbar bg="dark" expand="lg" variant="dark">
-                    <Navbar.Brand href="#home">PickaBook</Navbar.Brand>
+                    <Navbar.Brand href="#home"> <img src={Img} style={{width:120}} /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
@@ -121,9 +122,9 @@ class CustomHeader extends React.Component {
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Error Not Found!</Modal.Title>
+                    <Modal.Title><i>Error:</i> Not Found!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Unfortunately, we can't find <b>{this.state.filter}</b> {this.state.target}</Modal.Body>
+                <Modal.Body>Unfortunately, we can't find the <b>{this.state.filter}</b> {this.state.target}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>
                     Close
