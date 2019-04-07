@@ -56,7 +56,7 @@ class NotificationMenu extends React.Component {
                     <List
                         size="small"
                         bordered
-                        style={{backgroundColor: '#555'}}
+                        style={{width:210, backgroundColor: '#555', marginLeft: -70}}
                         dataSource = {this.state.notifications}
                         renderItem = {item => ( 
                             <List.Item onClick={()=>this.handleClick(item.book, item.pk)}><a href="#">{item.text}</a></List.Item>
