@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import NotificationMenu from '../containers/NotificationMenu';
 
 const gridStyle = {
-    textAlign: 'center',
+    textAlign: 'left',
   };
 
 class ProfilePage extends React.Component {
@@ -26,7 +26,8 @@ class ProfilePage extends React.Component {
             FI: "Fiction",
             SF: "Science Fiction",
             image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
-            avatar: this.state.image_url
+            avatar: this.state.image_url,
+            reviews: []
         };
     }  
 
@@ -47,8 +48,28 @@ class ProfilePage extends React.Component {
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
 
+            // this.fetchReviews();
         })
     }
+
+    // fetchReviews = () => {
+    //     const pr_ID = this.props.match.params.profID;
+    //     axios.get(`http://127.0.0.1:8000/bookreview/user/${pr_ID}`).then(res => {
+            
+    //         this.setState({
+    //             reviews: res.data,
+    //             max_length: res.data.length,
+    //             current_length: Math.min(3, res.data.length)
+    //         })
+
+    //         // for(var i=0; i<this.state.reviews.length; ++i){
+    //         //     this.state.reviews[i].isLiked = false
+    //         //     this.state.reviews[i].isDisliked = false
+    //         // }
+
+    //     })
+    //     .catch(error => console.log(error));
+    // }
 
     render() {
         return (
@@ -113,7 +134,8 @@ class ProfilePage extends React.Component {
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
                                 background: '#020037',
-                                color: 'white'
+                                color: 'white',
+                                textAlign: 'left'
                                 }}
                             >
                                 <p>
@@ -196,6 +218,59 @@ class ProfilePage extends React.Component {
                             )}
                         />
                         </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                        <Col span={22}>
+                            <Card 
+                                style={gridStyle} 
+                                title="My Reviews"
+                                headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037',
+                                color: 'white',
+                                textAlign: 'left'
+                                }}
+                            >
+
+                                <Col span={12}>
+                                    <Card 
+                                    style={gridStyle} 
+                                    title="Books"
+                                    headStyle={{
+                                    fontSize: 20,
+                                    fontStyle: 'italic',
+                                    fontFamily: 'Georgia', 
+                                    background: '#020037',
+                                    color: 'white',
+                                    textAlign: 'left'
+                                    }}
+                                    >
+
+                                    </Card>
+                                </Col>
+
+                                <Col span={12}>
+                                    <Card 
+                                    style={gridStyle} 
+                                    title="Authors"
+                                    headStyle={{
+                                    fontSize: 20,
+                                    fontStyle: 'italic',
+                                    fontFamily: 'Georgia', 
+                                    background: '#020037',
+                                    color: 'white',
+                                    textAlign: 'left'
+                                    }}
+                                    >
+
+                                    </Card>
+                                </Col>
+
+                            </Card>
                         </Col>
                     </Row>
                 </div>

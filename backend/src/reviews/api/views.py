@@ -30,3 +30,10 @@ class BookReviewListView(ListAPIView):
 class BookReviewLikeView(UpdateAPIView):
     queryset = BookReview.objects.all()
     serializer_class = BookReviewLikeSerializer
+
+class BookReviewUserListView(ListAPIView):
+    queryset = BookReview.objects.all()
+    serializer_class = BookReviewSerializer
+
+    def get_queryset(self):
+        return BookReview.objects.filter(prof=self.kwargs['fk']).order_by('-likes')
