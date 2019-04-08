@@ -1,15 +1,19 @@
 import time
-import datetime
 import book_authorCrawler
-from bs4 import BeautifulSoup
+
 def run():
 
     print("runUpdator called!")
     
+    countWeek = 7
+    
     while(1):
-        
-        today = datetime.datetime.today().weekday()
-        if((today % 7) == 0):
+
+        if(countWeek == 7):
+            print(countWeek)
+            countWeek = 0
+            print(countWeek)
             book_authorCrawler.run()
-        
-        time.sleep(3600)
+
+        time.sleep(24 * 3600)
+        countWeek += 1

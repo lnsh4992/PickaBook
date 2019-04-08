@@ -137,8 +137,7 @@ def crawlAuthor(isbn, authName, gen, bTitle):
 #        print("Author regisfsdfdsfdsf", len(searchResult["bio"]))
         Author(name = str(searchResult["name"]), image_url = str(searchResult["image_url"]),review_count = int(searchResult["review"]), bio = str(searchResult["bio"]), genre = str(searchResult["genre"]), numFollowers = str(searchResult["numFollowers"]), review = int(searchResult["review"])).save()
     except:
-        return
-#        print("Exception Occured! (Author)")
+        print("Exception Occured! (Author)")
 
 
 def crawl(path, api_key):
@@ -178,7 +177,7 @@ def crawl(path, api_key):
                 crawlAuthor(str(b["primary_isbn10"]), b["author"], key, b["title"])
                 cnt += 1
             except:
-#                print("Exception Occured! (crawl)")
+                print("Exception Occured! (crawl)")
                 continue
         
         print("%d books were updated from %s" %(cnt, key));
