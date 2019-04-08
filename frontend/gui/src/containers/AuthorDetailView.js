@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List, Icon, Avatar, Spin } from "antd";
+import { Card, Row, Col, List, Icon, Avatar, Spin, message, Rate } from "antd";
+import ReviewForm from '../forms/ReviewForm';
 
 const gridStyle = {
     textAlign: 'center',
@@ -9,6 +10,23 @@ const gridStyle = {
 const toLeft = {
     textAlign: 'left',
 };
+
+const LikeStyle = {
+    marginRight : 8,
+    color: '#378695'
+};
+
+const DislikeStyle = {
+    marginRight : 8,
+    color: '#900e01'
+};
+
+const IconText = ({ type, text, onClick, theme, style }) => (
+<span>
+    <Icon type={type} style={style} onClick={onClick} theme={theme}/>
+    {text}
+</span>
+);
 
 class AuthorDetail extends React.Component {
 
@@ -24,6 +42,7 @@ class AuthorDetail extends React.Component {
             FI: "Fiction",
             SF: "Science Fiction",
             books: [],
+            auth_reviews: [],
             following: false,
             iconType: "user-add"
         };
@@ -34,6 +53,8 @@ class AuthorDetail extends React.Component {
     componentDidMount = () => {
         const authID = this.props.match.params.authID;
         this._isMounted=true;
+        const profID = localStorage.getItem("profID");
+
         axios.get(`http://127.0.0.1:8000/authors/${authID}`).then(res => {
           this.setState({
             // book: res.data
@@ -55,7 +76,26 @@ class AuthorDetail extends React.Component {
           .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
-    }  
+
+        this.fetchReviews();
+    }
+
+    fetchReviews = () => {
+        const authID = this.props.match.params.authID;
+        axios.get(`http://127.0.0.1:8000/authreview/${authID}`).then(res => {
+            this.setState({
+                auth_reviews: res.data,
+                max_length: res.data.length,
+                current_length: Math.min(3, res.data.length)
+            })
+            for(var i=0; i<this.state.auth_reviews.length; ++i){
+                this.state.auth_reviews[i].isLiked = false
+                this.state.auth_reviews[i].isDisliked = false
+            }
+
+        })
+        .catch(error => console.log(error));
+    }
 
     componentWillUnmount(){
         this._isMounted = false;
@@ -81,8 +121,28 @@ class AuthorDetail extends React.Component {
 
         })
         .catch(error => console.log(error));
+    }
 
+    handleLike = (revID, inp) => {
+        var review = this.state.auth_reviews.filter(review => review.pk === revID)[0];
+        if (review.isDisliked || review.isLiked)
+            return;
 
+        axios.put(`http://127.0.0.1:8000/authreview/like/${revID}`, {
+            likes: inp === 'like' ? 1 : 0
+        }).then(res => {
+                
+                if (inp === 'like') {
+                    review.isLiked = true;
+                    review.likes += 1;
+                }
+                else {
+                    review.isDisliked = true;
+                    review.dislikes += 1;
+                }
+                this.setState(this.state);
+            })
+            .catch(error => console.log(error));
     }
 
     render() {
@@ -168,15 +228,44 @@ class AuthorDetail extends React.Component {
 
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
-                            <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Reviews</div>}
+                            <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Author Reviews</div>}
                             headStyle={{
                                 fontSize: 20,
                                 color: 'white',
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia', 
                                 background: '#020037'
-                            }}
-                            >
+                            }}>
+                            <List
+                                    itemLayout="vertical"
+                                    size="large"
+                                    dataSource={this.state.auth_reviews}
+                                    renderItem={item => (
+                                    <List.Item key={item.id}
+                                            actions={[<IconText type="like-o" 
+                                                                text={item.likes} 
+                                                                onClick={() => this.handleLike(item.pk, "like")} 
+                                                                theme = {item.isLiked ? 'filled' : 'outlined'}
+                                                                style = {LikeStyle}/>, 
+                                                      <IconText type="dislike-o" 
+                                                                text={item.dislikes} 
+                                                                onClick={() => this.handleLike(item.pk, "dislike")}
+                                                                theme = {item.isDisliked ? 'filled' : 'outlined'}
+                                                                style = {DislikeStyle} />]}
+                                            extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
+                                    >
+                                        <List.Item.Meta
+                                            avatar={<Avatar src={item.prof.avatar} />}
+                                            title={item.title}
+                                            description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
+                                            
+                                        />
+                                        <div>{item.content}</div>
+                                    </List.Item>
+                                    )}
+                                >
+
+                                </List>
                             </Card>
                         </Col>
                     </Row>

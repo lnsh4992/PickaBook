@@ -24,7 +24,7 @@ class AuthorReviewListView(ListAPIView):
     serializer_class = AuthorReviewSerializer
 
     def get_queryset(self):
-        return AuthorReview.objects.filter(Author=self.kwargs['fk']).order_by('-likes')
+        return AuthorReview.objects.filter(author=self.kwargs['fk']).order_by('-likes')
 
 
 class AuthorReviewLikeView(UpdateAPIView):
