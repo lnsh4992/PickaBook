@@ -226,6 +226,37 @@ class AuthorDetail extends React.Component {
                         </Col>
                     </Row>
 
+                    
+                    <List
+                        grid={{ gutter: 16, column: 4 }}
+                        style={{
+                            paddingTop: 20, paddingLeft: 55, paddingBottom: 20
+                        }}
+                        dataSource={this.state.books}
+                        renderItem={item => (
+                        <List.Item>
+
+
+                            <Card
+                                hoverable
+                                style={{ width: 240 }}
+                                cover={<img alt={item.title} 
+                                            src={item.image_url} 
+                                            style={{
+                                                width: 238, height: 295
+                                            }}
+                                            width="100%" height="100%"
+                                />}
+                            >
+                                <Card.Meta
+                                title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                                
+                                />
+                            </Card>
+                        </List.Item>
+                        )}
+                    />
+
                     <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Author Reviews</div>}
@@ -284,37 +315,6 @@ class AuthorDetail extends React.Component {
                             </Card>
                         </Col>
                     </Row>
-
-                    <List
-                        grid={{ gutter: 16, column: 4 }}
-                        style={{
-                            paddingTop: 20, paddingLeft: 55  
-                        }}
-                        dataSource={this.state.books}
-                        renderItem={item => (
-                        <List.Item>
-
-
-                            <Card
-                                hoverable
-                                style={{ width: 240 }}
-                                cover={<img alt={item.title} 
-                                            src={item.image_url} 
-                                            style={{
-                                                width: 238, height: 295
-                                            }}
-                                            width="100%" height="100%"
-                                />}
-                            >
-                                <Card.Meta
-                                title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
-                                
-                                />
-                            </Card>
-                        </List.Item>
-                        )}
-                    />
-
                 </div>
         )
     }
