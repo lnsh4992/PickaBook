@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, List, Icon, Avatar, Spin, message, Rate } from "antd";
-import ReviewForm from '../forms/ReviewForm';
+import AuthReviewForm from '../forms/AuthReviewForm';
 
 const gridStyle = {
     textAlign: 'center',
@@ -266,6 +266,21 @@ class AuthorDetail extends React.Component {
                                 >
 
                                 </List>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
+                        <Col span={22}>
+                            <Card title="Add A Review"
+                            headStyle={{
+                                fontSize: 20,
+                                color: 'white',
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037'
+                            }}>
+                                <AuthReviewForm authID={this.props.match.params.authID} fetchReviews={this.fetchReviews} />
                             </Card>
                         </Col>
                     </Row>
