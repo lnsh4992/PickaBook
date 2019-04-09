@@ -16,10 +16,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pickabook.settings')
 application = get_wsgi_application()
 
 
-import multiprocessing
-import runUpdator
+#import multiprocessing
+#import runUpdator
 
 #
-updatorProcess =  multiprocessing.Process(target=runUpdator.run)
-updatorProcess.start()
+#updatorProcess =  multiprocessing.Process(target=runUpdator.run)
+#updatorProcess.start()
 #updatorProcess.join()

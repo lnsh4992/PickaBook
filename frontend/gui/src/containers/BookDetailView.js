@@ -59,7 +59,13 @@ class BookDetail extends React.Component {
         const profID = localStorage.getItem("profID");
         
         axios.get(`http://127.0.0.1:8000/profile/favorites/${profID}`).then(res => {
-            console.log(res);
+            if(res.data.favorites.some(e => e.pk == bookID)) {
+                this.setState({
+                    iconTheme: !this.state.following ? "filled" : "outlined" ,
+                    following: !this.state.following
+        
+                });
+            }
         })
         .catch(err => { console.log(err) });
 

@@ -15,6 +15,7 @@ from .serializers import (
     ProfileAddFollowSerializer,
     ProfilePictureSerializer,
     ProfileFavoriteSerializer,
+    ProfileFollowingSerializer,
     AvatarSerializer
 )
 
@@ -63,6 +64,10 @@ class ProfileDetailView(RetrieveAPIView):
 class ProfileFavoriteView(RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileFavoriteSerializer
+
+class ProfileFollowingView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileFollowingSerializer
 
 class ProfileUpdateView(UpdateAPIView):
     queryset = Profile.objects.all()

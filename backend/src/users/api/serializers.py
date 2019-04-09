@@ -6,6 +6,7 @@ from books.api.serializers import (
     BookTitleSerializer
 )
 from authors.api.serializers import AuthorCardSerializer
+from authors.api.serializers import AuthorNameSerializer
 
 class ProfileSerializer(serializers.ModelSerializer):
     favorites = BookSerializer(read_only=True, many=True)
@@ -25,6 +26,12 @@ class ProfileFavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('pk', 'favorites')
+
+class ProfileFollowingSerializer(serializers.ModelSerializer):
+    following = AuthorNameSerializer(read_only=True, many=True)
+    class Meta:
+        model = Profile
+        fields = ('pk', 'following')
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:

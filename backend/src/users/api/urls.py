@@ -8,6 +8,7 @@ from .views import (
     ProfileAddFollowView,
     ProfilePictureView,
     ProfileFavoriteView,
+    ProfileFollowingView,
     ProfPicV,
     LookupProfileView
 )
@@ -24,6 +25,7 @@ urlpatterns = [
     path('update/<user__pk>', ProfileUpdateView.as_view()),
     path('user/<pk>', ProfileDetailView.as_view(), name='Profile'),
     path('favorites/<pk>', ProfileFavoriteView.as_view()),
+    path('following/<pk>', ProfileFollowingView.as_view()),
     re_path(r'^search/(?P<fname>[0-9A-Za-z]+)/(?P<lname>[0-9A-Za-z]+)/$', LookupProfileView.as_view()),
     
     path('addfavorite/<pk>', ProfileAddFavView.as_view(), name='favoritebook'),

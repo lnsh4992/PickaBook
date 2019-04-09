@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, List, Icon, Avatar, Spin, message, Rate } from "antd";
-import AuthReviewForm from '../forms/AuthReviewForm';
+//import AuthReviewForm from '../forms/AuthReviewForm';
 
 const gridStyle = {
     textAlign: 'center',
@@ -54,6 +54,20 @@ class AuthorDetail extends React.Component {
         const authID = this.props.match.params.authID;
         this._isMounted=true;
         const profID = localStorage.getItem("profID");
+        
+        axios.get(`http://127.0.0.1:8000/profile/following/${profID}`).then(res => {
+            if(res.data.following.some(e => e.pk == authID)) {
+                this.style = {
+                    marginLeft: 10,
+                    color: !this.state.following ? "#b22222": '#daa520'
+                }
+                this.setState({
+                    iconType: !this.state.following ? "user-delete" : "user-add" ,
+                    following: !this.state.following
+                });
+            }
+        })
+        .catch(err => { console.log(err) });
 
         axios.get(`http://127.0.0.1:8000/authors/${authID}`).then(res => {
           this.setState({
