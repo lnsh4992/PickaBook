@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Card, Row, Col, List, Icon, Avatar, Spin, message, Rate } from "antd";
-//import AuthReviewForm from '../forms/AuthReviewForm';
+import AuthReviewForm from '../forms/AuthReviewForm';
 
 const gridStyle = {
     textAlign: 'center',
