@@ -12,7 +12,8 @@ from reviews.models import BookReview
 from .serializers import (
     BookReviewSerializer,
     BookReviewLikeSerializer,
-    BookReviewCreateSerializer
+    BookReviewCreateSerializer,
+    BookReviewProfileSerializer
 )
 
 class BookReviewCreateView(CreateAPIView):
@@ -33,7 +34,7 @@ class BookReviewLikeView(UpdateAPIView):
 
 class BookReviewUserListView(ListAPIView):
     queryset = BookReview.objects.all()
-    serializer_class = BookReviewSerializer
+    serializer_class = BookReviewProfileSerializer
 
     def get_queryset(self):
         return BookReview.objects.filter(prof=self.kwargs['fk']).order_by('-likes')

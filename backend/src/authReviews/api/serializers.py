@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from authReviews.models import AuthorReview
+from authors.api.serializers import AuthorShortSerializer
 from users.api.serializers import ProfileShortSerializer
+
 
 class AuthorReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +16,12 @@ class AuthorReviewSerializer(serializers.ModelSerializer):
         model = AuthorReview
         fields = ('pk', 'prof', 'author', 'title', 'content', 'rating', 'creation_date', 'likes', 'dislikes')
 
+class AuthorReviewProfileSerializer(serializers.ModelSerializer):
+    author = AuthorShortSerializer(many=False, read_only = True)
+
+    class Meta:
+        model = AuthorReview
+        fields = ('pk', 'prof', 'author', 'title', 'content', 'rating', 'creation_date', 'likes', 'dislikes')
 
 class AuthorReviewLikeSerializer(serializers.ModelSerializer):
     class Meta:

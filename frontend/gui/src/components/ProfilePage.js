@@ -1,12 +1,29 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List } from "antd";
+import { Card, Row, Col, List, message, Avatar, Icon, Rate } from "antd";
 import { connect } from "react-redux";
 import NotificationMenu from '../containers/NotificationMenu';
 
 const gridStyle = {
     textAlign: 'left',
   };
+
+const LikeStyle = {
+    marginRight : 8,
+    color: '#378695'
+};
+
+const DislikeStyle = {
+    marginRight : 8,
+    color: '#900e01'
+};
+
+const IconText = ({ type, text, onClick, theme, style }) => (
+    <span>
+        <Icon type={type} style={style} onClick={onClick} theme={theme}/>
+        {text}
+    </span>
+);
 
 class ProfilePage extends React.Component {
     
@@ -43,33 +60,30 @@ class ProfilePage extends React.Component {
                 genre: res.data.genre,
                 books: res.data.favorites,
                 authors: res.data.following,
-                avatar: res.data.avatar
+                avatar: res.data.avatar,
+                profID: res.data.pk
             });
             localStorage.setItem("profID", res.data.pk);
             console.log(localStorage.getItem("profID"));
 
-            // this.fetchReviews();
+            this.fetchReviews();
         })
     }
 
-    // fetchReviews = () => {
-    //     const pr_ID = this.props.match.params.profID;
-    //     axios.get(`http://127.0.0.1:8000/bookreview/user/${pr_ID}`).then(res => {
-            
-    //         this.setState({
-    //             reviews: res.data,
-    //             max_length: res.data.length,
-    //             current_length: Math.min(3, res.data.length)
-    //         })
+    fetchReviews = () => {
+        const pr_ID = this.state.profID;
+        axios.get(`http://127.0.0.1:8000/bookreview/user/${pr_ID}`).then(res => {
+            console.log(res);            
+            this.setState({
+                reviews: res.data,
+                max_length: res.data.length,
+                current_length: Math.min(3, res.data.length)
+            })
 
-    //         // for(var i=0; i<this.state.reviews.length; ++i){
-    //         //     this.state.reviews[i].isLiked = false
-    //         //     this.state.reviews[i].isDisliked = false
-    //         // }
 
-    //     })
-    //     .catch(error => console.log(error));
-    // }
+        })
+        .catch(error => console.log(error));
+    }
 
     render() {
         return (
@@ -236,7 +250,7 @@ class ProfilePage extends React.Component {
                                 }}
                             >
 
-                                <Col span={12}>
+                                <Col span={12} style={{ marginBottom: 16 }} type="flex" justify="left">
                                     <Card 
                                     style={gridStyle} 
                                     title="Books"
@@ -250,10 +264,39 @@ class ProfilePage extends React.Component {
                                     }}
                                     >
 
+                                        <List
+                                            itemLayout="vertical"
+                                            size="large"
+                                            dataSource={this.state.reviews}
+                                            renderItem={item => (
+                                            <List.Item key={item.id}
+                                                    actions={[<IconText type="like-o" 
+                                                                        text={item.likes} 
+                                                                        theme = {'outlined'}
+                                                                        style = {LikeStyle}/>, 
+                                                            <IconText type="dislike-o" 
+                                                                        text={item.dislikes}
+                                                                        theme = {'outlined'}
+                                                                        style = {DislikeStyle} />]}
+                                                    extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
+                                            >
+                                                <List.Item.Meta
+                                                    avatar={<Avatar src={item.prof.avatar} />}
+                                                    title={item.title}
+                                                    description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
+                                                    
+                                                />
+                                                <div>{item.content}</div>
+                                            </List.Item>
+                                            )}
+                                        >
+
+                                        </List>
+
                                     </Card>
                                 </Col>
 
-                                <Col span={12}>
+                                <Col span={12} style={{ marginBottom: 16 }} type="flex" justify="right">
                                     <Card 
                                     style={gridStyle} 
                                     title="Authors"

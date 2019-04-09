@@ -10,3 +10,8 @@ class AuthorCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ('pk', 'name', 'image_url')
+
+class AuthorShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ('pk', 'name', 'image_url')

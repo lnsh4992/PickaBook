@@ -12,7 +12,8 @@ from authReviews.models import AuthorReview
 from .serializers import (
     AuthorReviewSerializer,
     AuthorReviewLikeSerializer,
-    AuthorReviewCreateSerializer
+    AuthorReviewCreateSerializer,
+    AuthorReviewProfileSerializer
 )
 
 class AuthorReviewCreateView(CreateAPIView):
@@ -32,7 +33,7 @@ class AuthorReviewLikeView(UpdateAPIView):
 
 class AuthorReviewUserListView(ListAPIView):
     queryset = AuthorReview.objects.all()
-    serializer_class = AuthorReviewSerializer
+    serializer_class = AuthorReviewProfileSerializer
 
     def get_queryset(self):
         return AuthorReview.objects.filter(prof=self.kwargs['fk']).order_by('-likes')

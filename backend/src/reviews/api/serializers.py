@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from reviews.models import BookReview
 from users.api.serializers import ProfileShortSerializer
+from books.api.serializers import BookShortSerializer
 
 class BookReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,6 +10,13 @@ class BookReviewCreateSerializer(serializers.ModelSerializer):
 
 class BookReviewSerializer(serializers.ModelSerializer):
     prof = ProfileShortSerializer(many=False, read_only = True)
+
+    class Meta:
+        model = BookReview
+        fields = ('pk', 'prof', 'book', 'title', 'content', 'rating', 'creation_date', 'likes', 'dislikes')
+
+class BookReviewProfileSerializer(serializers.ModelSerializer):
+    book = BookShortSerializer(many=False, read_only = True)
 
     class Meta:
         model = BookReview
