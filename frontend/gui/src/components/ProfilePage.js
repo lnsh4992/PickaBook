@@ -44,7 +44,8 @@ class ProfilePage extends React.Component {
             SF: "Science Fiction",
             image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
             avatar: this.state.image_url,
-            reviews: []
+            reviews: [],
+            authReviews: []
         };
     }  
 
@@ -67,6 +68,7 @@ class ProfilePage extends React.Component {
             console.log(localStorage.getItem("profID"));
 
             this.fetchReviews();
+            this.fetchAuthReviews();
         })
     }
 
@@ -76,6 +78,21 @@ class ProfilePage extends React.Component {
             console.log(res);            
             this.setState({
                 reviews: res.data,
+                max_length: res.data.length,
+                current_length: Math.min(3, res.data.length),
+            })
+
+
+        })
+        .catch(error => console.log(error));
+    }
+
+    fetchAuthReviews = () => {
+        const pr_ID = this.state.profID;
+        axios.get(`http://127.0.0.1:8000/authreview/user/${pr_ID}`).then(res => {
+            console.log(res);            
+            this.setState({
+                authReviews: res.data,
                 max_length: res.data.length,
                 current_length: Math.min(3, res.data.length)
             })
@@ -281,9 +298,9 @@ class ProfilePage extends React.Component {
                                                     extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
                                             >
                                                 <List.Item.Meta
-                                                    avatar={<Avatar src={item.prof.avatar} />}
+                                                    avatar={<Avatar src={item.book.image_url} />}
                                                     title={item.title}
-                                                    description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
+                                                    description={<a href={'/booklist/'+item.book.pk}>{item.book.title}</a>}
                                                     
                                                 />
                                                 <div>{item.content}</div>
@@ -309,6 +326,35 @@ class ProfilePage extends React.Component {
                                     textAlign: 'left'
                                     }}
                                     >
+
+                                        <List
+                                            itemLayout="vertical"
+                                            size="large"
+                                            dataSource={this.state.authReviews}
+                                            renderItem={item => (
+                                            <List.Item key={item.id}
+                                                    actions={[<IconText type="like-o" 
+                                                                        text={item.likes} 
+                                                                        theme = {'outlined'}
+                                                                        style = {LikeStyle}/>, 
+                                                            <IconText type="dislike-o" 
+                                                                        text={item.dislikes}
+                                                                        theme = {'outlined'}
+                                                                        style = {DislikeStyle} />]}
+                                                    extra={<div><Rate disabled allowHalf defaultValue={item.rating} /> {item.creation_date} </div>}
+                                            >
+                                                <List.Item.Meta
+                                                    avatar={<Avatar src={item.author.image_url} />}
+                                                    title={item.title}
+                                                    description={<a href={'/authors/'+item.author.pk}>{item.author.name}</a>}
+                                                    
+                                                />
+                                                <div>{item.content}</div>
+                                            </List.Item>
+                                            )}
+                                        >
+
+                                        </List>
 
                                     </Card>
                                 </Col>
