@@ -38,7 +38,6 @@ class Explore extends React.Component {
 
     handleSortChange = (event) => {
         var obj = [...this.state.books];
-        console.log(obj);
 
         switch(event){
             case 'title': 
@@ -48,7 +47,6 @@ class Explore extends React.Component {
                 obj.sort((a, b) => b.rating - a.rating);
                 break;
             case 'publication_date':
-                
                 obj.sort((a, b) => b.publication_date.localeCompare(a.publication_date));
                 break;
         }
