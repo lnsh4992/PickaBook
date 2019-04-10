@@ -80,7 +80,9 @@ class ProfileRegistrationForm extends React.Component {
                       onChange={(value) => this.handlePrivacyChange(value)}>
                         <Option value="True">True</Option>
                         <Option value="False">False</Option>
+                      </Select>
                     </FormItem>
+
                     <FormItem label="First Name" >
                         <Input name="firstname" placeholder="First name" />
                     </FormItem>
