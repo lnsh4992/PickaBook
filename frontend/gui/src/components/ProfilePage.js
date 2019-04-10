@@ -155,7 +155,7 @@ class ProfilePage extends React.Component {
 
                     </Row>
 
-                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16}} type="flex" justify="center">
                         <Col span={22}>
                             <Card 
                                 style={gridStyle} 
@@ -267,9 +267,9 @@ class ProfilePage extends React.Component {
                                 }}
                             >
 
-                                <Col span={12} style={{ marginBottom: 16 }} type="flex" justify="left">
+                                <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                                     <Card 
-                                    style={gridStyle} 
+                                    style={{textAlign: 'left', width: 1100}} 
                                     title="Books"
                                     headStyle={{
                                     fontSize: 20,
@@ -282,6 +282,12 @@ class ProfilePage extends React.Component {
                                     >
 
                                         <List
+                                            pagination={{
+                                                onChange: (page) => {
+                                                    console.log(page);
+                                                },
+                                                pageSize: 2,
+                                            }}
                                             itemLayout="vertical"
                                             size="large"
                                             dataSource={this.state.reviews}
@@ -311,11 +317,11 @@ class ProfilePage extends React.Component {
                                         </List>
 
                                     </Card>
-                                </Col>
+                                </Row>
 
-                                <Col span={12} style={{ marginBottom: 16 }} type="flex" justify="right">
+                                <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                                     <Card 
-                                    style={gridStyle} 
+                                    style={{textAlign: 'left', width: 1100}} 
                                     title="Authors"
                                     headStyle={{
                                     fontSize: 20,
@@ -328,6 +334,12 @@ class ProfilePage extends React.Component {
                                     >
 
                                         <List
+                                            pagination={{
+                                                onChange: (page) => {
+                                                    console.log(page);
+                                                },
+                                                pageSize: 2,
+                                            }}
                                             itemLayout="vertical"
                                             size="large"
                                             dataSource={this.state.authReviews}
@@ -357,7 +369,7 @@ class ProfilePage extends React.Component {
                                         </List>
 
                                     </Card>
-                                </Col>
+                                </Row>
 
                             </Card>
                         </Col>

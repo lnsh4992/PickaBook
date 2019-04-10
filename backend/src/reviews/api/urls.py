@@ -12,5 +12,4 @@ urlpatterns = [
     path('create/', BookReviewCreateView.as_view(), name='createreview'),
     path('like/<pk>', BookReviewLikeView.as_view(), name='likereview'),
     path('user/<fk>', BookReviewUserListView.as_view(), name="userreviewlist")
-    
 ]
