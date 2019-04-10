@@ -64,7 +64,6 @@ class ProfilePage extends React.Component {
                 profID: res.data.pk
             });
             localStorage.setItem("profID", res.data.pk);
-            console.log(localStorage.getItem("profID"));
 
             this.fetchReviews();
         })
@@ -107,6 +106,10 @@ class ProfilePage extends React.Component {
                                 <div style={{display:'flex', alignItems: 'stretch'}}>
                                     <Col span={22}>
                                         {this.state.first_name + " " + this.state.last_name}
+                                        {
+                                            this.state.review_count > 10 &&
+                                                <Icon style={{marginLeft: 10, color: '#DAA520'}} type="crown" theme="filled" />
+                                        }
                                     </Col>
                                     <NotificationMenu history={this.props.history}/>
                                 </div>} 

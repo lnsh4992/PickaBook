@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfileShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('pk', 'first_name', 'last_name', 'avatar')
+        fields = ('pk', 'first_name', 'last_name', 'avatar', 'review_count')
 
 class ProfileFavoriteSerializer(serializers.ModelSerializer):
     favorites = BookTitleSerializer(read_only=True, many=True)

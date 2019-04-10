@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Dropdown, Icon, Button, Badge, List } from "antd";
+import { Dropdown, Icon, Button, Badge, List, Avatar } from "antd";
 import { connect } from "react-redux";
 
 const gridStyle = {
@@ -59,7 +59,15 @@ class NotificationMenu extends React.Component {
                         style={{width:210, backgroundColor: '#555', marginLeft: -70}}
                         dataSource = {this.state.notifications}
                         renderItem = {item => ( 
-                            <List.Item onClick={()=>this.handleClick(item.book, item.pk)}><a href="#">{item.text}</a></List.Item>
+                            <List.Item onClick={()=>this.handleClick(item.book, item.pk)}>
+                                {
+                                    item.isBook > 0 ?
+                                    <List.Item.Meta avatar={<Avatar src="http://akgerber.com/wp-content/uploads/Open_Book_Logo_1small.png" />} />
+                                    :
+                                    <List.Item.Meta avatar={<Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuAiFK0gPiOZF2szsAfT939_vw7epX303IAcpkLyX-nH1t7qsXEw" />} />
+                                }
+                                <a href="#">{item.text}</a>
+                                </List.Item>
                             )}
                     />
                 </div>

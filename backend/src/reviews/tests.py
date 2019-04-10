@@ -119,6 +119,7 @@ class BookReviewModelTest(TestCase):
     def test_review_dislike(self):
 
         review = self.create_review()
+
         url = reverse('likereview', kwargs={'pk': review.pk})
         resp = self.client.put(url, 
                                 data = urlencode({'likes': 0}),
@@ -145,6 +146,8 @@ class BookReviewModelTest(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         respContent = str(resp.content)
+        print(respContent)
+        print(BookReview.objects.all())
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r2.likes)))
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r3.likes)))
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r4.likes)))

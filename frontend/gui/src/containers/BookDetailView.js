@@ -291,7 +291,16 @@ class BookDetail extends React.Component {
                                         <List.Item.Meta
                                             avatar={<Avatar src={item.prof.avatar} />}
                                             title={item.title}
-                                            description={<a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}</a>}
+                                            description={
+                                                <div>
+                                                    <a href={'/profile/'+item.prof.pk}>{item.prof.first_name + " " + item.prof.last_name}
+                                                    </a>
+                                                {
+                                                    item.prof.review_count > 10 &&
+                                                    <Icon style={{marginLeft: 10, color: '#DAA520'}} type="crown" theme="filled" twoToneColor="#DAA520" />
+                                                }
+                                                </div>    
+                                            }
                                             
                                         />
                                         <div>{item.content}</div>

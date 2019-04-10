@@ -273,7 +273,16 @@ class QAnswer extends React.Component {
                     renderItem={item => (
                         <Comment
                             actions={[<span onClick={() => this.showDrawer(item.pk)}>Reply to</span>]}
-                            author={<a href={'/profile/'+item.profile.pk}>{item.profile.first_name + " " + item.profile.last_name}</a>}
+                            author={
+                                <div>
+                                    <a href={'/profile/'+item.profile.pk}>{item.profile.first_name + " " + item.profile.last_name}
+                                    </a>
+                                {
+                                    item.profile.review_count > 10 &&
+                                    <Icon style={{marginLeft: 10, color: '#DAA520'}} type="crown" theme="filled" twoToneColor="#DAA520" />
+                                }
+                                </div>    
+                            }
                             avatar={<Avatar src={item.profile.avatar}/>}
                             content={item.question}
                             datetime={item.creation_date}
@@ -287,8 +296,16 @@ class QAnswer extends React.Component {
                                 dataSource={item.answers}
                                 renderItem={answer => (
                                     <Comment
-                                        author={answer.profile.first_name + " " + answer.profile.last_name}
-                                        author={<a href={'/profile/'+answer.profile.pk}>{answer.profile.first_name + " " + answer.profile.last_name}</a>}
+                                        author={
+                                            <div>
+                                                <a href={'/profile/'+answer.profile.pk}>{answer.profile.first_name + " " + answer.profile.last_name}
+                                                </a>
+                                            {
+                                                answer.profile.review_count > 10 &&
+                                                <Icon style={{marginLeft: 10, color: '#DAA520'}} type="crown" theme="filled" twoToneColor="#DAA520" />
+                                            }
+                                            </div>    
+                                        }
                                         avatar={<Avatar src={answer.profile.avatar}/>}
                                         content={answer.answer}
                                         datetime={answer.creation_date}
