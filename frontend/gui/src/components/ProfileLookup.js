@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, List } from "antd";
+import { Card, Row, Col, List, Icon } from "antd";
 
 
 const gridStyle = {
@@ -60,11 +60,22 @@ class ProfileLookup extends React.Component {
                         </Col>
                         
                         <Col span={16}>
-                            <Card title={this.state.first_name + this.state.last_name} headStyle={{
+                            <Card  headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
                                 fontFamily: 'Georgia'
-                            }}>
+                            }}
+                                title={
+                                <div style={{display:'flex', alignItems: 'stretch'}}>
+                                    <Col span={22}>
+                                        {this.state.first_name + " " + this.state.last_name}
+                                        {
+                                            this.state.review_count > 10 &&
+                                                <Icon style={{marginLeft: 10, color: '#DAA520'}} type="crown" theme="filled" />
+                                        }
+                                    </Col>
+                                </div>}
+                            >
                                 <p>
                                     <b><i>User Since: </i></b> 
                                     {this.state.creation_date}
