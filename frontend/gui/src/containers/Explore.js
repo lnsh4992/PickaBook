@@ -106,7 +106,7 @@ class Explore extends React.Component {
     
     render() {
         return (
-            <Layout style={{ padding: '0 0', background: '#378695'}}>
+            <Layout style={{ padding: '0 0', background: '#020037'}}>
                 {this.state.error ?
                     this.errorMessage()
                     :
@@ -167,7 +167,7 @@ class Explore extends React.Component {
                         <ReactCardFlip isFlipped={item.isFlipped} flipDirection="horizontal">
                         <Card
                             hoverable
-                            style={{ width: 240, background: '#DDA72F'}}
+                            style={{ width: 240, background: '#F6C564'}}
                             cover={<img alt={item.title} src={item.image_url} style={{height: 350}} width="100%" height="100%" />}
                             onClick={() => this.handleClick(item)}
                             key="front"
@@ -179,7 +179,7 @@ class Explore extends React.Component {
 
                         <Card
                             title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
-                            style={{width: 240, height: 350, background: '#DDA72F'}}
+                            style={{width: 240, height: 350, background: '#F6C564'}}
                             key="back"
                             onClick={() => this.handleClick(item)}
                         >
