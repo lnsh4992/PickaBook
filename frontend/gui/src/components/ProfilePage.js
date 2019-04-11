@@ -112,7 +112,7 @@ class ProfilePage extends React.Component {
                             }}>
                                 <img src={this.state.avatar} 
                                 style={{
-                                    width: 194, height: 224
+                                    width: 194, height: 219
                                 }}
                                 width="100%" height="100%" >
                                 </img>

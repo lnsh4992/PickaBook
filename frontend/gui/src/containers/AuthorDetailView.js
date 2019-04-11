@@ -169,7 +169,7 @@ class AuthorDetail extends React.Component {
                             }}>
                                 <img src={this.state.image_url} 
                                 style={{
-                                    width: 194, height: 295
+                                    width: 194, height: 285
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -271,7 +271,7 @@ class AuthorDetail extends React.Component {
                         )}
                     />
 
-                    <Row gutter={20} style={{ marginBottom: 8 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={22}>
                             <Card title={<div style={{display:'flex', alignItems: 'stretch'}}>Author Reviews</div>}
                             headStyle={{
