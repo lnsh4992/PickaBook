@@ -4,12 +4,17 @@ import axios from 'axios';
 import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
-
+import Img from '../images/arrow.png';
+// import Text from 'react-native';
 
 import ReactCardFlip from 'react-card-flip';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
+
+// const goldenStyle = {
+//     color: 'green',
+//   };
 
 class Explore extends React.Component {
     
@@ -117,9 +122,11 @@ class Explore extends React.Component {
                         mode="inline"
                         theme="dark"
                         defaultSelectedKeys={[3]}
-                        style={{ height: '100%', paddingLeft: 10, paddingTop: 10 }}
+                        style={{ height: '100%', paddingLeft: 0, paddingTop: 10 }}
                     >
-                        <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>Newest Collection</Menu.Item>
+                        <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>
+                        Newest Collection
+                        </Menu.Item>
                         <Menu.Item key="2" onClick={() => this.handleSortChange('rating')}>Top Rated</Menu.Item>
                         <Menu.Item key="3" onClick={() => this.handleSortChange('title')}>Title</Menu.Item>
                         <SubMenu key="genre" title='Genre'>
@@ -132,17 +139,23 @@ class Explore extends React.Component {
                         <Menu.Item key="FI" onClick={() => this.handleGenreChange('FI')}>Fiction</Menu.Item>
                         <Menu.Item key="SF" onClick={() => this.handleGenreChange('SF')}>Science Fiction</Menu.Item>
                         </SubMenu>
+
+                        <div style={{marginTop: 50, marginLeft: 22}}>{`Unsure of the title of the`}</div>
+                        <div style={{marginTop: 22, marginLeft: 22}}>{`book? Search by substring`}</div>
+                        <div style={{marginTop: 22, marginLeft: 22}}>{`below!`}</div>
+                        <div> <img src ={Img} style={{width: 40, marginTop: 10, marginLeft: 90}}></img> </div>
+
                         <Form inline onSubmit={(event) => this.handleSearch(event)}>
-                            <FormControl 
+                            <FormControl style={{marginTop: 40, marginLeft: 22}}
                             type="text" placeholder="Search" className="mr-sm-2" name="tgtname"
                             />
-                            <Button style={{marginTop: 10}}
+                            <Button style={{marginTop: 15, marginLeft: 22}}
                                     variant="outline-success" 
                                     type="primary">
                                     Search
                             </Button>
                         </Form>
-                </Menu>
+                    </Menu>
                 </Sider>
 
                 <Content>
