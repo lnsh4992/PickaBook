@@ -5,6 +5,7 @@ import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
 import Img from '../images/arrow.png';
+import Logo from '../images/logo.png';
 // import Text from 'react-native';
 
 import ReactCardFlip from 'react-card-flip';
@@ -87,6 +88,7 @@ class Explore extends React.Component {
             for(var i=0; i<this.state.books.length; ++i){
                 this.state.books[i].isFlipped = false
             }
+
             this.setState({
                 booksFiltered: this.state.books
             })
@@ -117,12 +119,13 @@ class Explore extends React.Component {
                     :
                     <b></b>
                 }
-                <Sider width={220} >
+                <Sider width={220}>
+                    <img src={Logo} style={{width:175, marginLeft: 22, marginTop: 25}} />
                     <Menu
                         mode="inline"
                         theme="dark"
                         defaultSelectedKeys={[3]}
-                        style={{ height: '100%', paddingLeft: 0, paddingTop: 10 }}
+                        style={{paddingLeft: 0, paddingTop: 10 }}
                     >
                         <Menu.Item key="1" onClick={()=> this.handleSortChange('publication_date')}>
                         Newest Collection
