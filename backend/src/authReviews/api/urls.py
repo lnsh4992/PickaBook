@@ -8,9 +8,9 @@ from .views import (
 )
 
 urlpatterns = [
-    path('<fk>', AuthorReviewListView.as_view(), name="reviewlist"),
-    path('create/', AuthorReviewCreateView.as_view(), name='createreview'),
-    path('like/<pk>', AuthorReviewLikeView.as_view(), name='likereview'),
-    path('user/<fk>', AuthorReviewUserListView.as_view(), name="userreviewlist")
+    path('<fk>', AuthorReviewListView.as_view(), name="authreviewlist"),
+    path('create/', AuthorReviewCreateView.as_view(), name='authcreatereview'),
+    path('like/<pk>', AuthorReviewLikeView.as_view(), name='authlikereview'),
+    path('user/<fk>', AuthorReviewUserListView.as_view(), name="authuserreviewlist")
     
 ]

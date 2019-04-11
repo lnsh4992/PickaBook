@@ -146,8 +146,6 @@ class BookReviewModelTest(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         respContent = str(resp.content)
-        print(respContent)
-        print(BookReview.objects.all())
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r2.likes)))
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r3.likes)))
         self.assertTrue(respContent.find("\"likes\":"+str(r1.likes)) < respContent.find("\"likes\":"+str(r4.likes)))
