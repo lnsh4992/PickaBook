@@ -4,6 +4,7 @@ import { Card, Row, Col, List, message, Avatar, Icon, Rate } from "antd";
 import { connect } from "react-redux";
 import NotificationMenu from '../containers/NotificationMenu';
 
+
 const gridStyle = {
     textAlign: 'left',
   };
@@ -137,7 +138,8 @@ class ProfilePage extends React.Component {
                                     background: '#020037',
                                     color: 'white'
                                 }}>
-                                <p>
+
+                            <p>
                                     <b><i>User Since: </i></b> 
                                     {this.state.creation_date}
                                 </p>
@@ -152,8 +154,8 @@ class ProfilePage extends React.Component {
                                     {this.state[this.state.genre]}
                                 </p>
 
-
                             </Card>
+                            
                         </Col>
 
                     </Row>
