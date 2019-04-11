@@ -173,7 +173,7 @@ class Explore extends React.Component {
                             key="front"
                         >
                             <Card.Meta
-                            title={<a href={'/booklist/'+item.pk}><b>{item.title }</b></a>}
+                            title={<a style={{color: 'black'}} href={'/booklist/'+item.pk}>{item.title }</a>}
                             />
                         </Card>
 
