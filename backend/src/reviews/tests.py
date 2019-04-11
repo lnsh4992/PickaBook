@@ -8,7 +8,6 @@ from django.urls import reverse
 from django.utils import timezone
 from urllib.parse import urlencode
 
-
 # Create your tests here.
 
 class BookReviewModelTest(TestCase):
