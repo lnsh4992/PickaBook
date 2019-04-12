@@ -4,7 +4,7 @@ import axios from 'axios';
 import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
-import Img from '../images/arrow.png';
+import ArrowImg from '../images/arrow.png';
 import Logo from '../images/logo.png';
 // import Text from 'react-native';
 
@@ -146,10 +146,10 @@ class Explore extends React.Component {
                         <div style={{marginTop: 50, marginLeft: 22}}>{`Unsure of the title of the`}</div>
                         <div style={{marginTop: 22, marginLeft: 22}}>{`book? Search by substring`}</div>
                         <div style={{marginTop: 22, marginLeft: 22}}>{`below!`}</div>
-                        <div> <img src ={Img} style={{width: 40, marginTop: 10, marginLeft: 90}}></img> </div>
+                        <div> <img src ={ArrowImg} style={{width: 40, marginTop: 10, marginLeft: 90}}></img> </div>
 
                         <Form inline onSubmit={(event) => this.handleSearch(event)}>
-                            <FormControl style={{marginTop: 40, marginLeft: 22}}
+                            <FormControl style={{marginTop: 40, marginLeft: 22, width: 180}}
                             type="text" placeholder="Search" className="mr-sm-2" name="tgtname"
                             />
                             <Button style={{marginTop: 15, marginLeft: 22}}

@@ -30,6 +30,7 @@ class Profile(models.Model):
 
     genre = models.CharField(max_length=2, choices = GENRES, default='FA')
     avatar = models.ImageField(upload_to='user_avatar', blank=True, null=True, default='/user_avatar/logo.jpg')
+    isPrivate = models.BooleanField(default=False)
 
 
 @receiver(post_save, sender=User)

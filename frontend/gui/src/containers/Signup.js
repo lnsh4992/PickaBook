@@ -26,8 +26,14 @@ const prefixIcon = {
               values.password,
               values.confirm
             );
-          console.log('Received values of form: ', values);
-          this.props.history.push('/newprof/');
+
+            setTimeout(
+              function() {
+                this.props.history.push('/newprof/');
+              }
+              .bind(this),
+              1000
+            );
         }
 //        this.props.history.push('/');
       });

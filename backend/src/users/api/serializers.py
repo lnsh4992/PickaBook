@@ -14,7 +14,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile 
-        fields = ('pk', 'first_name', 'last_name', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following', 'avatar')
+        fields = ('pk', 'first_name', 'last_name', 'isPrivate', 'review_count', 'creation_date', 'bio', 'genre', 'favorites', 'following', 'avatar')
 
 class ProfileShortSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +36,7 @@ class ProfileFollowingSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'bio', 'genre', 'avatar')
+        fields = ('first_name', 'last_name', 'bio', 'genre', 'isPrivate', 'avatar')
         read_only_fields = ['user', 'review_count', 'creation_date']
 
 class ProfileAddFavSerializer(serializers.ModelSerializer):

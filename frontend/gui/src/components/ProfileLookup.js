@@ -51,7 +51,7 @@ class ProfileLookup extends React.Component {
             this.setState({
                 first_name: res.data.first_name,
                 last_name: res.data.last_name,
-                private: false,
+                private: res.data.isPrivate,
                 review_count: res.data.review_count,
                 creation_date: res.data.creation_date,
                 bio: res.data.bio,
@@ -60,7 +60,7 @@ class ProfileLookup extends React.Component {
                 books: res.data.favorites,
                 authors: res.data.following
             });
-
+            console.log(this.state);
         })
         .catch(error => console.log(error));
     }
