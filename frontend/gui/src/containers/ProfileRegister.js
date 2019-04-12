@@ -14,32 +14,32 @@ class ProfileRegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = { genre: "FA",
-                       private: false };
+                       private: false,
+                       isSelected: false };
       }
 
     handleFileSelect = event => {
         this.setState({
-            selectedFile: event.target.files[0]
+            selectedFile: event.target.files[0],
+            isSelected: true
         })
     }
 
     handleFormSubmit = (event, userID) => {
         event.preventDefault();
-        console.log(this.state)
 
-        let img_data = new FormData()
-        img_data.append('avatar', this.state.selectedFile)
-        fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json, text/plain, */*',
-            },
-            body: img_data
-        }).then(res => res.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch(err => console.log(err))
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+              return;
+            }
+            else {
+                this.postData(event, userID);
+            }
+          });
+        
+    }
+
+    postData = (event, userID) => {
 
         axios.put(`http://127.0.0.1:8000/profile/update/${userID}`, {
             first_name: event.target.elements.firstname.value,
@@ -49,11 +49,27 @@ class ProfileRegistrationForm extends React.Component {
             isPrivate: this.state.private
         })
         .then(res => {
-            console.log(res);
-            this.props.history.push('/profile');
+            if ( this.state.isSelected ){
+                let img_data = new FormData()
+                img_data.append('avatar', this.state.selectedFile)
+                fetch(`http://127.0.0.1:8000/profile/updatepicprof/${this.state.profID}`, {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json, text/plain, */*',
+                    },
+                    body: img_data
+                }).then(res => res.json())
+                .then((data) => {
+                    this.props.history.push('/profile');
+                })
+                .catch(err => { console.log(err)});
+            }
+            else {
+                this.props.history.push('/profile');
+            }
+            
         })
         .catch(error => console.log(error));
-        
     }
 
     handleGenreChange = (value) => {
@@ -75,6 +91,8 @@ class ProfileRegistrationForm extends React.Component {
 
 
     render() {
+        const { getFieldDecorator } = this.props.form;
+
         return (
             <div>
                 <Form onSubmit={(event) => this.handleFormSubmit(
@@ -82,15 +100,28 @@ class ProfileRegistrationForm extends React.Component {
                     this.props.userid
                 )}>
                     <FormItem label="First Name" >
+                        {getFieldDecorator('firstname', {
+                        rules: [{ required: true, message: 'Please input your First Name!' }],
+                        })(
                         <Input name="firstname" placeholder="First name" />
+                        )}
                     </FormItem>
 
                     <FormItem label="Last Name" >
+                        {getFieldDecorator('lastname', {
+                        rules: [{ required: true, message: 'Please input your Last Name!' }],
+                        })(
                         <Input name="lastname" placeholder="Last name" />
+                        )}
                     </FormItem>
                     
                     <FormItem label = "Bio" >
+                        {getFieldDecorator('bio', {
+                        rules: [{ required: true, message: 'Please Tell Us Something About Yourself!' }],
+                        })(
                         <TextArea name="bio" placeholder="About Me!" autosize={{minRows: 2}} />
+                        )}
+                        
                     </FormItem>
 
                     <FormItem label = "Genre" >
@@ -131,10 +162,12 @@ class ProfileRegistrationForm extends React.Component {
     }
 }
 
+const WrappedProfileRegistrationForm = Form.create({ name: 'profileregister' })(ProfileRegistrationForm);
+
 const mapStateToProps = state => {
     return {
         userid: state.userId
     };
 };
 
-export default connect(mapStateToProps)(ProfileRegistrationForm);
+export default connect(mapStateToProps)(WrappedProfileRegistrationForm);
