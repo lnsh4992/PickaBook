@@ -1,6 +1,7 @@
 import React from 'react';
-import {Form, Input, Button, Select } from 'antd';
+import {Form, Input, Button, Select, Switch } from 'antd';
 import { connect } from "react-redux";
+import 'antd/dist/antd.css';
 
 import axios from 'axios';
 
@@ -55,7 +56,8 @@ class ProfileUpdateForm extends React.Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 bio: this.state.bio,
-                genre: this.state.genre
+                genre: this.state.genre,
+                isPrivate: this.state.private
             })
             .then(res => {
                 this.props.history.push('/profile');
@@ -70,7 +72,8 @@ class ProfileUpdateForm extends React.Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 bio: this.state.bio,
-                genre: this.state.genre
+                genre: this.state.genre,
+                isPrivate: this.state.private
             })
             .then(res => {
                 this.props.history.push('/profile');
@@ -91,17 +94,21 @@ class ProfileUpdateForm extends React.Component {
 
     }
 
+    handlePrivacyChange = () => {
+        this.setState({private: !this.state.private});
+    }
+
     componentDidMount() {
         axios.get(`http://127.0.0.1:8000/profile/${this.props.userid}`).then(res => {
             this.setState({
                 first_name: res.data.first_name,
                 last_name: res.data.last_name,
+                private: res.data.isPrivate,
                 bio: res.data.bio,
                 genre: res.data.genre,
                 avatar: res.data.avatar,
-                profID: res.data.pk
-            })
-
+                profID: res.data.pk,
+            });
         })
     }
 
@@ -140,6 +147,11 @@ class ProfileUpdateForm extends React.Component {
                             <Option value="SF">Science Fiction</Option>
                         </Select>    
                     </FormItem>
+
+                    <Form.Item label="Privacy">
+                        <Switch name='switch' checked={this.state.private} onClick={this.handlePrivacyChange}/>
+                    </Form.Item>
+
 
                     <FormItem label = "Avatar">
                         <input 

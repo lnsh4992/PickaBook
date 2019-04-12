@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Switch } from 'antd';
 import { connect } from "react-redux";
-
+import 'antd/dist/antd.css';
 import axios from 'axios';
 
 const FormItem = Form.Item;
@@ -13,7 +13,8 @@ class ProfileRegistrationForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { genre: "FA" };
+        this.state = { genre: "FA",
+                       private: false };
       }
 
     handleFileSelect = event => {
@@ -44,11 +45,15 @@ class ProfileRegistrationForm extends React.Component {
             first_name: event.target.elements.firstname.value,
             last_name: event.target.elements.lastname.value,
             bio: event.target.elements.bio.value,
-            genre: this.state.genre
+            genre: this.state.genre,
+            isPrivate: this.state.private
         })
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res);
+            this.props.history.push('/profile');
+        })
         .catch(error => console.log(error));
-        this.props.history.push('/profile');
+        
     }
 
     handleGenreChange = (value) => {
@@ -63,6 +68,11 @@ class ProfileRegistrationForm extends React.Component {
 
         })
     }
+
+    handlePrivacyChange = () => {
+        this.setState({private: !this.state.private});
+    }
+
 
     render() {
         return (
@@ -96,6 +106,10 @@ class ProfileRegistrationForm extends React.Component {
                             <Option value="SF">Science Fiction</Option>
                         </Select>    
                     </FormItem>
+
+                    <Form.Item label="Privacy">
+                        <Switch name='switch' checked={this.state.private} onClick={this.handlePrivacyChange}/>
+                    </Form.Item>
 
                     <FormItem label = "Avatar">
                         <input 
