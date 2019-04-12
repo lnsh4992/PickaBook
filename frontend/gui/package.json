@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^1.1.16",
+    "@fortawesome/fontawesome": "^1.1.8",
     "acorn": "^6.1.1",
     "acorn-jsx": "^5.0.1",
     "antd": "^3.13.2",
@@ -23,6 +24,7 @@
     "react-color": "^2.17.0",
     "react-dom": "^16.8.1",
     "react-infinite-scroller": "^1.2.4",
+    "react-native": "^0.59.4",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",

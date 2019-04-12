@@ -93,7 +93,7 @@ class BookListTest(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         respCon = str(resp.content)
-        print(respCon)
+        # print(respCon)
         self.assertIn(b1.author_name, respCon)
         self.assertNotIn(b3.author_name, respCon)
         self.assertNotIn(b5.author_name, respCon)
