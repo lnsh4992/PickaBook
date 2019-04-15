@@ -95,26 +95,22 @@ class ProfileLookup extends React.Component {
         return (
                 <div>
                     <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
-                        <Col span={6}>
+                        <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
                                 <img src={this.state.avatar} style={{
-                                    width: 211, height: 221
+                                    width: 194, height: 219
                                 }}
                                 width="100%" height="100%" >
                                 </img>
                             </Card>
                         </Col>
                         
-                        <Col span={16}>
+                        <Col span={18}>
                         <MDBContainer>
                         <MDBView>
-                            <Card  headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia'
-                            }}
+                            <Card  
                                 title={
                                 <div style={{display:'flex', alignItems: 'stretch'}}>
                                     <Col span={22}>
@@ -126,6 +122,13 @@ class ProfileLookup extends React.Component {
                                     </Col>
                                 </div>
                                 }
+                                headStyle={{
+                                    fontSize: 20,
+                                    fontStyle: 'italic',
+                                    fontFamily: 'Georgia', 
+                                    background: '#020037',
+                                    color: 'white'
+                                }}
                             >
                                 <p>
                                     <b><i>User Since: </i></b> 
@@ -173,7 +176,16 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView>
 
-                            <Card style={gridStyle} title="About Me">
+                            <Card style={gridStyle} title="About Me"
+                            headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037',
+                                color: 'white',
+                                textAlign: 'left'
+                                }}
+                            >
                                 <p>
                                     { !this.state.private &&
                                         this.state.bio
@@ -200,7 +212,16 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} title="Favorites">
+                        <Card style={{height: 522}} 
+                        headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037',
+                                color: 'white',
+                                textAlign: 'left'
+                        }}
+                        title="Favorites">
                             {
                             !this.state.private &&
                                 <List
@@ -216,8 +237,8 @@ class ProfileLookup extends React.Component {
                                     <List.Item>
                                         <Card
                                             hoverable
-                                            style={{ width: 180 }}
-                                            cover={<img alt={item.title} src={item.image_url} />}
+                                            style={{ width: 180, background: '#F6C564', color: 'white'}}
+                                            cover={<img alt={item.title} src={item.image_url} style={{width:178, height: 250}} />}
                                         >
                                             <Card.Meta
                                             title={<a href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
@@ -247,7 +268,16 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} title="Following">
+                        <Card style={{height: 522}} 
+                        headStyle={{
+                            fontSize: 20,
+                            fontStyle: 'italic',
+                            fontFamily: 'Georgia', 
+                            background: '#020037',
+                            color: 'white',
+                            textAlign: 'left'
+                        }}
+                        title="Following">
                         {
                             !this.state.private &&
                                 <List
@@ -263,8 +293,8 @@ class ProfileLookup extends React.Component {
                                     <List.Item>
                                         <Card
                                             hoverable
-                                            style={{ width: 180 }}
-                                            cover={<img alt={item.name} src={item.image_url} />}
+                                            style={{ width: 180, background: '#F6C564', color: 'white'}}
+                                            cover={<img alt={item.name} src={item.image_url} style={{width:178, height: 250}} />}
                                         >
                                             <Card.Meta
                                             title={<a href={'/authors/'+item.pk}><b>{item.name}</b></a>}
@@ -298,7 +328,7 @@ class ProfileLookup extends React.Component {
 
                             <Card 
                                 style={{textAlign: 'left', minHeight:500}} 
-                                title="My Reviews"
+                                title="User's Reviews"
                                 headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',

@@ -215,7 +215,7 @@ class ProfilePage extends React.Component {
                                 <List.Item>
                                     <Card
                                         hoverable
-                                        style={{ width: 180, background: '#F6C564'}}
+                                        style={{ width: 180, background: '#F6C564', color: 'white'}}
                                         cover={<img alt={item.title} src={item.image_url} style={{width:178, height: 250}} />}
                                     >
                                         <Card.Meta
