@@ -10,6 +10,7 @@ from .views import (
     ProfileFavoriteView,
     ProfileFollowingView,
     ProfPicV,
+    ProfileRemoveRecView,
     LookupProfileView
 )
 
@@ -30,6 +31,7 @@ urlpatterns = [
     
     path('addfavorite/<pk>', ProfileAddFavView.as_view(), name='favoritebook'),
     path('addfollow/<pk>', ProfileAddFollowView.as_view(), name='followauthor'),
+    path('remrecommended/<pk>', ProfileRemoveRecView.as_view(), name='recommendbook'),
 
     path('resetpw/', PasswordResetView.as_view(), name='reset_password'),
     path('resetpw/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),

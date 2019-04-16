@@ -46,7 +46,8 @@ class ProfilePage extends React.Component {
             image_url: "https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png",
             avatar: this.state.image_url,
             reviews: [],
-            authReviews: []
+            authReviews: [],
+            recommended: []
         };
     }  
 
@@ -61,6 +62,7 @@ class ProfilePage extends React.Component {
                 bio: res.data.bio,
                 genre: res.data.genre,
                 books: res.data.favorites,
+                recommended: res.data.recommended,
                 authors: res.data.following,
                 avatar: res.data.avatar,
                 profID: res.data.pk
@@ -100,6 +102,13 @@ class ProfilePage extends React.Component {
 
         })
         .catch(error => console.log(error));
+    }
+
+    handleRec = (bookID) => {
+        const pr_ID = this.state.profID;
+        axios.put(`http://127.0.0.1:8000/profile/remrecommended/${pr_ID}`, {
+            recommended: [bookID]
+        });
     }
 
     render() {
@@ -254,6 +263,45 @@ class ProfilePage extends React.Component {
                             )}
                         />
                         </Card>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
+                        <Col span={22}>
+                            <Card
+                                style={gridStyle} 
+                                title="Recommendations"
+                                headStyle={{
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                fontFamily: 'Georgia', 
+                                background: '#020037',
+                                color: 'white',
+                                textAlign: 'left'
+                            }}
+                            >
+                            
+                            <List
+                            pagination={{
+                                pageSize: 4,
+                            }}
+                            grid={{ gutter: 0, column: 4 }}
+                            dataSource={this.state.recommended}
+                            renderItem={item => (
+                                <List.Item>
+                                    <Card
+                                        hoverable
+                                        style={{ width: 180, background: '#F6C564'}}
+                                        cover={<img alt={item.title} src={item.image_url} style={{width:178, height: 250}} />}
+                                    >
+                                        <Card.Meta
+                                        title={<a onClick={() => this.handleRec(item.pk)} href={'/booklist/'+item.pk}><b>{item.title}</b></a>}
+                                        />
+                                    </Card>
+                                </List.Item>
+                                )}
+                                />
+                            </Card>
                         </Col>
                     </Row>
 

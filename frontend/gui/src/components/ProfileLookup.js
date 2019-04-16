@@ -94,13 +94,13 @@ class ProfileLookup extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} style={{ marginBottom: 16, marginLeft: 22, marginRight: 10 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
                             }}>
                                 <img src={this.state.avatar} style={{
-                                    width: 185, height: 215
+                                    width: 194, height: 219
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -110,11 +110,7 @@ class ProfileLookup extends React.Component {
                         <Col span={18}>
                         <MDBContainer>
                         <MDBView>
-                            <Card  headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia'
-                            }}
+                            <Card  
                                 title={
                                 <div style={{display:'flex', alignItems: 'stretch'}}>
                                     <Col span={22}>
@@ -211,7 +207,7 @@ class ProfileLookup extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} style={{ marginBottom: 16, marginLeft: 5, marginRight: 5 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={11}>
                         <MDBContainer>
                         <MDBView >
