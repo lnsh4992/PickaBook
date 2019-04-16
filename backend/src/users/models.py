@@ -16,6 +16,7 @@ class Profile(models.Model):
     
     favorites = models.ManyToManyField('books.Book', related_name="favorites")
     following = models.ManyToManyField('authors.Author', related_name="following")
+    recommended = models.ManyToManyField('books.Book', related_name="recommended")
 
     GENRES = (
         ('FA', 'Fantasy'),
