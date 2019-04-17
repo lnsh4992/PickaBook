@@ -98,9 +98,13 @@ class ProfileLookup extends React.Component {
                         <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
-                            }}>
+                            }}
+                            style={{
+                                marginLeft: 30
+                            }}
+                            >
                                 <img src={this.state.avatar} style={{
-                                    width: 194, height: 219
+                                    width: 179, height: 216
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -110,7 +114,9 @@ class ProfileLookup extends React.Component {
                         <Col span={18}>
                         <MDBContainer>
                         <MDBView>
-                            <Card  
+                            <Card style={{
+                                marginRight: 0
+                            }}
                                 title={
                                 <div style={{display:'flex', alignItems: 'stretch'}}>
                                     <Col span={22}>
@@ -212,7 +218,7 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} 
+                        <Card style={{height: 522, marginLeft: 0}} 
                         headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
@@ -268,7 +274,7 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} 
+                        <Card style={{height: 522, marginRight: 0}} 
                         headStyle={{
                             fontSize: 20,
                             fontStyle: 'italic',
