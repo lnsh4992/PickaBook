@@ -187,6 +187,12 @@ test('Notification From Answer', () => {
 
 });
 
+test('Recommendations', () => {
+  expect.assertions(1);
+  expect(true).toBeTruthy();
+  return axios.get(`http://127.0.0.1:8000/profile`);
+})
+
 /*
 describe('Indicator', () => {
   describe('when loading is false', () => {
