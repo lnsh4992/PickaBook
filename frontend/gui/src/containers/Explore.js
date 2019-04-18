@@ -4,6 +4,7 @@ import axios from 'axios';
 import {List, Card, Rate, Layout, Menu, Input, Row, message} from 'antd';
 import {Form, FormControl, Button } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
+import { MDBView } from "mdbreact";
 import ArrowImg from '../images/arrow.png';
 import Logo from '../images/logo.png';
 // import Text from 'react-native';
@@ -184,7 +185,11 @@ class Explore extends React.Component {
                         <Card
                             hoverable
                             style={{ width: 240, background: '#F6C564'}}
-                            cover={<img alt={item.title} src={item.image_url} style={{height: 350}} width="100%" height="100%" />}
+                            cover={
+                                <MDBView hover zoom>
+                                <img alt={item.title} src={item.image_url} style={{height: 350}} width="100%" height="100%" />
+                                </MDBView>
+                            }
                             onClick={() => this.handleClick(item)}
                             key="front"
                         >

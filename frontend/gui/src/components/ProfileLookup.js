@@ -94,13 +94,17 @@ class ProfileLookup extends React.Component {
     render() {
         return (
                 <div>
-                    <Row gutter={20} style={{ marginBottom: 16, marginLeft: 22, marginRight: 10 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={4}>
                             <Card bodyStyle={{
                                 padding: 0
-                            }}>
+                            }}
+                            style={{
+                                marginLeft: 30
+                            }}
+                            >
                                 <img src={this.state.avatar} style={{
-                                    width: 185, height: 215
+                                    width: 179, height: 216
                                 }}
                                 width="100%" height="100%" >
                                 </img>
@@ -110,10 +114,8 @@ class ProfileLookup extends React.Component {
                         <Col span={18}>
                         <MDBContainer>
                         <MDBView>
-                            <Card  headStyle={{
-                                fontSize: 20,
-                                fontStyle: 'italic',
-                                fontFamily: 'Georgia'
+                            <Card style={{
+                                marginRight: 0
                             }}
                                 title={
                                 <div style={{display:'flex', alignItems: 'stretch'}}>
@@ -211,12 +213,12 @@ class ProfileLookup extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={20} style={{ marginBottom: 16, marginLeft: 5, marginRight: 5 }} type="flex" justify="center">
+                    <Row gutter={20} style={{ marginBottom: 16 }} type="flex" justify="center">
                         <Col span={11}>
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} 
+                        <Card style={{height: 522, marginLeft: 0}} 
                         headStyle={{
                                 fontSize: 20,
                                 fontStyle: 'italic',
@@ -272,7 +274,7 @@ class ProfileLookup extends React.Component {
                         <MDBContainer>
                         <MDBView >
 
-                        <Card style={{height: 522}} 
+                        <Card style={{height: 522, marginRight: 0}} 
                         headStyle={{
                             fontSize: 20,
                             fontStyle: 'italic',
