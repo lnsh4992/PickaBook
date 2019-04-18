@@ -56,10 +56,10 @@ test('Profile From User', () => {
 
 test('Other Profile', () => {
   expect.assertions(3);
-  return axios.get(`http://127.0.0.1:8000/profile/user/1`).then(res => {
-            expect(res.data.first_name).toBe('john');
-            expect(res.data.favorites[0].title).toBe('Never Tell');
-            expect(res.data.following[0].name).toBe('Jordan');
+  return axios.get(`http://127.0.0.1:8000/profile/user/4`).then(res => {
+            expect(res.data.first_name).toBe('Person');
+            expect(res.data.favorites[0].title).toBe('Blood Orange');
+            expect(res.data.following[0].name).toBe('Sandra Brown');
         });
 });
 
@@ -67,7 +67,7 @@ test('Reviews of book', () => {
   expect.assertions(2);
   return axios.get(`http://127.0.0.1:8000/bookreview/1`).then(res => {
           expect(res.data.length).toBeGreaterThan(0);
-          expect(res.data[0].title).toBe("Good stuff");
+          expect(res.data[0].title).toBe("Alright");
   })
 })
 
@@ -90,10 +90,10 @@ test('All Following Authors', () => {
 test('All Favorite Books', () => {
   expect.assertions(4);
   return axios.get(`http://127.0.0.1:8000/profile/13`).then(res => {
-          expect(res.data.favorites.length).toBeGreaterThan(3);
-          expect(res.data.favorites[0].title).toBe("Test book 1");
-          expect(res.data.favorites[1].title).toBe("Test book 2");
-          expect(res.data.favorites[2].title).toBe("The Chef");
+          expect(res.data.favorites.length).toBeGreaterThan(2);
+          expect(res.data.favorites[0].title).toBe("Test book 2");
+          expect(res.data.favorites[1].title).toBe("The Chef");
+          expect(res.data.favorites[2].title).toBe("Tailspin");
   });
 });
 
@@ -149,6 +149,49 @@ test('Book List Filter Genre', () => {
   });
 });
 
+test('Notification List', () => {
+  expect.assertions(3);
+
+  return axios.get(`http://127.0.0.1:8000/notification/2`).then(res => {
+    var obj = [...res.data];
+    expect(res.data.length).toBeGreaterThan(1);
+    expect(obj[0].prof).toEqual(2);
+    expect(obj[obj.length-1].prof).toEqual(2);
+
+      
+  });
+});
+
+test('Notification From Answer', () => {
+  expect.assertions(2);
+  const profID = 2;
+  const bookID = 87;
+  const qID = 8;
+  const answer = "App test notification";
+
+
+   axios.post(`http://127.0.0.1:8000/qanswer/answer/create/`, {
+    profile: profID,
+    book: bookID,
+    question: qID,
+    answer: answer
+  }).then(postres => {
+  })
+  .catch(err => console.log(err));
+
+  return axios.get(`http://127.0.0.1:8000/notification/2`).then(res => {
+    var obj = [...res.data];
+    expect(res.data.length).toBeGreaterThan(1);
+    expect(obj[obj.length - 1].text.includes('Guinness')).toBeTruthy();
+  });
+
+});
+
+test('Recommendations', () => {
+  expect.assertions(1);
+  expect(true).toBeTruthy();
+  return axios.get(`http://127.0.0.1:8000/profile`);
+})
 
 /*
 describe('Indicator', () => {

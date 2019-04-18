@@ -218,3 +218,84 @@ class ProfileTest(TestCase):
         self.assertIn(prof.first_name, str(resp.content))
         self.assertIn(book.title, str(resp.content))
         self.assertIn(auth.name, str(resp.content))
+
+    def test_recommendation_fav(self):
+        prof1 = self.create_profile('u1')
+        prof2 = self.create_profile('u2')
+        prof3 = self.create_profile('u3')
+        b1 = self.create_book('b1')
+        b2 = self.create_book('b2')
+        b3 = self.create_book('b3')
+        b4 = self.create_book('b4')
+
+        prof3.favorites.add(b1)
+        prof3.favorites.add(b2)
+        prof3.favorites.add(b4)
+        prof3.save()
+
+        prof1.favorites.add(b1)
+        prof1.favorites.add(b3)
+        prof1.save()
+
+        prof2.favorites.add(b1)
+        prof2.save()
+
+        url = reverse('favoritebook', kwargs={'pk': prof2.pk, })
+        resp = self.client.put(url, 
+                                data = urlencode({'favorites': str(b2.pk)}),
+                                content_type = 'application/x-www-form-urlencoded'
+                            )
+
+        self.assertEqual(resp.status_code, 200)
+        print(prof2.favorites.all())
+        self.assertTrue(b4 in prof2.recommended.all())
+
+    def test_recommendation_del(self):
+        p1 = self.create_profile()
+        b1 = self.create_book('b1')
+        b2 = self.create_book('b2')
+        p1.recommended.add(b1)
+        p1.recommended.add(b2)
+        p1.save()
+
+        url = reverse('recommendbook', kwargs={'pk': p1.pk})
+        resp = self.client.put(url, 
+                                data = urlencode({'recommended': str(b2.pk)}),
+                                content_type = 'application/x-www-form-urlencoded'
+                            )
+
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(p1.recommended.all().count(), 1)
+        self.assertTrue(p1.recommended.all()[0], b1)
+
+    def test_recommendation_follow(self):
+        profs = []
+        auths = []
+        books = []
+        for i in range(3):
+            profs.append(self.create_profile('u'+str(i)))
+
+        for i in range(4):
+            auths.append(self.create_author('a'+str(i)))
+            books.append(self.create_book('b'+str(i), 'a'+str(i)))
+
+        profs[2].following.add(auths[0])
+        profs[2].following.add(auths[1])
+        profs[2].following.add(auths[3])
+        profs[2].save()
+
+        profs[0].following.add(auths[0])
+        profs[0].following.add(auths[2])
+        profs[0].save()
+
+        profs[1].following.add(auths[0])
+        profs[1].save()
+
+        url = reverse('followauthor', kwargs={'pk': profs[1].pk, })
+        resp = self.client.put(url, 
+                                data = urlencode({'following': str(auths[1].pk)}),
+                                content_type = 'application/x-www-form-urlencoded'
+                            )
+
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(books[3] in profs[1].recommended.all())
